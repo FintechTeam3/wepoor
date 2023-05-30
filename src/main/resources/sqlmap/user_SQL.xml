@@ -3,14 +3,65 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="com.hk.wepoor.model.UserMapper">
-  
-  <select id="selectAll" resultType="UserVO">
-    <![CDATA[
-    select * from user
-    ]]>
-	</select>  
-  
-  
-  </mapper>
+
+<mapper namespace="com.hk.wepoor.model.UserMapper">
+
+	<insert id="insertUser" parameterType="UserVO">
+        <![CDATA[
+        INSERT INTO user (user_id, user_pwd, user_name, user_nickname, user_phone)
+        VALUES (#{userId}, SHA2(#{userPwd}, 256), #{userName}, #{userNickname}, #{userPhone})
+    	]]>
+	</insert>
+
+	<select id="getUserByUserId" parameterType="String" resultType="UserVO">
+        <![CDATA[
+        SELECT * FROM user WHERE user_id = #{userId}
+    	]]>
+	</select>
+
+	<select id="getUserByUserNo" parameterType="int" resultType="UserVO">
+        <![CDATA[
+        SELECT * FROM user WHERE user_no = #{userNo}
+        ]]>
+	</select>
+
+	<select id="getAllUsers" resultType="hashmap">
+        <![CDATA[
+        SELECT * FROM user
+        ]]>
+	</select>
+
+	<select id="HashedPwd" resultType="string">
+		<![CDATA[
+        SELECT SHA2(#{userPwd}, 256)
+    	]]>
+	</select>
+
+	<update id="updateUser" parameterType="UserVO">
+        <![CDATA[
+        UPDATE user SET
+        user_id = #{userId},
+        user_pwd = #{userPwd},
+        user_name = #{userName},
+        user_nickname = #{userNickname},
+        user_phone = #{userPhone},
+        user_point = #{userPoint}
+        WHERE user_no = #{userNo}
+    	]]>
+	</update>
+
+	<delete id="deleteUser" parameterType="int">
+    	<![CDATA[
+        DELETE FROM user WHERE user_no = #{userId}
+        ]]>
+	</delete>
+	
+	<select id = "getAllUserId" resultType="hashmap">
+		<![CDATA[
+        SELECT user_id FROM user;
+        ]]>
+	</select>
+	
+	
+	
+</mapper>

@@ -18,13 +18,7 @@ class GetAllUser {
 	@Test
 	void contextLoads() {
 		
-		List<UserVO> list = null;
-		
-		list = userservice.selectAll();
-		
-		for(UserVO u:list) {
-			System.out.println(u);
-		}
+
 		
 		
 	}
