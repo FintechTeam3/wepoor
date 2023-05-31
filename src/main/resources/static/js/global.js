@@ -131,15 +131,17 @@
 			if (pwd1 == pwd2) {
 				$("#alert-success").show();
 				$("#alert-danger").hide();
-
+				$("#submit").removeAttr("disabled");
 			} else {
 				$("#alert-success").hide();
 				$("#alert-danger").show();
+				$("#submit").attr("disabled", "disabled");
 
 			}
 		} else {
 			$("#alert-success").hide();
 			$("#alert-danger").hide();
+			$("#submit").attr("disabled", "disabled");
 		}
 	});
 

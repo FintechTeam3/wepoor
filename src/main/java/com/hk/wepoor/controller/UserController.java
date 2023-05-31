@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-
 import javax.swing.text.html.parser.Entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,35 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hk.wepoor.model.UserMapper;
-import com.hk.wepoor.service.UserService;
 import com.hk.wepoor.vo.UserVO;
+
 
 @Controller
 public class UserController {
 	
+
 	@Autowired
 	UserMapper mapper;
-	
-	@GetMapping("/")
-	public String home() {
-		return "home";
-	}
-	
-	@GetMapping("/contact")
-	public String contact() {
-		return "contact";
-	}
-	
-	@GetMapping("/services")
-	public String services() {
-		return "services";
-	}
-	
-	@GetMapping("/teashop")
-	public String teashop() {
-		return "teashop";
-	}
-	
 	
 	@GetMapping("/login_page")
 	public String login() {

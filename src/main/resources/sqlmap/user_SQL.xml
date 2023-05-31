@@ -5,21 +5,29 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hk.wepoor.model.UserMapper">
-
-	<insert id="insertUser" parameterType="UserVO">
+	<resultMap id="memberResultMap" type="UserVO">
+        <id column="user_no" property="userNo"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_pwd" property="userPwd"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_nickname" property="userNickname"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="user_point" property="userPoint"/>
+    </resultMap>
+	<insert id="insertUser" parameterType="com.hk.wepoor.vo.UserVO">
         <![CDATA[
         INSERT INTO user (user_id, user_pwd, user_name, user_nickname, user_phone)
         VALUES (#{userId}, SHA2(#{userPwd}, 256), #{userName}, #{userNickname}, #{userPhone})
     	]]>
 	</insert>
 
-	<select id="getUserByUserId" parameterType="String" resultType="UserVO">
+	<select id="getUserByUserId" parameterType="String" resultMap="memberResultMap">
         <![CDATA[
         SELECT * FROM user WHERE user_id = #{userId}
     	]]>
 	</select>
 
-	<select id="getUserByUserNo" parameterType="int" resultType="UserVO">
+	<select id="getUserByUserNo" parameterType="int" resultMap="memberResultMap">
         <![CDATA[
         SELECT * FROM user WHERE user_no = #{userNo}
         ]]>
@@ -37,7 +45,7 @@
     	]]>
 	</select>
 
-	<update id="updateUser" parameterType="UserVO">
+	<update id="updateUser" parameterType="com.hk.wepoor.vo.UserVO">
         <![CDATA[
         UPDATE user SET
         user_id = #{userId},
