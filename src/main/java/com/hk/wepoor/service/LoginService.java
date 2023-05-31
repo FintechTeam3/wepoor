@@ -17,10 +17,10 @@ public class LoginService {
 //	@Value("${jwt.secret}")
 	private String secretKey="helloworldwepoortoken1234eqweqweqeqeqweq";
 
-	private Long expiredMs = 1000 * 60 * 60l; // 1000 = 0.001초 => 한시간
+	private Long expiredMs = 1000 * 60 * 60l; // 1 = 0.001초 => 1000 = 1초
 
 	public String loginCheck(String userId, String pwd) {
-		String result = "0";
+		String jwtToken = "0";
 
 		UserVO member = mapper.getUserByUserId(userId);
 		String changedPwd = mapper.HashedPwd(pwd);
@@ -29,10 +29,10 @@ public class LoginService {
 			return null;
 		}else {
 		if (changedPwd.equals(member.getUserPwd())) {
-			result = Jwt.createJwt(userId, secretKey, expiredMs);
+			jwtToken = Jwt.createJwt(userId, secretKey, expiredMs);
 
 		}
 		}
-		return result;
+		return jwtToken;
 	}
 }

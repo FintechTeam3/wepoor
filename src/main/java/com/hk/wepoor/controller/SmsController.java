@@ -11,6 +11,10 @@ import net.nurigo.sdk.message.response.MessageListResponse;
 import net.nurigo.sdk.message.response.MultipleDetailMessageSentResponse;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
+import okhttp3.logging.HttpLoggingInterceptor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +35,7 @@ import java.util.Random;
 
 @RestController
 public class SmsController {
-
+	final Logger logger = LoggerFactory.getLogger(HttpLoggingInterceptor.class);
 	final DefaultMessageService messageService;
 	private String api_key = "NCSAJSC8YA77HTTI";
 	private String api_secret = "IAGITD3QVDJP3E86FUJUR0URJFXFQ1IT";
@@ -110,6 +114,7 @@ public class SmsController {
 			numStr += ran;
 		}
 		String from = "01040091541";
+		logger.info("수신번호: " + to);
 		message.setFrom(from);
 		message.setTo(to);
 		message.setText("인증번호: " + numStr);

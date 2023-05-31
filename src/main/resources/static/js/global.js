@@ -68,7 +68,7 @@
 
 	$('#memberPhoneCheck').click(function() {
 
-		var to = $('input[name="memberPhone"]').val();
+		var to = $('input[name="userPhone"]').val();
 		$.ajax({
 			url: "/send-one",
 			type: "POST",
@@ -76,7 +76,7 @@
 			dataType: "text",
 			success: function(data) {
 				const checkNum = data;
-				console.log(checkNum);
+	
 				alert('checkNum:' + checkNum);
 
 				//인증하기 버튼 클릭 이벤트

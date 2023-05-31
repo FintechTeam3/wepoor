@@ -78,6 +78,21 @@ public class UserController {
 	}
 	
 	
+	@GetMapping("/test")
+	@ResponseBody
+	public String test2() {
+		return "test2";
+	}
 	
+	@GetMapping("/test/1")
+	@ResponseBody
+	public String test1() {
+		return "test1";
+	}
+	@GetMapping("/test/2")
+	@ResponseBody
+	public String test3() {
+		return "test3";
+	}
 	
 }
