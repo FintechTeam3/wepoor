@@ -1,0 +1,15 @@
+package com.hk.wepoor.model;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.hk.wepoor.vo.AccountVO;
+
+@Mapper
+public interface AccountMapper {
+	
+	List<AccountVO> selectAll();
+	AccountVO select(int i);
+	
+}
