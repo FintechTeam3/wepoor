@@ -17,8 +17,13 @@ public class UserController {
 	UserService userservice;
 	
 	@GetMapping("/")
-	public String home() {
-		return "home";
+	public String category() {
+		return "category";
+	}
+	
+	@GetMapping("/roomMake")
+	public String roomMake() {
+		return "roomMake";
 	}
 	
 	@GetMapping("list")

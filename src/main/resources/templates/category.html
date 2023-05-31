@@ -37,7 +37,7 @@
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
       </button>
       <span style="margin-right:50px; font-size:25px; color:#FFFFFF; font-weight:700;">카테고리</span>
-      <button style="margin-right:30px; border-radius:10px; background:#CCCCCC; font-family: 'Jua', sans-serif; font-size:20px; padding:5px 10px 5px 10px">방 만들기</button>
+      <button style="margin-right:30px; border-radius:10px; background:#CCCCCC; font-family: 'Jua', sans-serif; font-size:20px; padding:5px 10px 5px 10px" onclick="roomMake()">방 만들기</button>
          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                <a class="nav-item nav-link" href="index.html">Home</a>
@@ -91,6 +91,11 @@
    <!-- Javascript files-->
    <script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.bundle.min.js"></script>
+     <script>
+    function roomMake() {
+    	window.location.href = 'roomMake'
+    }  
+  </script>
 </body>
 
 </html>
