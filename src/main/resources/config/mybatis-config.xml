@@ -8,6 +8,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.hk.wepoor.vo.UserVO" alias="UserVO"/>
+		<typeAlias type="com.hk.wepoor.vo.AccountVO" alias="AccountVO"/>
 	</typeAliases>
 	
 </configuration>
