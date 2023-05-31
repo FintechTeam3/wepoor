@@ -17,7 +17,7 @@ class UpdateAccount {
 	void contextLoads() {
 		
 		AccountVO accountVO = null;
-		accountVO = new AccountVO(8, "신한은행", 1456873546);
+		accountVO = new AccountVO(8, "신한은행", "1456873546");
 		
 		int affectRowCount = account_service.update(accountVO);
 		

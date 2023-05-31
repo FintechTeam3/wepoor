@@ -17,7 +17,7 @@ class InsertAccount {
 	void contextLoads() {
 		
 		AccountVO accountVO = null;
-		accountVO = new AccountVO(13, "삽입테스트", 123456789);
+		accountVO = new AccountVO(13, "삽입테스트", "123456789");
 		
 		int affectRowCount = account_service.create(accountVO);
 		
