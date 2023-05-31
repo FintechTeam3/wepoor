@@ -10,7 +10,7 @@ import com.hk.wepoor.vo.AccountVO;
 public interface AccountMapper {
 	
 	List<AccountVO> selectAll();
-	AccountVO select(int i);
+	AccountVO select(int user_no);
 	int insert(AccountVO accountVO);
 	int delete(int user_no);
 	int update(AccountVO accountVO);

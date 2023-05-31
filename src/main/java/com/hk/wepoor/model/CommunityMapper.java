@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.hk.wepoor.vo.AccountVO;
 import com.hk.wepoor.vo.CommunityVO;
 
 @Mapper

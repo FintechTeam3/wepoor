@@ -16,11 +16,11 @@ class GetAccount {
 	@Test
 	void contextLoads() {
 		
-		AccountVO account = null;
+		AccountVO accountVO = null;
 		
-		account = account_service.select(1);
+		accountVO = account_service.select(1);
 		
-		System.out.println(account);
+		System.out.println(accountVO);
 		
 		
 	}

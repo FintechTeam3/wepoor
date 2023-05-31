@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hk.wepoor.service.AccountService;
-import com.hk.wepoor.vo.AccountVO;
 
 @SpringBootTest
 class DeleteAccount {

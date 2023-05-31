@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.hk.wepoor.service.AccountService;
 import com.hk.wepoor.service.CommunityService;
-import com.hk.wepoor.vo.AccountVO;
 import com.hk.wepoor.vo.CommunityVO;
 
 @SpringBootTest
@@ -18,11 +16,11 @@ class GetCommunity {
 	@Test
 	void contextLoads() {
 		
-		CommunityVO community = null;
+		CommunityVO communityVO = null;
 		
-		community = community_service.select(1);
+		communityVO = community_service.select(1);
 		
-		System.out.println(community);
+		System.out.println(communityVO);
 		
 		
 	}

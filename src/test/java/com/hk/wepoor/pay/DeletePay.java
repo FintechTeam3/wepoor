@@ -1,25 +1,21 @@
-package com.hk.wepoor.community;
+package com.hk.wepoor.pay;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.hk.wepoor.service.CommunityService;
-import com.hk.wepoor.vo.CommunityVO;
+import com.hk.wepoor.service.PayService;
 
 @SpringBootTest
-class UpdateAccount {
+class DeletePay {
 	
 	@Autowired
-	CommunityService community_service;
+	PayService pay_service;
 	
 	@Test
 	void contextLoads() {
 		
-		CommunityVO communityVO = null;
-		communityVO = new CommunityVO(8, 0, 0, "별로 안반가워요");
-		
-		int affectRowCount = community_service.update(communityVO);
+		int affectRowCount = pay_service.delete(8);
 		
 		if(affectRowCount == 1) {
 			System.out.println(affectRowCount);
