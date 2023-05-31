@@ -29,4 +29,9 @@ public class AccountService {
 		return affectRowCount;
 	}
 	
+	public int delete(int user_no) {
+		int affectRowCount = account_mapper.delete(user_no);
+		return affectRowCount;
+	}
+	
 }
