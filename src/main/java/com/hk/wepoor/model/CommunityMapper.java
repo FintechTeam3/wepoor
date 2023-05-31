@@ -14,6 +14,6 @@ public interface CommunityMapper {
 	CommunityVO select(int commu_id);
 	int insert(CommunityVO communityVO);
 	int delete(int commu_id);
-	int update(AccountVO accountVO);
+	int update(CommunityVO communityVO);
 	
 }

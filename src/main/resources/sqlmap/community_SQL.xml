@@ -31,9 +31,9 @@
     ]]>
 	</delete> 
 	
-	<update id="update" parameterType="AccountVO">
+	<update id="update" parameterType="CommunityVO">
     <![CDATA[
-    UPDATE account SET bank_name = #{bank_name}, account_number = #{account_number} WHERE user_no = #{user_no}
+    UPDATE community SET commu_content = #{commu_content} WHERE commu_id = #{commu_id}
     ]]>
 	</update> 
   

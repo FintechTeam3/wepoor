@@ -39,8 +39,8 @@ public class CommunityService {
 		return affectRowCount;
 	}
 	
-	public int update(AccountVO accountVO) {
-		int affectRowCount = account_mapper.update(accountVO);
+	public int update(CommunityVO communityVO) {
+		int affectRowCount = community_mapper.update(communityVO);
 		return affectRowCount;
 	}
 	
