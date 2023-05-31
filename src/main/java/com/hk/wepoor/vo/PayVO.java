@@ -7,10 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountVO {
+public class PayVO {
 	
+	int pay_id;
 	int user_no;
-	String bank_name;
-	int account_number;
+	String pay_date;
+	int pay_price;
+	String pay_card;
 	
 }

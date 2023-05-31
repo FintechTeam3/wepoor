@@ -8,14 +8,33 @@
   
   <select id="selectAll" resultType="AccountVO">
     <![CDATA[
-    select * from account
+    SELECT * FROM account
     ]]>
 	</select>  
   
     <select id="select" resultType="AccountVO">
     <![CDATA[
-    SELECT * FROM account where user_no = #{user_no}
+    SELECT * FROM account WHERE user_no = #{user_no}
     ]]>
 	</select> 
+	
+	<insert id="insert" parameterType="AccountVO">
+    <![CDATA[
+    INSERT INTO account (user_no, bank_name, account_number) 
+    VALUES (#{user_no}, #{bank_name}, #{account_number})
+    ]]>
+	</insert> 
+	
+	<delete id="delete" parameterType="Integer">
+    <![CDATA[
+    DELETE FROM account WHERE user_no = #{user_no}
+    ]]>
+	</delete> 
+	
+	<update id="update" parameterType="AccountVO">
+    <![CDATA[
+    UPDATE account SET bank_name = #{bank_name}, account_number = #{account_number} WHERE user_no = #{user_no}
+    ]]>
+	</update> 
   
   </mapper>

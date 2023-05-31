@@ -8,7 +8,7 @@ import com.hk.wepoor.service.AccountService;
 import com.hk.wepoor.vo.AccountVO;
 
 @SpringBootTest
-class GetAccount {
+class UpdateAccount {
 	
 	@Autowired
 	AccountService account_service;
@@ -17,11 +17,15 @@ class GetAccount {
 	void contextLoads() {
 		
 		AccountVO accountVO = null;
+		accountVO = new AccountVO(8, "신한은행", 1456873546);
 		
-		accountVO = account_service.select(1);
+		int affectRowCount = account_service.update(accountVO);
 		
-		System.out.println(accountVO);
-		
+		if(affectRowCount == 1) {
+			System.out.println(affectRowCount);
+		} else {
+			System.out.println("실패~!");
+		}
 		
 	}
 

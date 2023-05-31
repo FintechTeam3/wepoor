@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountVO {
+public class CommunityVO {
 	
+	int commu_id;
+	int top_commu_id;
 	int user_no;
-	String bank_name;
-	int account_number;
+	String commu_content;
 	
 }
