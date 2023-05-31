@@ -23,9 +23,9 @@ class UpdateCategory {
 		int affectRowCount = category_service.update(categoryVO);
 		
 		if(affectRowCount == 1){
-			System.out.println("★★★★★★★★★★★★입력성공★★★★★★★★★★★★");
+			System.out.println("★★★★★★★★★★★★수정성공★★★★★★★★★★★★");
 		}else {
-			System.out.println("★★★★★★★★★★★★입력실패★★★★★★★★★★★★");
+			System.out.println("★★★★★★★★★★★★수정실패★★★★★★★★★★★★");
 		}
 	}
 

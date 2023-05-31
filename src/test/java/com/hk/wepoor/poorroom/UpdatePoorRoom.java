@@ -19,10 +19,10 @@ class UpdatePoorRoom {
 		
 		int affectRowCount = poorroom_service.update(PoorroomVO);
 		
-		if(affectRowCount == 1) {
-			System.out.println("수정완료!");
-		} else {
-			System.out.println("수정실패!");
+		if(affectRowCount == 1){
+			System.out.println("★★★★★★★★★★★★수정성공★★★★★★★★★★★★");
+		}else {
+			System.out.println("★★★★★★★★★★★★수정실패★★★★★★★★★★★★");
 		}
 		
 	}

@@ -10,6 +10,7 @@
 		<typeAlias type="com.hk.wepoor.vo.UserVO" alias="UserVO"/>
 		<typeAlias type="com.hk.wepoor.vo.AccountVO" alias="AccountVO"/>
 		<typeAlias type="com.hk.wepoor.vo.CategoryVO" alias="CategoryVO"/>
+		<typeAlias type="com.hk.wepoor.vo.PoorRoomVO" alias="PoorRoomVO"/>
 	</typeAliases>
 	
 </configuration>

@@ -18,7 +18,7 @@ class GetPoorRoom {
 
 		PoorRoomVO poorroomVO = poorroom_service.select(1);
 
-		System.out.println(poorroomVO);
+		System.out.println("★★★★★★★★★★"+poorroomVO+"★★★★★★★★★★★★");
 
 	}
 

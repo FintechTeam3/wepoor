@@ -13,37 +13,37 @@ public class CategoryService {
 
 	@Autowired
 	CategoryMapper category_mapper;
-	
+
 	// <전체조회>
 	public List<CategoryVO> selectAll() {
 		List<CategoryVO> list = category_mapper.selectAll();
 		return list;
 	};
-	
-	// <카테고리 하나조회>
+
+	// <하나조회>
 	public CategoryVO select(int Id) {
-		
+
 		CategoryVO cateId = category_mapper.select(Id);
-		
+
 		return cateId;
 	};
-	
-	// <카테고리 등록>
+
+	// <등록>
 	public int insert(String cateName) {
 		int affectRowCount = category_mapper.insert(cateName);
 		return affectRowCount;
-	}; 
-	
-	// <카테고리 삭제>
+	};
+
+	// <삭제>
 	public int delte(int cateName) {
 		int affectRowCount = category_mapper.delte(cateName);
 		return affectRowCount;
 	};
-	
-	// <카테고리 수정> 
+
+	// <수정>
 	public int update(CategoryVO categoryVO) {
 		int affectRowCount = category_mapper.update(categoryVO);
 		return affectRowCount;
 	};
-	
+
 }

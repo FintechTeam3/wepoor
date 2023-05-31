@@ -19,10 +19,10 @@ class InsertPoorRoom {
 		
 		int affectRowCount = poorroom_service.create(poorroomVO);
 		
-		if(affectRowCount == 1) {
-			System.out.println("입력완료!");
-		} else {
-			System.out.println("입력실패!");
+		if(affectRowCount == 1){
+			System.out.println("★★★★★★★★★★★★입력성공★★★★★★★★★★★★");
+		}else {
+			System.out.println("★★★★★★★★★★★★입력실패★★★★★★★★★★★★");
 		}
 		
 	}
