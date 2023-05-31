@@ -30,5 +30,11 @@
     DELETE FROM account WHERE user_no = #{user_no}
     ]]>
 	</delete> 
+	
+	<update id="update" parameterType="AccountVO">
+    <![CDATA[
+    UPDATE account SET bank_name = #{bank_name}, account_number = #{account_number} WHERE user_no = #{user_no}
+    ]]>
+	</update> 
   
   </mapper>

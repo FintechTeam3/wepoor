@@ -13,5 +13,6 @@ public interface AccountMapper {
 	AccountVO select(int i);
 	int insert(AccountVO accountVO);
 	int delete(int user_no);
+	int update(AccountVO accountVO);
 	
 }

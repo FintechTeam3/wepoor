@@ -34,4 +34,9 @@ public class AccountService {
 		return affectRowCount;
 	}
 	
+	public int update(AccountVO accountVO) {
+		int affectRowCount = account_mapper.update(accountVO);
+		return affectRowCount;
+	}
+	
 }
