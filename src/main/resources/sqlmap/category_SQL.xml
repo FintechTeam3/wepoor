@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.hk.wepoor.model.CategoryMapper">
+  
+  <select id="selectAll" resultType="CategoryVO">
+    <![CDATA[
+    select * from category
+    ]]>
+	</select>  
+  
+  <select id="select" resultType="CategoryVO">
+    <![CDATA[
+    select * 
+    from category 
+    where cate_id = #{cateId}
+    ]]>
+	</select>
+	
+   <insert id="insert" >
+    <![CDATA[
+    INSERT INTO category (cate_Name) 
+    VALUES (#{cateName})
+    ]]>
+	</insert> 
+	
+	<delete id="delte" >
+	<![CDATA[
+	DELETE FROM category 
+	WHERE cate_id = #{cateName}
+	]]>
+	</delete>
+  </mapper>
