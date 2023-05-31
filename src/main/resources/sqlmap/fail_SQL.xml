@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.hk.wepoor.model.FailMapper">
+  
+  <select id="selectAll" resultType="FailVO">
+    <![CDATA[
+    select * from fail
+    ]]>
+	</select>  
+  
+  <insert id="insert" parameterType="FailVO">
+   <![CDATA[
+    insert into fail (fail_id, user_no, fail_num)
+    values (#{fail_id}, #{user_no}, #{fail_num})
+    ]]>
+  </insert>
+  
+  
+  
+  
+  
+  
+  </mapper>
