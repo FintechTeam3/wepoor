@@ -11,6 +11,6 @@ public class AccountVO {
 	
 	int user_no;
 	String bank_name;
-	String account_number;
+	int account_number;
 	
 }

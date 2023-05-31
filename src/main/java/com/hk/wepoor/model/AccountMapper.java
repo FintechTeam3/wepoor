@@ -11,5 +11,6 @@ public interface AccountMapper {
 	
 	List<AccountVO> selectAll();
 	AccountVO select(int i);
+	int insert(AccountVO accountVO);
 	
 }

@@ -24,4 +24,9 @@ public class AccountService {
 		return account;
 	}
 	
+	public int create(AccountVO accountVO) {
+		int affectRowCount = account_mapper.insert(accountVO);
+		return affectRowCount;
+	}
+	
 }

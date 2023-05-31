@@ -17,5 +17,12 @@
     SELECT * FROM account where user_no = #{user_no}
     ]]>
 	</select> 
+	
+	<insert id="insert" parameterType="AccountVO">
+    <![CDATA[
+    INSERT INTO account (user_no, bank_name, account_number) 
+    VALUES (#{user_no}, #{bank_name}, #{account_number})
+    ]]>
+	</insert> 
   
   </mapper>
