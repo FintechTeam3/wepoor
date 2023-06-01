@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,6 +15,7 @@ import com.hk.wepoor.service.LoginService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -35,7 +37,7 @@ public class LoginController {
 		logger.info("JWTTOKEN: " + jwtToken);
 
 		if (jwtToken == null || jwtToken.equals("0")) {
-			return "0";
+			return "redirect:/login_page";
 		} else {
 
 			Cookie cookie = new Cookie("jwtToken", jwtToken);
@@ -50,6 +52,25 @@ public class LoginController {
 
 			return "redirect:/access";
 		}
+	}
+
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie c : cookies) {
+				String cookieName = c.getName();
+				logger.info(cookieName);
+				if (cookieName.equals("jwtToken")) {
+					c.setMaxAge(0);
+					response.addCookie(c);
+					return "redirect:/login_page";
+				}
+			}
+		}
+
+		return "redirect:/login_page";
 	}
 
 }
