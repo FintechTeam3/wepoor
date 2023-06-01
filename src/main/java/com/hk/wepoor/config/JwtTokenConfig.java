@@ -7,13 +7,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.hk.wepoor.interceptor.JwtTokenInterceptor;
 
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public class JwtTokenConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new JwtTokenInterceptor())
-				.addPathPatterns("/test/**")
-				.excludePathPatterns("/join");
+				.addPathPatterns("/access/**");
+//				.excludePathPatterns();
 		
 	}
 
