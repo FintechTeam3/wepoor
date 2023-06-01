@@ -19,6 +19,6 @@ public interface CardHistoryMapper {
 	
 	int update(CardHistoryVO cardVO); //수정(결제수단변경 예시)
 	
-	
+	int delete(int card_id); //삭제
 	
 }

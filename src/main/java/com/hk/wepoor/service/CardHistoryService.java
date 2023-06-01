@@ -40,4 +40,9 @@ public class CardHistoryService {
 		return cardUpdateCount;
 	}
 	
+	//삭제
+	public int delete(int card_id) {
+		int cardDeleteCount=cardmapper.delete(card_id);
+		return cardDeleteCount;
+	}
 }

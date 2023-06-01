@@ -31,5 +31,11 @@
      where card_id = #{card_id}  
      ]]>
      </update>
+     
+     <delete id="delete" parameterType="int">
+     <![CDATA[
+     delete from card_history where card_id = #{card_id} 
+     ]]>
+     </delete>
       
   </mapper>
