@@ -18,81 +18,56 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hk.wepoor.model.UserMapper;
 import com.hk.wepoor.vo.UserVO;
 
-
 @Controller
 public class UserController {
-	
 
 	@Autowired
 	UserMapper mapper;
-	
+
 	@GetMapping("/login_page")
 	public String login() {
 		return "login";
 	}
 
-	
 	@GetMapping("/join")
 	public String join() {
 		return "join";
 	}
 
 	@PostMapping("/join_insert")
-	public String joinInsert(@RequestParam("userId") String userId, 
-			@RequestParam("userPhone") String userPhone,
-			@RequestParam("userName") String userName,
-			@RequestParam("userNickname") String userNickname,
-			@RequestParam("userPwd") String userPwd){
-		
+	public String joinInsert(@RequestParam("userId") String userId, @RequestParam("userPhone") String userPhone,
+			@RequestParam("userName") String userName, @RequestParam("userNickname") String userNickname,
+			@RequestParam("userPwd") String userPwd) {
+
 		UserVO uservo = new UserVO();
 		uservo.setUserId(userId);
 		uservo.setUserName(userName);
 		uservo.setUserNickname(userNickname);
 		uservo.setUserPhone(userPhone);
 		uservo.setUserPwd(userPwd);
-		
+
 		mapper.insertUser(uservo);
-		
+
 		return "redirect:/login_page";
 	}
 
-	
 	@PostMapping("/id_check")
 	@ResponseBody
 	public int test(@RequestParam("userId") String userId) {
-		
-		List<HashMap<String, String>> mails =  mapper.getAllUserId();
-		
-		for(int i  = 0; i <mails.size(); i++) {
-			for(Entry<String, String> elem: mails.get(i).entrySet()) {
-				
-				if(elem.getValue().equals(userId)) {
+
+		List<HashMap<String, String>> mails = mapper.getAllUserId();
+
+		for (int i = 0; i < mails.size(); i++) {
+			for (Entry<String, String> elem : mails.get(i).entrySet()) {
+
+				if (elem.getValue().equals(userId)) {
 					return 1;
 				}
-				
+
 			}
 		}
-		
-		
+
 		return 0;
 	}
-	
-	
-	@GetMapping("/test")
-	@ResponseBody
-	public String test2() {
-		return "test2";
-	}
-	
-	@GetMapping("/test/1")
-	@ResponseBody
-	public String test1() {
-		return "test1";
-	}
-	@GetMapping("/test/2")
-	@ResponseBody
-	public String test3() {
-		return "test3";
-	}
-	
+
 }

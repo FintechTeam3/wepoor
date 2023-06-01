@@ -1,26 +1,30 @@
-package com.hk.wepoor.account;
+package com.hk.wepoor.poorroom;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hk.wepoor.service.AccountService;
+import com.hk.wepoor.service.PoorRoomService;
 import com.hk.wepoor.vo.AccountVO;
+import com.hk.wepoor.vo.PoorRoomVO;
 
 @SpringBootTest
-class GetAccount {
+class GetAllPoorRoom {
 	
 	@Autowired
-	AccountService account_service;
+	PoorRoomService poorroom_service;
 	
 	@Test
 	void contextLoads() {
 		
-		AccountVO accountVO = null;
+		List<PoorRoomVO> list = poorroom_service.selectAll();
 		
-		accountVO = account_service.select(1);
-		
-		System.out.println(accountVO);
+		for(PoorRoomVO a:list) {
+			System.out.println(a);
+		}
 		
 		
 	}

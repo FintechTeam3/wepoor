@@ -242,7 +242,7 @@ button {
 
 .navbar-light .navbar-nav .nav-link {
     display: block;
-    padding: .5rem 1rem;
+    padding: 0.5rem ;
     font-size: 18px;
     color: #0d0a05;
     text-transform: uppercase;
@@ -545,8 +545,7 @@ i.fa.fa-angle-left {
     background-color: #f1f1f1;
     height: auto;
     border-radius: 5px;
-    padding: 90px 0px 70px 0px;
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 .left_main {
@@ -606,7 +605,8 @@ i.fa.fa-angle-left {
 }
 
 .box_main.active {
-    background-color: #f3801f;
+    background-color: #CCCCCC;
+    height:100px
 }
 
 .box_main.active .border_10 {
@@ -1285,3 +1285,7 @@ input.mail_text::placeholder {
 .margin_90 {
     margin: 90px 0px;
 }
+
+
+
+

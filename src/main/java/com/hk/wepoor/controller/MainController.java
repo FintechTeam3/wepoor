@@ -11,6 +11,16 @@ public class MainController {
 		return "home";
 	}
 	
+	@GetMapping("/category")
+	public String category() {
+		return "category";
+	}
+	
+	@GetMapping("/roomMake")
+	public String roomMake() {
+		return "roomMake";
+	}
+	
 	@GetMapping("/contact")
 	public String contact() {
 		return "contact";
@@ -24,6 +34,11 @@ public class MainController {
 	@GetMapping("/teashop")
 	public String teashop() {
 		return "teashop";
+	}
+
+	@GetMapping("/community")
+	public String community() {
+		return "community";
 	}
 	
 }
