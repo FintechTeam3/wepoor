@@ -20,6 +20,7 @@
 
 
 		<typeAlias type="com.hk.wepoor.vo.FailVO" alias="FailVO"/>
+		<typeAlias type="com.hk.wepoor.vo.CardHistoryVO" alias="CardHistoryVO"/>
 
 	</typeAliases>
 	
