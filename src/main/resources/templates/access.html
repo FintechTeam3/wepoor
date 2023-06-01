@@ -8,12 +8,20 @@
 <body>
 	<p>accceeess</p>
 	<button id="mypage" type="button" class="navyBtn">마이페이지</button>
+	<button id="logout" type="button" class="navyBtn">로그아웃</button>
 
 	<script>
 		$(function() {
+			
 			$("#mypage").on("click", function() {
 				location.href = "/access/mypage";
 			});
+			
+			
+			$("#logout").on("click", function() {
+				location.href = "/logout";
+			});
+			
 		});
 	</script>
 </body>
