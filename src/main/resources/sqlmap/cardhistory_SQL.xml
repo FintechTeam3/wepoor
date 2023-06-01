@@ -12,6 +12,30 @@
     ]]>
 	</select>  
   
+   <select id="select" resultType="CardHistoryVO"> <!-- card_id를 기준으로 조회 : card_id 7번 조회 -->
+  <![CDATA[
+  select * from card_history where card_id = #{card_id}
+  ]]>
+  </select>
    
-   
+   <insert id="insert" parameterType="CardHistoryVO"> <!-- 전달받은 파라미터 데이터 타입 지정(선택적) -->
+   <![CDATA[
+    insert into card_history (card_id, card_company, card_date, card_cost, card_store)
+    values (#{card_id}, #{card_company}, #{card_date}, #{card_cost}, #{card_store})
+    ]]>
+  </insert>
+      
+    <update id="update" parameterType="CardHistoryVO" >
+    <![CDATA[
+     update card_history set card_id = #{card_id}, card_company = #{card_company}, card_date = #{card_date}, card_cost = #{card_cost}, card_store = #{card_store}
+     where card_id = #{card_id}  
+     ]]>
+     </update>
+     
+     <delete id="delete" parameterType="int">
+     <![CDATA[
+     delete from card_history where card_id = #{card_id} 
+     ]]>
+     </delete>
+      
   </mapper>

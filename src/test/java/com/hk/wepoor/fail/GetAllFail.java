@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hk.wepoor.service.FailService;
 import com.hk.wepoor.vo.FailVO;
-import com.hk.wepoor.vo.UserVO;
+
 
 @SpringBootTest
 class GetAllFail {

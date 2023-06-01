@@ -22,5 +22,27 @@ public class CardHistoryService {
 		return list;
 	}
 	
+	//하나만 조회
+	public CardHistoryVO select(int card_id) {
+		CardHistoryVO cardSelect= cardmapper.select(card_id);
+		return cardSelect;
+	}
 	
+	//삽입
+	public int create(CardHistoryVO cardVO) {
+		int cardHistoryCount=cardmapper.insert(cardVO);
+		return cardHistoryCount;
+	}
+	
+	//수정
+	public int update(CardHistoryVO cardVO) {
+		int cardUpdateCount=cardmapper.update(cardVO);
+		return cardUpdateCount;
+	}
+	
+	//삭제
+	public int delete(int card_id) {
+		int cardDeleteCount=cardmapper.delete(card_id);
+		return cardDeleteCount;
+	}
 }
