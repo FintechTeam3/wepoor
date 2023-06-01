@@ -22,5 +22,11 @@ public class CardHistoryService {
 		return list;
 	}
 	
+	//하나만 조회
+	public CardHistoryVO select(int card_id) {
+		CardHistoryVO cardSelect= cardmapper.select(card_id);
+		return cardSelect;
+	}
+	
 	
 }

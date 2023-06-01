@@ -12,6 +12,10 @@
     ]]>
 	</select>  
   
-   
+   <select id="select" resultType="CardHistoryVO"> <!-- card_id를 기준으로 조회 : card_id 7번 조회 -->
+  <![CDATA[
+  select * from card_history where card_id = #{card_id}
+  ]]>
+  </select>
    
   </mapper>

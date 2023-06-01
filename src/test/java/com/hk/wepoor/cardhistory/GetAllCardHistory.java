@@ -10,7 +10,7 @@ import com.hk.wepoor.service.CardHistoryService;
 import com.hk.wepoor.vo.CardHistoryVO;
 
 @SpringBootTest
-class GetAllFail {
+class GetAllCardHistory {
 	
 	@Autowired
 	CardHistoryService cardservice;

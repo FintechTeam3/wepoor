@@ -13,5 +13,6 @@ public interface CardHistoryMapper {
 	
 	List<CardHistoryVO> selectAll(); // 카드내역 전체조회
 	
+	CardHistoryVO select(int card_id); //card_id=5인사람 조회해서 보여줘
 	
 }
