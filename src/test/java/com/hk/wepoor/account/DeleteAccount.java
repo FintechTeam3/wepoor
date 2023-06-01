@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hk.wepoor.service.AccountService;
-import com.hk.wepoor.vo.AccountVO;
 
 @SpringBootTest
-class GetAccount {
+class DeleteAccount {
 	
 	@Autowired
 	AccountService account_service;
@@ -16,12 +15,13 @@ class GetAccount {
 	@Test
 	void contextLoads() {
 		
-		AccountVO accountVO = null;
+		int affectRowCount = account_service.delete(9);
 		
-		accountVO = account_service.select(1);
-		
-		System.out.println(accountVO);
-		
+		if(affectRowCount == 1) {
+			System.out.println(affectRowCount);
+		} else {
+			System.out.println("실패~!");
+		}
 		
 	}
 
