@@ -18,4 +18,11 @@
   ]]>
   </select>
    
+   <insert id="insert" parameterType="CardHistoryVO"> <!-- 전달받은 파라미터 데이터 타입 지정(선택적) -->
+   <![CDATA[
+    insert into card_history (card_id, card_company, card_date, card_cost, card_store)
+    values (#{card_id}, #{card_company}, #{card_date}, #{card_cost}, #{card_store})
+    ]]>
+  </insert>
+      
   </mapper>

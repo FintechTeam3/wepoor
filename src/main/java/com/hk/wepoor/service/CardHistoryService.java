@@ -28,5 +28,10 @@ public class CardHistoryService {
 		return cardSelect;
 	}
 	
+	//삽입
+	public int create(CardHistoryVO cardVO) {
+		int cardHistoryCount=cardmapper.insert(cardVO);
+		return cardHistoryCount;
+	}
 	
 }
