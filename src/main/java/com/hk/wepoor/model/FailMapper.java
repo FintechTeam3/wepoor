@@ -10,7 +10,9 @@ import com.hk.wepoor.vo.FailVO;
 @Mapper
 public interface FailMapper {
 	
-	List<FailVO> selectAll(); // 전체조회	
+	List<FailVO> selectAll(); // 전체조회
+	
+	FailVO select(int fail_id); //fail_id = 7 인사람 조회하여 보여주세요. 
 	
 	int insert(FailVO failVO); //삽입 (실패 입력 행 몇개야?)
 	

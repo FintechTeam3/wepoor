@@ -21,6 +21,14 @@ public class FailService {
 		List<FailVO> list = failmapper.selectAll();
 		return list;
 	}
+	
+	// 조회 //fail_id = 7 인사람 조회하여 보여주세요.
+	public FailVO select(int fail_id) {
+		FailVO failSelect= failmapper.select(fail_id); //failSelect에 담았음
+		return failSelect;		
+	}
+	
+	
 	// 실패 입력
 	public int create(FailVO failVO) {
 		int failCount=failmapper.insert(failVO); //실패 입력 행 몇개야?

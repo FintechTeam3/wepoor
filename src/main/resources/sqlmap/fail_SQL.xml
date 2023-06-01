@@ -19,15 +19,16 @@
     ]]>
   </insert>
   
-  <delete id="delete" parameterType="int">  <!--  -->                                  <!--fail_id를 기준값으로 해당데이터 삭제 : fail_id 8번 삭제-->
+  <delete id="delete" parameterType="int">    <!--fail_id를 기준값으로 해당데이터 삭제 : fail_id 8번 삭제-->
   <![CDATA[
     delete from fail where fail_id = #{fail_id} 
     ]]>
   </delete>
   
-  
-  
-  
-  
+  <select id="select" resultType="FailVO"> <!-- fail_id를 기준으로 조회 : fail_id 7번 조회 -->
+  <![CDATA[
+  select * from fail where fail_id = #{fail_id}
+  ]]>
+  </select>
   
   </mapper>
