@@ -11,9 +11,9 @@ public class MainController {
 		return "home";
 	}
 	
-	@GetMapping("/category")
-	public String category() {
-		return "category";
+	@GetMapping("/index")
+	public String index() {
+		return "index";
 	}
 	
 	@GetMapping("/roomMake")
