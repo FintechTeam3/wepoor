@@ -16,11 +16,6 @@ public class MainController {
 		return "index";
 	}
 	
-//	@GetMapping("/category")
-//	public String category() {
-//		return "category";
-//	}
-	
 	@GetMapping("/roomMake")
 	public String roomMake() {
 		return "roomMake";
