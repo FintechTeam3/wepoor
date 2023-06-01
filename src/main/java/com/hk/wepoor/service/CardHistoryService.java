@@ -34,4 +34,10 @@ public class CardHistoryService {
 		return cardHistoryCount;
 	}
 	
+	//수정
+	public int update(CardHistoryVO cardVO) {
+		int cardUpdateCount=cardmapper.update(cardVO);
+		return cardUpdateCount;
+	}
+	
 }

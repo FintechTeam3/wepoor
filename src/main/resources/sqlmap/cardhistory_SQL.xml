@@ -25,4 +25,11 @@
     ]]>
   </insert>
       
+    <update id="update" parameterType="CardHistoryVO" >
+    <![CDATA[
+     update card_history set card_id = #{card_id}, card_company = #{card_company}, card_date = #{card_date}, card_cost = #{card_cost}, card_store = #{card_store}
+     where card_id = #{card_id}  
+     ]]>
+     </update>
+      
   </mapper>

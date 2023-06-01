@@ -17,6 +17,7 @@ public interface CardHistoryMapper {
 	
 	int insert(CardHistoryVO cardVO); //삽입
 	
+	int update(CardHistoryVO cardVO); //수정(결제수단변경 예시)
 	
 	
 	
