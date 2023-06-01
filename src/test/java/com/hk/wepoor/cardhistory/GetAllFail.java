@@ -1,4 +1,4 @@
-package com.hk.wepoor.fail;
+package com.hk.wepoor.cardhistory;
 
 import java.util.List;
 
@@ -6,25 +6,24 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.hk.wepoor.service.FailService;
-import com.hk.wepoor.vo.FailVO;
-
+import com.hk.wepoor.service.CardHistoryService;
+import com.hk.wepoor.vo.CardHistoryVO;
 
 @SpringBootTest
 class GetAllFail {
 	
 	@Autowired
-	FailService failservice;
+	CardHistoryService cardservice;
 	
 	@Test
 	void contextLoads() {
 		
-		List<FailVO> list = null;
+		List<CardHistoryVO> list = null;
 		
-		list = failservice.selectAll();
+		list = cardservice.selectAll();
 		
-		for(FailVO fail8:list) {
-			System.out.println(fail8);
+		for(CardHistoryVO card5:list) {
+			System.out.println(card5);
 		}
 		
 		

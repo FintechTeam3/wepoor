@@ -19,9 +19,24 @@ public class AccountService {
 		return list;
 	}
 	
-	public AccountVO select(int i) {
-		AccountVO account = account_mapper.select(i);
-		return account;
+	public AccountVO select(int user_no) {
+		AccountVO accountVO = account_mapper.select(user_no);
+		return accountVO;
+	}
+	
+	public int create(AccountVO accountVO) {
+		int affectRowCount = account_mapper.insert(accountVO);
+		return affectRowCount;
+	}
+	
+	public int delete(int user_no) {
+		int affectRowCount = account_mapper.delete(user_no);
+		return affectRowCount;
+	}
+	
+	public int update(AccountVO accountVO) {
+		int affectRowCount = account_mapper.update(accountVO);
+		return affectRowCount;
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.hk.wepoor.fail;
+package com.hk.wepoor.pay;
 
 import java.util.List;
 
@@ -6,27 +6,25 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.hk.wepoor.service.FailService;
-import com.hk.wepoor.vo.FailVO;
-
+import com.hk.wepoor.service.PayService;
+import com.hk.wepoor.vo.PayVO;
 
 @SpringBootTest
-class GetAllFail {
+class GetAllPay {
 	
 	@Autowired
-	FailService failservice;
+	PayService pay_service;
 	
 	@Test
 	void contextLoads() {
 		
-		List<FailVO> list = null;
+		List<PayVO> list = null;
 		
-		list = failservice.selectAll();
+		list = pay_service.selectAll();
 		
-		for(FailVO fail8:list) {
-			System.out.println(fail8);
+		for(PayVO p:list) {
+			System.out.println(p);
 		}
-		
 		
 	}
 

@@ -1,4 +1,6 @@
-package com.hk.wepoor.account;
+package com.hk.wepoor.category;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,7 @@ import com.hk.wepoor.service.AccountService;
 import com.hk.wepoor.vo.AccountVO;
 
 @SpringBootTest
-class GetAccount {
+class GetAllAccount {
 	
 	@Autowired
 	AccountService account_service;
@@ -16,11 +18,13 @@ class GetAccount {
 	@Test
 	void contextLoads() {
 		
-		AccountVO accountVO = null;
+		List<AccountVO> list = null;
 		
-		accountVO = account_service.select(1);
+		list = account_service.selectAll();
 		
-		System.out.println(accountVO);
+		for(AccountVO a:list) {
+			System.out.println(a);
+		}
 		
 		
 	}
