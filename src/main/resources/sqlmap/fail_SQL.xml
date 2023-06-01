@@ -6,18 +6,24 @@
   
   <mapper namespace="com.hk.wepoor.model.FailMapper">
   
-  <select id="selectAll" resultType="FailVO">
+  <select id="selectAll" resultType="FailVO"> <!--resultType : 조회결과값을 저장하기 위한 타입  -->
     <![CDATA[
     select * from fail
     ]]>
 	</select>  
   
-  <insert id="insert" parameterType="FailVO">
+  <insert id="insert" parameterType="FailVO"> <!-- 전달받은 파라미터 데이터 타입 지정(선택적) -->
    <![CDATA[
     insert into fail (fail_id, user_no, fail_num)
     values (#{fail_id}, #{user_no}, #{fail_num})
     ]]>
   </insert>
+  
+  <delete id="delete" parameterType="int">  <!--  -->                                  <!--fail_id를 기준값으로 해당데이터 삭제 : fail_id 8번 삭제-->
+  <![CDATA[
+    delete from fail where fail_id = #{fail_id} 
+    ]]>
+  </delete>
   
   
   
