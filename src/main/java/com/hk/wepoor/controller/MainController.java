@@ -11,6 +11,11 @@ public class MainController {
 		return "home";
 	}
 	
+	@GetMapping("/index")
+	public String index() {
+		return "index";
+	}
+	
 	@GetMapping("/category")
 	public String category() {
 		return "category";
