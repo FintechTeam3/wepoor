@@ -36,9 +36,4 @@ public class MainController {
 		return "teashop";
 	}
 
-	@GetMapping("/community")
-	public String community() {
-		return "community";
-	}
-	
 }
