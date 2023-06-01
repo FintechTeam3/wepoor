@@ -6,13 +6,13 @@
   
   <mapper namespace="com.hk.wepoor.model.AccountMapper">
   
-  <select id="selectAll" resultType="AccountVO">
+  <select id="selectAll" >
     <![CDATA[
     select * from account
     ]]>
 	</select>  
   
-    <select id="select" resultType="AccountVO">
+    <select id="select" >
     <![CDATA[
     SELECT * FROM account where user_no = #{user_no}
     ]]>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.hk.wepoor.model.RoomMemberMapper">
+  
+  <select id="selectAll" resultType="RoomMemberVO">
+    <![CDATA[
+    select * from room_member
+    ]]>
+	</select>  
+  
+   <select id="select" resultType="RoomMemberVO">
+    <![CDATA[
+    SELECT * FROM room_member WHERE room_id = #{room_id}
+    ]]>
+	</select> 
+	
+	<insert id="insert" parameterType="RoomMemberVO">
+    <![CDATA[
+    INSERT INTO room_member (user_no, success) 
+    VALUES (#{user_no}, #{success})
+    ]]>
+	</insert> 
+	
+	<delete id="delete" parameterType="Integer">
+    <![CDATA[
+    DELETE FROM room_member WHERE room_id = #{room_id}
+    ]]>
+	</delete> 
+	
+	<update id="update" parameterType="RoomMemberVO">
+    <![CDATA[
+    UPDATE room_member SET user_no=#{user_no}, success=#{success}
+    WHERE room_id = #{room_id}
+    ]]>
+	</update> 
+  
+  </mapper>

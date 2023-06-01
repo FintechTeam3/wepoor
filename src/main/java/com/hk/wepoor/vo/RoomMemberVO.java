@@ -8,5 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoomMemberVO {
-	String b;
+	int room_id;
+	int user_no;
+	int success;
 }
