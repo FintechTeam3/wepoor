@@ -50,7 +50,7 @@ public class LoginController {
 			logger.info("userId: " + claims.getBody().get("userId"));
 			logger.info("claims:" + claims.getBody());
 
-			return "redirect:/access";
+			return "redirect:/category";
 		}
 	}
 
