@@ -41,3 +41,13 @@
 .navbar {
     justify-content: flex-start !important;
 }
+.see_bt {
+    width: 80px;
+    margin: 0 auto;
+    text-align: center;
+}
+.see_bt a{
+    margin-bottom: 0px;
+    background-color: #e0e0e0;
+    margin-top: 0px;
+}
