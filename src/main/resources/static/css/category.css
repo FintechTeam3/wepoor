@@ -1,0 +1,43 @@
+.bg-light {
+	background-color: #1abc9c !important;
+}
+.header_section {
+    clear:both;
+}
+.about_layout_padding {
+   padding-top: 50px;
+   padding-bottom: 0px;
+}
+
+.in_see_bt a {
+	margin-bottom : 70px;
+	background-color: #1abc9c;
+	margin-top: 45px;
+}
+
+.see_bt a:hover {
+	color: #ffffff;
+	background-color: #1abc9c;
+}
+
+.copyright_text {
+	padding-top : 0px;
+}
+
+.copyright_section {
+	background-color: #1abc9c;
+	margin-top : 20px;
+}
+
+.catchphrase {
+	padding-top: 200px;
+	margin-bottom : 1px;
+	margin : 0px;
+}
+.navbar-toggler {
+	border: 0px solid #000 !important;
+    background-color: #1abc9c;
+}
+.navbar {
+    justify-content: flex-start !important;
+}
