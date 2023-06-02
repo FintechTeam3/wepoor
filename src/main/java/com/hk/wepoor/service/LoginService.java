@@ -24,7 +24,7 @@ public class LoginService {
 			return null;
 		} else {
 			if (changedPwd.equals(member.getUserPwd())) {
-				jwtToken = Jwt.createJwt(userId, member.getUserNickname());
+				jwtToken = Jwt.createJwt(userId, member.getUserNo());
 
 			} else {
 				return null;

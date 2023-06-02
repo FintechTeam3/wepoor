@@ -19,7 +19,7 @@ public class Jwt {
 
 	private static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-	public static String createJwt(String userId, String userNickname) {
+	public static String createJwt(String userId, int userNo) {
 
 		Long expiredMs = 1000 * 60 * 60l;
 
@@ -27,6 +27,7 @@ public class Jwt {
 		Claims claims = Jwts.claims();
 
 		claims.put("userId", userId);
+		claims.put("userNo", userNo);
 		return Jwts.builder().setHeaderParam("type", "JWT").setClaims(claims)
 				.setIssuedAt(new Date(System.currentTimeMillis())) // 발행일
 				.setExpiration(new Date(System.currentTimeMillis() + expiredMs)) // 만료일
