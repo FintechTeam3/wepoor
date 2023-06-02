@@ -72,5 +72,10 @@ public class LoginController {
 
 		return "redirect:/login_page";
 	}
-
+	
+	@GetMapping("/test")
+	public String test() {
+		return "test";
+	}
+	
 }
