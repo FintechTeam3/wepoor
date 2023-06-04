@@ -1,128 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<!--===============================================================================================-->
+<title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+
+<!-- <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"> -->
+
+<link rel="stylesheet" type="text/css"
+	href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+
+<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+
+<link rel="stylesheet" type="text/css"
+	href="vendor/css-hamburgers/hamburgers.min.css">
+
+<link rel="stylesheet" type="text/css"
+	href="vendor/animsition/css/animsition.min.css">
+
+<link rel="stylesheet" type="text/css"
+	href="vendor/select2/select2.min.css">
+
+<link rel="stylesheet" type="text/css"
+	href="vendor/daterangepicker/daterangepicker.css">
+
+<link rel="stylesheet" type="text/css" href="css/util.css">
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
+<!-- 공통설정 -->
+
+<!-- site metas -->
+<title>Teab</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- bootstrap css -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<!-- style css -->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<!-- Responsive-->
+<link rel="stylesheet" href="css/responsive.css">
+<!-- fevicon -->
+<!-- <link rel="icon" href="images/fevicon.png" type="image/gif" /> -->
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+<!-- Tweaks for older IEs-->
+<link rel="stylesheet"
+	href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<!-- owl stylesheets -->
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesoeet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+	media="screen">
+
+<!-- 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"> -->
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/homepage.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
 </head>
 <body style="background-color: #666666;">
-	
+	<div class="header_section">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+			<div class="logo">
+				<a href="/"><img src="images/woogeoji.jpg"></a>
+			</div>
+
+			<p
+				style="color: white; font-size: 35px; font-weight: 700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">우거지</p>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link" href="/">Home</a> <a
+						class="nav-item nav-link" href="about.html">About</a> <a
+						class="nav-item nav-link" href="teashop.html">Teashop</a>
+				</div>
+			</div>
+		</nav>
+	</div>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" method = "post" action="/login">
-					<span class="login100-form-title p-b-43">
-						Login to continue
-					</span>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="userId">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
+				<form class="login100-form validate-form" method="post"
+					action="/login">
+					<span class="login100-form-title p-b-43"> 이미지 </span>
+
+
+					<div class="wrap-input100 validate-input"
+						data-validate="Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="userId"> <span
+							class="focus-input100"></span> <span class="label-input100">아이디</span>
 					</div>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="userPwd">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
+
+
+					<div class="wrap-input100 validate-input"
+						data-validate="Password is required">
+						<input class="input100" type="password" name="userPwd"> <span
+							class="focus-input100"></span> <span class="label-input100">비밀번호</span>
 					</div>
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
+							<input class="input-checkbox100" id="ckb1" type="checkbox"
+								name="remember-me"> <label class="label-checkbox100"
+								for="ckb1"> Remember me </label>
 						</div>
 
 						<div>
-							<a href="#" class="txt1">
-								Forgot Password?
-							</a>
+							<a href="#" class="txt1"> Forgot Password? </a>
 						</div>
 					</div>
-			
+
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
+						<button class="login100-form-btn">로그인</button>
 					</div>
-					
+
 					<div class="container-login100-form-btn p-t-20 p-b-20">
 						<button class="login100-form-btn" onclick="location.href='/join'">
-							Sign up
-						</button>
-					</div>
-					<div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-							sign in with
-						</span>
+							회원가입</button>
 					</div>
 
-					<div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-facebook-f" aria-hidden="true"></i>
+					<div class="container-login100-form-btn">
+						<a href="#" class="login100-form-btn2"> <img
+							src="images\kakao.png" alt="위의 이미지를 누르면 연결됩니다.">
 						</a>
 
-						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
-						</a>
-						
-				
+
 					</div>
 				</form>
 
-				<div class="login100-more" style="background-image: url('images/img-3.png');">
-				</div>
+				<div class="login100-more"
+					style="background-image: url('images/poor.png');"></div>
+
 			</div>
 		</div>
 	</div>
-	
-	
 
-	
-	
-<!--===============================================================================================-->
+	<div class="copyright_section">
+		<div class="container">
+			<p class="copyright_text">
+				Copyright 2023 All Right Reserved By.<a href="https://html.design">
+					Free html Templates</a> Distributed by. <a href="/">life&money</a>
+			</p>
+			</p>
+		</div>
+	</div>
+
+
+
+	<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/daterangepicker/moment.min.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
 </body>
