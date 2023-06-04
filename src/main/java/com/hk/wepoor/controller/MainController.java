@@ -40,5 +40,10 @@ public class MainController {
 	public String page() {
 		return "page";
 	}
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "mypage";
+	}
 
 }
