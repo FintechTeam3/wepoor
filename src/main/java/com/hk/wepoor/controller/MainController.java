@@ -35,5 +35,10 @@ public class MainController {
 	public String teashop() {
 		return "teashop";
 	}
+	
+	@GetMapping("/page")
+	public String page() {
+		return "page";
+	}
 
 }
