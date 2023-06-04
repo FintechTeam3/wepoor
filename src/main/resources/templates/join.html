@@ -1,149 +1,167 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="utf-8">
 
 <head>
-
-<!-- Required meta tags-->
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Colorlib Templates">
-<meta name="author" content="Colorlib">
-<meta name="keywords" content="Colorlib Templates">
-
-
-<!-- Title Page-->
-<title>Au Register Forms by Colorlib</title>
-
-<!-- Icons font CSS-->
-<link href="vendor/mdi-font/css/material-design-iconic-font.min.css"
-	rel="stylesheet" media="all">
-<link href="vendor/font-awesome-4.7/css/font-awesome.min.css"
-	rel="stylesheet" media="all">
-<!-- Font special for pages-->
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
-
-<!-- Vendor CSS-->
-<link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-<link href="vendor/datepicker/daterangepicker.css" rel="stylesheet"
-	media="all">
-
-<!-- Main CSS-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
-<link href="css/main2.css" rel="stylesheet" media="all">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <!-- mobile metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <!-- site metas -->
+   <title>Teab</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- bootstrap css -->
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+   <!-- style css -->
+   <link rel="stylesheet" type="text/css" href="css/style.css">
+   <!-- Responsive-->
+   <link rel="stylesheet" href="css/responsive.css">
+   <!-- fevicon -->
+   <!-- <link rel="icon" href="images/fevicon.png" type="image/gif" /> -->
+   <!-- Scrollbar Custom CSS -->
+   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+   <!-- Tweaks for older IEs-->
+   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+   <!-- owl stylesheets -->
+   <link rel="stylesheet" href="css/owl.carousel.min.css">
+   <link rel="stylesoeet" href="css/owl.theme.default.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+      media="screen">
+    <!-- bootstrap CSS END-->  
+    
+    <!-- hyejung CSS Start -->
+    <link rel="stylesheet" type="text/css" href="css/homepage.css">
+    <!-- hyejung CSS End -->
 </head>
 
 <body>
-	<!-- <div class="page-wrapper bg-gra-03 p-t-130 p-b-100 font-poppins">
-        <div class="wrapper wrapper--w680">
-            <div class="card card-4"> -->
-	<div class="card-body">
-		<h2 class="title">Registration Form</h2>
-		<form method="POST" action="/join_insert">
+   <!-- header section start -->
+   <div class="header_section">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     
+         
+         <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">회원가입</p>
+         
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         
+         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              	<a class="nav-item nav-link" href="/">Home</a>
+               	<a class="nav-item nav-link" href="about.html">About</a>
+               	<a class="nav-item nav-link" href="teashop.html">Teashop</a>
+            </div>
+         </div>
+      </nav>
+   </div>
 
-			<div class="row row-space">
-				<div class="col-2">
-					<div class="input-group">
-						<label class="label">아이디 <input id="userId"
-							class="input--style-4" type="text" name="userId">
+   <!-- header section end -->
+	<div style="margin: 15px 25px 15px 0px;">
+		<div class="card-body">
 
-						</label>
-						<div class="col-2">
-							<input type="button" id="mailCheck"
-								class="btn btn--radius-2 btn--blue" value="중복 조회">
-						</div>
-					</div>
+			<form id="joinForm" method="POST" action="join_insert">
+			
+				<div class="mb-3">
+  					<label for="exampleFormControlInput1" class="form-label">이름</label>
+  					<input id="userName" name="userName" type="text" class="form-control" placeholder="이름입력(2~6글자)" required>
 				</div>
+				
+				<div class="mb-3">
+  					<label for="exampleFormControlInput1" class="form-label">닉네임</label>
+  					<input id="userNickname"name="userNickname" type="text" class="form-control" placeholder="닉네임입력(2~20글자)" required>
+				</div>
+				
+				<label>아이디</label>
+				<div class="input-group mb-3">
+					<input id="userId" name="userId" type="text" class="form-control"
+						placeholder="아이디입력(3~20글자)" aria-label="Recipient's username"
+						aria-describedby="button-addon2" required>
+					<button class="btn btn-light" type="button" style="color:black;font-weight:normal"
+						id="mailCheck">중복 조회</button>
+				</div>
+				
+				<label>비밀번호</label>
+				<div class="input-group mb-3">
+					<input id="userPwd" type="password" name="userPwd" class="form-control" placeholder="비밀번호" aria-label="비밀번호" required>
+					<span id="divid"class="input-group-text">/</span> 
+					<input id="pwdCheck"  type="password" name="pwdCheck" class="form-control" placeholder="비밀번호 확인" aria-label="비밀번호 확인" required>
+				</div>
+				<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+				<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 
-			</div>
 
-			<div class="row row-space">
-				<div class="col-2">
-					<div class="input-group">
-						<label class="label">핸드폰 번호</label> <input class="input--style-4"
-							type="text" name="userPhone">
-					</div>
+				<label>핸드폰번호</label>
+				<div class="input-group mb-3">
+					<input id="phone" name="userPhone" type="text" class="form-control" placeholder="핸드폰번호 입력" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+					<button id="memberPhoneCheck"  style="color:black;font-weight:normal" class="btn btn-light" type="button">인증번호 전송</button>
 				</div>
-				<div class="col-2">
-					<input type="button" id="memberPhoneCheck"
-						class="btn btn--radius-2 btn--blue" value="인증번호 전송">
+				
+				<label>인증번호 입력</label>
+				<div class="input-group mb-3">
+					<input name="memberPhoneCertify" type="text" class="form-control" placeholder="인증번호 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
+					<button id="certifyCheck"  style="color:black;font-weight:normal" class="btn btn-light" type="button">인증하기</button>
 				</div>
-			</div>
-
-			<div class="row row-space">
-				<div class="col-2">
-					<div class="input-group">
-						<label class="label">인증번호 입력</label> <input class="input--style-4"
-							type="text" name="memberPhoneCertify">
-					</div>
+				
+				<div class="p-t-15">
+					<button class="btn btn-light" style="color:black;font-weight:bold;float: left;" id="cancel" type="button" onclick="location.href='login_page'">Cancel</button>
+					<button class="btn btn-light" style="color:black;font-weight:bold;float: right;" id="submit" type="submit">Submit</button>
+					
 				</div>
-				<div class="col-2">
-					<input type="button" id="certifyCheck"
-						class="btn btn--radius-2 btn--blue" value="인증하기">
-				</div>
-			</div>
-			<div class="row row-space">
-				<div class="col-2">
-					<div class="input-group">
-						<label class="label">이름</label> <input class="input--style-4"
-							type="text" name="userName">
-					</div>
-				</div>
-				<div class="col-2">
-					<div class="input-group">
-						<label class="label">닉네임</label> <input class="input--style-4"
-							type="text" name="userNickname">
-					</div>
-				</div>
-			</div>
-			<div class="row row-space">
-				<div class="col-2">
-					<div class="input-group">
-						<label class="label">비밀번호</label> <input id="userPwd"
-							class="input--style-5" type="password" name="userPwd">
-					</div>
-				</div>
-				<div class="col-2">
-					<div class="input-group">
-						<label class="label">비밀번호 확인</label> <input id="pwdCheck"
-							class="input--style-5" type="password" name="pwdCheck">
-					</div>
-				</div>
-			</div>
-			<div class="alert alert-success" id="alert-success">비밀번호가
-				일치합니다.</div>
-			<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지
-				않습니다.</div>
-
-			<div class="p-t-15">
-				<button class="btn btn--radius-2 btn--blue" id="submit"
-					type="submit">Submit</button>
-			</div>
-		</form>
+				
+			</form>
+		</div>
 	</div>
-	<!--             </div>
-        </div>
-    </div> -->
 
-	<!-- Jquery JS-->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<!-- Vendor JS-->
-	<script src="vendor/select2/select2.min.js"></script>
-	<script src="vendor/datepicker/moment.min.js"></script>
-	<script src="vendor/datepicker/daterangepicker.js"></script>
 
-	<!-- Main JS-->
-	<script src="js/global.js"></script>
 
+
+	<!-- copyright section start -->
+   <div class="copyright_section">
+      <div class="container">
+         <p class="copyright_text">Copyright 2023 All Right Reserved By.<a href="https://html.design"> Free html
+               Templates</a> Distributed by. <a href="/">life&money</a> </p>
+         </p>
+      </div>
+   </div>
+   <!-- copyright section end -->
+   
+   
+   <!-- Javascript files-->
+   <script src="js/jquery.min.js"></script>
+   <script src="js/popper.min.js"></script>
+   <script src="js/bootstrap.bundle.min.js"></script>
+   <script src="js/jquery-3.0.0.min.js"></script>
+   <script src="js/plugin.js"></script>
+   <!-- sidebar -->
+   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+   <script src="js/custom.js"></script>
+   <!-- javascript -->
+   <script src="js/owl.carousel.js"></script>
+   <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+   <script src="js/global.js"></script>
+   <script>
+            $(document).ready(function () {
+               // Add minus icon for collapse element which is open by default
+               $(".collapse.show").each(function () {
+                  $(this).prev(".card-header").find(".fa").addClass("fa-minus").removeClass("fa-plus");
+               });
+
+               // Toggle plus minus icon on show hide of collapse element
+               $(".collapse").on('show.bs.collapse', function () {
+                  $(this).prev(".card-header").find(".fa").removeClass("fa-plus").addClass("fa-minus");
+               }).on('hide.bs.collapse', function () {
+                  $(this).prev(".card-header").find(".fa").removeClass("fa-minus").addClass("fa-plus");
+               });
+               $(".fancybox").fancybox({
+                   openEffect: "none",
+                   closeEffect: "none"
+                });
+            });
+   </script>
 </body>
-
 </html>

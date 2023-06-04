@@ -22,6 +22,7 @@ public class Jwt {
 	public static String createJwt(String userId, int userNo) {
 
 		Long expiredMs = 1000 * 60 * 60l;
+		
 
 		// payload저장
 		Claims claims = Jwts.claims();

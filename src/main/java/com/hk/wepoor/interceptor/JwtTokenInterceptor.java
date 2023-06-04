@@ -8,6 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import com.hk.wepoor.jwt.Jwt;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,20 +52,23 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
 			return false;
 		}
 
-		Jws<Claims> claims = Jwt.parseToken(jwtToken);
-		Long jwtExp = ((Number) claims.getBody().get("exp")).longValue();
-		Long currentTime = System.currentTimeMillis();
+		try {
 
-		// 토큰이 유효하지 않으면
-		if (jwtExp > currentTime) {
+			Jws<Claims> claims = Jwt.parseToken(jwtToken);
+			String userId = (String) claims.getBody().get("userId");
+			int userNo = (int) claims.getBody().get("userNo");
+			request.setAttribute("userId", userId);
+			request.setAttribute("userNo", userNo);
+			logger.info("[preHandle] login success");
+			return true; // 다음 진행을 나타냄 true = 통과, false=거부
+			
+		} catch (ExpiredJwtException e) {
+			// 토큰이 유효하지 않다면
 			response.sendRedirect(request.getContextPath() + "/login_page");
 			logger.info("[preHandle] invalid token");
 			return false;
 		}
-		String userId = (String) claims.getBody().get("userId");
-		request.setAttribute("userId", userId);
-		logger.info("[preHandle] login success");
-		return true; // 다음 진행을 나타냄 true = 통과, false=거부
+
 	}
 
 }
