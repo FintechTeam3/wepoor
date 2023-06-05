@@ -1,5 +1,8 @@
 package com.hk.wepoor.vo;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,5 +16,6 @@ public class CommunityVO {
 	int top_commu_id;
 	int user_no;
 	String commu_content;
-	
+	Date create_time;
+
 }
