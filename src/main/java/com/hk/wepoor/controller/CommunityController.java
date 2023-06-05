@@ -135,7 +135,7 @@ public class CommunityController {
         // 대댓글 생성
         CommunityVO reply = new CommunityVO();
         reply.setTop_commu_id(top_commu_id);
-        reply.setUser_no(useNo);
+
         reply.setCommu_content(commu_content);
     
         communityService.create(reply);
