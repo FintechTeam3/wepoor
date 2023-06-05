@@ -63,7 +63,8 @@
                     <form action="/community/createReply" method="post">
                         <!-- 상위 게시물의 commu_id 값을 전달하기 위해 hidden 필드 추가 -->
                         <input type="hidden" name="parentId" th:value="${community.commu_id}">
-
+                        <input type="hidden" name="useNo" value="${useNo}">
+                        <!--  -->
                         <input class="form-control mb-2" name="commu_content" type="text" placeholder="댓글을 작성해주세요.">
                         
                         <button type="submit" class="btn btn-warning">댓글작성</button>
@@ -73,8 +74,7 @@
                         <div th:if="${community.commu_id} == ${replyList.top_commu_id}" class="d-flex justify-content-between">
                             <h5 class="card-title mb-3" th:text="${replyList.commu_content}"></h5>
                             <div th:text="${replyList.user_no}"></div>
-                            <input type="hidden" name="useId" value="${request.useId}">
-                            <input type="hidden" name="user_no" value="${#replyList.user_no}">
+                            
                         </div>
                     </div>
                 </div>

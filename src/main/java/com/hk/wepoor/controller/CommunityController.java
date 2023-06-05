@@ -86,7 +86,7 @@ public class CommunityController {
     @ResponseBody
     public String createReply(@RequestParam("parentId") int top_commu_id, 
                             @RequestParam("commu_content") String commu_content,
-                            @RequestParam("useId") int user_id) {
+                            @RequestParam("useNo") String useNo) {
              // JWT 토큰 값을 쿠키에서 가져오기
         // Cookie[] cookies = request.getCookies();
         // String jwtToken = null;
@@ -111,7 +111,7 @@ public class CommunityController {
         //     // ...
        
         // System.out.println("상위 게시물 값입니다: " + top_commu_id);
-        // System.out.println("유저 아이디 값입니다: " + userId);
+        System.out.println("유저 아이디 값입니다: " + useNo);
         // System.out.println("유저 번호 값입니다: " + userNo);
         // System.out.println("컨텐트 값입니다: " + commu_content);
         
@@ -130,12 +130,12 @@ public class CommunityController {
         // if (parentComment == null) {
         //     return "error"; // 부모 댓글이 존재하지 않으면 에러 처리
         // }
-        System.out.println("user_id" + user_id);
+        System.out.println("user_id" + useNo);
         
         // 대댓글 생성
         CommunityVO reply = new CommunityVO();
         reply.setTop_commu_id(top_commu_id);
-        // reply.setUser_no(userNo);
+        reply.setUser_no(useNo);
         reply.setCommu_content(commu_content);
     
         communityService.create(reply);
