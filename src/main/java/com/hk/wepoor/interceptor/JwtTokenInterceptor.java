@@ -13,6 +13,7 @@ import io.jsonwebtoken.Jws;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 @Component
@@ -57,8 +58,10 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
 			Jws<Claims> claims = Jwt.parseToken(jwtToken);
 			String userId = (String) claims.getBody().get("userId");
 			int userNo = (int) claims.getBody().get("userNo");
-			request.setAttribute("userId", userId);
-			request.setAttribute("userNo", userNo);
+			HttpSession session = request.getSession();
+			session.setAttribute("userNo", userNo);
+			session.setAttribute("userId", userId);
+			
 			logger.info("[preHandle] login success");
 			return true; // 다음 진행을 나타냄 true = 통과, false=거부
 			

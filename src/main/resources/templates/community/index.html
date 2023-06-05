@@ -34,6 +34,8 @@
     </head>
 
     <body>
+    <p th:text="${session.userId}"></p>
+	<h th:text="${session.userNo}"></h>
         <div class="container mt-4">
             <h1>게시글 작성하기</h1>
             <form action="#" th:action="@{/community/create}" method="POST">
