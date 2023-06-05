@@ -130,6 +130,7 @@
 			$('#phone').focus();
 			return false;
 		}
+		
 		return true;
 		
 	});
