@@ -74,9 +74,17 @@ public class CommunityController {
 
     // 게시글 생성하기
     @PostMapping("/community/create")
-    public String createCommunity(CommunityVO communityVO) {
+    public String createCommunity(@RequestParam("commu_content") String commu_content, HttpServletRequest request) {
         
-        communityService.create(communityVO);
+        // 세션 기반
+        HttpSession session = request.getSession(false);
+        int userNo = (int) session.getAttribute("userNo");
+
+        CommunityVO reply = new CommunityVO();
+        reply.setUser_no(userNo);
+        reply.setCommu_content(commu_content);
+
+        communityService.create(reply);
 
         return "redirect:/community";
     }
@@ -86,63 +94,24 @@ public class CommunityController {
     @ResponseBody
     public String createReply(@RequestParam("parentId") int top_commu_id, 
                             @RequestParam("commu_content") String commu_content,
-                            @RequestParam("useId") int user_id) {
-             // JWT 토큰 값을 쿠키에서 가져오기
-        // Cookie[] cookies = request.getCookies();
-        // String jwtToken = null;
-        // if (cookies != null) {
-        //     for (Cookie cookie : cookies) {
-        //         if (cookie.getName().equals("jwtToken")) {
-        //             jwtToken = cookie.getValue();
-        //             break;
-        //         }
-        //     }
-        // }
+                            HttpServletRequest request) {
+        
+        // 세션 기반
+        HttpSession session = request.getSession(false);
+        int userNo = (int) session.getAttribute("userNo");
 
-        // System.out.println("여기부터 jwt");
-        // // JWT 토큰 값을 사용하여 유저 정보 추출
-        // if (jwtToken != null) {
-        //     Jws<Claims> jws = Jwt.parseToken(jwtToken);
-        //     Claims claims = jws.getBody();
-        //     String userId = claims.get("userId", String.class);
-        //     int userNo = claims.get("userNo", Integer.class);
-        //     System.out.println("여기 되나?");
-        //     // 유저 정보 및 게시물 정보를 사용하여 처리 로직을 작성
-        //     // ...
-       
-        // System.out.println("상위 게시물 값입니다: " + top_commu_id);
-        // System.out.println("유저 아이디 값입니다: " + userId);
-        // System.out.println("유저 번호 값입니다: " + userNo);
-        // System.out.println("컨텐트 값입니다: " + commu_content);
-        
-        // jwt 토큰값을 받아와서 암호를 해독,
-        // 해독한 내용을 토대로 유저의 pk값을 도출
-        // user의 user_id값을 통해 user의 넘버를 조회
-        // System.out.println("상위 게시물 값입니다: " + top_commu_id);
-        // // System.out.println("상위 게시물 값입니다: " + userId);
-
-        // System.out.println("컨텐트 값입니다: " + commu_content);
-        
-        // // 부모 댓글 조회
-        // CommunityVO parentComment = communityService.select(top_commu_id);
-        // model.addAttribute("communityList", communityCommentList);
-        
-        // if (parentComment == null) {
-        //     return "error"; // 부모 댓글이 존재하지 않으면 에러 처리
-        // }
-        System.out.println("user_id" + user_id);
+        System.out.println("유저 넘버는" + userNo);
         
         // 대댓글 생성
         CommunityVO reply = new CommunityVO();
         reply.setTop_commu_id(top_commu_id);
-        // reply.setUser_no(userNo);
+        reply.setUser_no(userNo);
         reply.setCommu_content(commu_content);
     
         communityService.create(reply);
 
-
-        return "redirect:/community";
-        }
+        return "redirect:/community/index";
+    }
 }
 
 
