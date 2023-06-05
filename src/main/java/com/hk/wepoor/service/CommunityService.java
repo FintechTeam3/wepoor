@@ -18,6 +18,11 @@ public class CommunityService {
 		List<CommunityVO> list = community_mapper.selectAll();
 		return list;
 	}
+
+	// 대댓글 목록
+	public List<CommunityVO> selectRepliesByParentId(int top_commu_id) {
+        return community_mapper.selectRepliesByParentId(top_commu_id);
+    }
 	
 	public CommunityVO select(int commu_id) {
 		CommunityVO communityVO = community_mapper.select(commu_id);

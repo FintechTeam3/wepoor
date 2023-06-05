@@ -1,49 +1,151 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    
+
+<html xmlns:th="http://www.thymeleaf.org" lang="utf-8">
+
 <head>
-    <title>Community Page</title>
-</head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-<body>
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- mobile metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <!-- site metas -->
+   <title>Teab</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- bootstrap css -->
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+   <!-- style css -->
+   <link rel="stylesheet" type="text/css" href="css/style.css">
+   <!-- Responsive-->
+   <link rel="stylesheet" href="css/responsive.css">
+   <!-- fevicon -->
+   <link rel="icon" href="images/fevicon.png" type="image/gif" />
+   <!-- Scrollbar Custom CSS -->
+   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+   <!-- Tweaks for older IEs-->
+   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+   <!-- owl stylesheets -->
+   <link rel="stylesheet" href="css/owl.carousel.min.css">
+   <link rel="stylesoeet" href="css/owl.theme.default.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+      media="screen">
+    </head>
 
-    <div class="container mt-4">
-        <h1>게시글 작성하기</h1>
-        <form action="#" th:action="@{/community/create}" method="POST">
+    <body>
+        <div class="container mt-4">
+            <h1>게시글 작성하기</h1>
+            <form action="#" th:action="@{/community/create}" method="POST">
+     
+                <input class="form-control mb-2" name="commu_content" type="text" placeholder="댓글을 작성해주세요." >
+                <input class="form-control mb-2" name="top_commu_id" type="text" placeholder="top_commu_id">
+                <!-- <input class="form-control mb-2" name="user_no" type="text" placeholder="user_no">  -->
+    
+                <!-- <label for="commu_content">content</label>
+                <input type="text" id="commu_content" name="commu_content" />
+    
+                <label for="top_commu_id">top_commu_id</label>
+                <input id="top_commu_id" name="top_commu_id"></input> -->
+    
+                <button type="submit" class="btn btn-warning">제출</button>
+            </form>
+            
+            <h1>Community List</h1>
+    
+            <div class="card w-75 mb-3" th:each="community : ${communityList}">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title mb-3" th:text="${community.commu_content}"></h5>
+                        <div th:text="${community.user_no}"></div>
+                    </div>
+                    <div th:text="${community.create_time}"></div>
+                    <form action="/community/createReply" method="post">
+                        <!-- 상위 게시물의 commu_id 값을 전달하기 위해 hidden 필드 추가 -->
+                        <input type="hidden" name="parentId" th:value="${community.commu_id}">
 
-            <label for="formFile" class="form-label"></label>
-            <input class="form-control mb-3" type="file" id="formFile">
-
-            <input class="form-control mb-2" name="commu_content" type="text" placeholder="댓글을 작성해주세요." >
-            <input class="form-control mb-2" name="top_commu_id" type="text" placeholder="top_commu_id">
-            <input class="form-control mb-2" name="user_no" type="text" placeholder="user_no"> 
-
-            <!-- <label for="commu_content">content</label>
-            <input type="text" id="commu_content" name="commu_content" />
-
-            <label for="top_commu_id">top_commu_id</label>
-            <input id="top_commu_id" name="top_commu_id"></input> -->
-
-            <button type="submit" class="btn btn-warning">제출</button>
-        </form>
-        
-        <h1>Community List</h1>
-
-        <div class="card w-75 mb-3" th:each="community : ${communityList}">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <h5 class="card-title mb-3" th:text="${community.commu_content}"></h5>
-                    <div th:text="${community.user_no}"></div>
+                        <input class="form-control mb-2" name="commu_content" type="text" placeholder="댓글을 작성해주세요.">
+                        
+                        <button type="submit" class="btn btn-warning">댓글작성</button>
+                    </form>
+                    <!-- 대댓글 리스트 -->
+                    <div th:each="replyList : ${replyList}" >
+                        <div th:if="${community.commu_id} == ${replyList.top_commu_id}" class="d-flex justify-content-between">
+                            <h5 class="card-title mb-3" th:text="${replyList.commu_content}"></h5>
+                            <div th:text="${replyList.user_no}"></div>
+                            <input type="hidden" name="useId" value="${request.useId}">
+                            <input type="hidden" name="user_no" value="${#replyList.user_no}">
+                        </div>
+                    </div>
                 </div>
-                <a href="#" class="btn btn-primary">댓글달기</a>
             </div>
         </div>
-        <!-- <p th:each="community : ${communityList}">
-            <span th:text="${community.commu_id}"></span>번 게시글: <span th:text="${community.commu_content}"></span>
-            상위 게시글 <span th:text="${community.top_commu_id}"></span> 
-        </p> -->
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-</body>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- jQuery를 사용한 AJAX 요청 처리 (community/index.html) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // $(document).ready(function() {
+        //     // 대댓글 작성 폼의 submit 이벤트 처리
+        //     $("#reply-form").submit(function(e) {
+        //         e.preventDefault();
+                
+        //         var formData = $(this).serialize();
+        //         $.ajax({
+        //             type: "POST",
+        //             url: "/community/createReply",
+        //             data: formData,
+        //             success: function(response) {
+        //                 if (response === "success") {
+        //                     // 대댓글이 성공적으로 생성된 경우, 처리할 작업 수행
+        //                     alert("대댓글이 작성되었습니다.");
+        //                     location.reload(); // 페이지 새로고침
+        //                 }
+        //             },
+        //             error: function(xhr, status, error) {
+        //                 // 대댓글 생성 중 오류 발생 시 처리할 작업 수행
+        //                 alert("대댓글 작성 중 오류가 발생했습니다.");
+        //             }
+        //         });
+        //     });
+        // });
+    </script>
+    </body>
+
+    
+
+
+   <style>
+   .bg-light {
+    background-color: #1abc9c !important;;
+	}
+	.about_layout_padding {
+    padding-top: 50px;
+    padding-bottom: 0px;
+	}
+	.in_see_bt a {
+	margin-bottom : 90px;
+	background-color: #1abc9c;
+	}
+	.see_bt a:hover {
+    color: #ffffff;
+    background-color: #1abc9c;
+	}
+	.copyright_text {
+	padding-top : 0px;
+	}
+	.copyright_section {
+	background-color: #1abc9c;
+	margin-top : 20px;
+	}
+	.catchphrase {
+	padding-top: 200px;
+    margin-bottom : 1px;
+	}
+   </style>   
+   
+   
+
 </html>
