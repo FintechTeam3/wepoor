@@ -24,7 +24,7 @@
     VALUES (#{commu_id}, #{top_commu_id}, #{user_no}, #{commu_content})
     ]]>
 	</insert> 
-	
+
 	<delete id="delete" parameterType="Integer">
     <![CDATA[
     DELETE FROM community WHERE commu_id = #{commu_id}
