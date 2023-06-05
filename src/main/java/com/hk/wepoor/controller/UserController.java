@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hk.wepoor.model.UserMapper;
 import com.hk.wepoor.vo.UserVO;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import reactor.netty.http.server.HttpServerRequest;
+
 @Controller
 public class UserController {
 
@@ -71,5 +75,16 @@ public class UserController {
 		return 0;
 	}
 	
+	// 마이페이지 닉네임, 포인트 불러오기 - 혜정
+	@GetMapping("/mypage")
+	public String mypage(HttpServletRequest req) {
+		HttpSession session = req.getSession(false);
+		
+		String userId = (String) session.getAttribute("userId");
+		
+		UserVO userVO = mapper.getUserByUserId(userId);
+	    req.setAttribute("userPoint", userVO.getUserPoint());
+		return "mypage";
+	}
 
 }

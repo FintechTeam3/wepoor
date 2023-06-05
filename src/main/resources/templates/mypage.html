@@ -74,13 +74,13 @@
             
             <!-- nickname section --> 
 			<div>
-				<input type="text" class="nickname_input" readonly>
+				<input type="text" class="nickname_input" th:value="${session.userId}" style="color:black; text-align:center;" readonly>
 			</div>
 			
             <!-- point section --> 
-			<div>
-				<input type="text" class="point_input" th:text="${userId}" style="color:black;" readonly>
-				<h3 th:text="${userId}"></h3>
+			<div class="userpoint">
+				<input type="text" th:value="${userPoint}" class="point_input" style="color:white; text-align:center;" readonly>
+				<span>포인트</span>
 			</div>
             
             <!-- page section -->
