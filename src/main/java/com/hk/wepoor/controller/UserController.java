@@ -53,7 +53,7 @@ public class UserController {
 
 	@PostMapping("/id_check")
 	@ResponseBody
-	public int test(@RequestParam("userId") String userId) {
+	public int idCheck(@RequestParam("userId") String userId) {
 
 		List<HashMap<String, String>> mails = mapper.getAllUserId();
 
@@ -69,5 +69,6 @@ public class UserController {
 
 		return 0;
 	}
+	
 
 }
