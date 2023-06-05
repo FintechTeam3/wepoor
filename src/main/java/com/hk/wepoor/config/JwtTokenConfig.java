@@ -12,7 +12,7 @@ public class JwtTokenConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new JwtTokenInterceptor())
-				.addPathPatterns("/category/**");
+				.addPathPatterns("/category/**", "/mypage/**");
 //				.excludePathPatterns();
 		
 	}

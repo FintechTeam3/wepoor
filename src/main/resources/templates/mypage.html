@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="utf-8">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
    <!-- basic -->
@@ -79,7 +79,8 @@
 			
             <!-- point section --> 
 			<div>
-				<input type="text" class="point_input" readonly>
+				<input type="text" class="point_input" th:text="${userId}" style="color:black;" readonly>
+				<h3 th:text="${userId}"></h3>
 			</div>
             
             <!-- page section -->
