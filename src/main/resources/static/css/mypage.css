@@ -1,0 +1,49 @@
+.bg-light {
+	background-color: #1abc9c !important;
+}
+.header_section {
+    clear:both;
+}
+.copyright_text {
+	padding-top : 0px;
+}
+.copyright_section {
+	background-color: #1abc9c;
+	margin-top : 20px;
+}
+.navbar-toggler {
+	border: 0px solid #000 !important;
+    background-color: #1abc9c;
+}
+.navbar {
+    justify-content: flex-start !important;
+}
+.image_2 {
+	margin: auto auto 10px auto;
+}
+.nickname_input {
+	border-radius: 3px;
+	border: solid 1px #d9d9d9;
+	background-color: #e0e0e0;
+	display: block;
+	margin: 0px auto;
+}
+.point_input {
+	border-radius: 3px;
+	border: solid 1px #1abc9c;
+	background-color: #1abc9c;
+	display: block;
+	margin: 20px auto 50px auto;
+}
+.mapage_hr {
+	margin: 10px auto 10px auto;
+}
+.mypage_link {
+	display: block;
+	margin: auto auto auto 10px;
+	color: #0d0a05;
+	font-size:14px;
+	font-weight:500;
+	font-family: 'Jua', sans-serif;
+	letter-spacing: 2px;
+}
