@@ -78,10 +78,13 @@
 			</div>
 			
             <!-- point section --> 
-			<div class="userpoint">
-				<input type="text" th:value="${userPoint}" class="point_input" style="color:white; text-align:center;" readonly>
-				<span>포인트</span>
-			</div>
+            
+            <table>
+            	<tr>
+            		<th><input type="text" th:value="${userPoint}" class="point_input" style="color:white; text-align:center;" readonly></th>
+            		<th><span style="margin-left:5px;">포인트</span></th>
+            	</tr>
+            </table>
             
             <!-- page section -->
             <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">

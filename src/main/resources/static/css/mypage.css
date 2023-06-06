@@ -33,7 +33,8 @@
 	border: solid 1px #1abc9c;
 	background-color: #1abc9c;
 	display: block;
-	margin: 20px auto 70px auto;
+	margin: auto auto auto auto;
+	width: 135px;
 }
 .mapage_hr {
 	margin: 10px auto 10px auto;
@@ -49,4 +50,7 @@
 }
 .copyright_section {
 	margin-top: 70px;
+}
+table {
+	margin : 20px auto 70px auto;
 }
