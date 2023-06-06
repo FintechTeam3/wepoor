@@ -78,8 +78,16 @@
             	</tr>
             </table>
    		</div>
-   	<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+   		
+   			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
    
+			<table>
+            	<tr th:each=pl:${pointlist}>
+            		<th><span th:text="${pl.point_date}">적립or사용일자</span></th>
+            		<th><span>구분</span></th>
+            		<th><span th:text="${pl.point_price}">적립or사용금액</span></th>
+            	</tr>
+            </table>
    
    
           </div>

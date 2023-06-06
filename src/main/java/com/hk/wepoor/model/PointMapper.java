@@ -15,4 +15,7 @@ public interface PointMapper {
 	int delete(int point_id);
 	int update(PointVO pointVO);
 	
+	// 사용자의 포인트 내역 조회
+	List<PointVO> selectAllUser(int user_no);
+	
 }

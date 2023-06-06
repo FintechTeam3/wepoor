@@ -37,5 +37,12 @@
     WHERE point_id=#{point_id} 
     ]]>
 	</update> 
+	
+	<!-- 사용자의 포인트 내역 조회 -->
+	<select id="selectAllUser">
+	<![CDATA[
+    SELECT * FROM point WHERE user_no=#{user_no} ORDER BY point_date DESC;
+    ]]>
+	</select>
   
   </mapper>

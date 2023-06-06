@@ -39,4 +39,9 @@ public class PointService {
 		return affectRowCount;
 	}
 	
+	public List<PointVO> selectAllUser(int user_no) {
+		List<PointVO> list = point_mapper.selectAllUser(user_no);
+		return list;
+	}
+	
 }
