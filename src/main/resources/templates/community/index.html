@@ -39,43 +39,41 @@
  
  <body>
     <!-- header section start -->
-    <div class="header_section" style="margin-top: 0px;">
-       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-       
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-             <span class="navbar-toggler-icon"></span>
-          </button>
-          
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-             <div class="navbar-nav">
-                   <a class="nav-item nav-link" href="/">Home</a>
-                    <a class="nav-item nav-link" href="about.html">About</a>
-                    <a class="nav-item nav-link" href="teashop.html">Teashop</a>
-             </div>
-          </div>
-          
-          <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">페이지명</p>
-          
-          <div class="see_bt in_see_bt"><a href="login_page" style="font-size:16px; font-weight:700; font-family: 'Jua', sans-serif; color: black;">버튼명</a></div>
-          
-       </nav>
-    </div>
-    <!-- header section end -->
+        <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/">Home</a>
+                        <a class="nav-item nav-link" href="about.html">About</a>
+                        <a class="nav-item nav-link" href="teashop.html">Teashop</a>
+                </div>
+            </div>
+            
+            <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">페이지명</p>
+            
+            <div class="see_bt in_see_bt"><a href="login_page" style="font-size:16px; font-weight:700; font-family: 'Jua', sans-serif; color: black;">버튼명</a></div>
+            
+        </nav>
+        </div>
+        <!-- header section end -->
     
     <!-- 페이지 작성하기 시작-->
-
-    <body>
         <div class="container mt-4">
-            <div class="d-flex">
+            <div class="d-flex mt-4">
                 <img src="images/woogeoji.png" alt="이미지 사진" style="width: 28px; height: 28px;">
                 <p th:text="${session.userId}" style="margin: 10px;"></p>
             </div>
             <form action="#" th:action="@{/community/create}" method="POST">
-     
                 <input class="form-control my-2" name="commu_content" type="text" placeholder="댓글을 작성해주세요." >
-    
-                <button type="submit" class="btn btn-warning">제출</button>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
+                </div>
             </form>
             
             <h1>Community List</h1>
@@ -83,35 +81,59 @@
                 <div>
                     <div class="d-flex">
                         <img src="images/woogeoji.png" alt="이미지 사진" style="width: 28px; height: 28px;">
-                        <p th:text="${session.userId}" style="margin: 10px;"></p>
+                        <p th:text="${community.user_nickname}" style="margin: 10px;"></p>
                         <div>
                             
                         </div>
                     </div>
                     <h5 class="card-title" th:text="${community.commu_content}" style="margin: 0px;"></h5>
                     <div th:text="${community.create_time}" class="d-flex justify-content-end" style="font-size: 10px;"></div>
-                    <form action="/community/createReply" method="post">
+                    <form th:action="@{/community/createReply}" method="post">
                         <!-- 상위 게시물의 commu_id 값을 전달하기 위해 hidden 필드 추가 -->
                         <input type="hidden" name="parentId" th:value="${community.commu_id}">
 
                         <input class="form-control mb-2" name="commu_content" type="text" placeholder="댓글을 작성해주세요.">
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-warning">댓글작성</button>
+                            <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
                         </div>
                     </form>
                     <!-- 대댓글 리스트 -->
                     <div>
+                        <!-- 필터 1. commu_id 와 top_commu_id가 같은지 -->
                         <div th:each="replyList : ${replyList}" th:if="${community.commu_id} == ${replyList.top_commu_id}" class="form-control">
 
                             <div  class="d-flex">
                                 <div class="d-flex justify-content-center align-items-center mr-2">
                                     <img src="images/arrow-right.png" alt="" style="width: 20px; height: 20px;">
                                 </div>
-                                    <div>
-                                    <div class="d-flex">
-                                        <img src="images/woogeoji.png" alt="이미지 사진" style="width: 28px; height: 28px;">
-                                        <p th:text="${session.userId}" style="margin: 10px;"></p>
+                                <div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <img src="images/woogeoji.png" alt="이미지 사진" style="width: 28px; height: 28px;">
+                                            <p th:text="${replyList.user_nickname}" style="margin: 10px;"></p>
+                                        </div>
+                                        <!-- 댓글 수정 / 해당 유저라면 -->
+                                        <div class="d-flex">
+                                            <form action="" th:if="${replyList.user_no} == ${session.userNo}" class="mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square mr-2" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">
+                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                                </svg>
+                                            </form>
+                                            <!-- <button type="button" class="btn btn-primary" >Open modal for @fat</button> -->
+                                            <!-- 댓글 삭제 / 해당 유저라면 -->
+                                            <form th:action="@{/community/delete}" method="post" th:if="${replyList.user_no} == ${session.userNo}" class="d-flex align-items-center" >
+                                                <button>
+                                                    <input type="hidden" name="delete" th:value="${replyList.commu_id}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
+                                    
                                     <!-- 대댓글 너비설정 -->
                                     <h5 class="card-title" th:text="${replyList.commu_content}" style="margin: 0px; width: 70vw;"></h5>
                                     <div th:text="${replyList.create_time}" class="d-flex justify-content-end" style="font-size: 10px;"></div>
@@ -123,7 +145,35 @@
             </div>
         </div>
    <!-- 페이지 작성하기 끝-->
-                  
+   
+   
+   
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+           <form>
+             <div class="mb-3">
+               <label for="recipient-name" class="col-form-label">Recipient:</label>
+               <input type="text" class="form-control" id="recipient-name">
+             </div>
+             <div class="mb-3">
+               <label for="message-text" class="col-form-label">Message:</label>
+               <textarea class="form-control" id="message-text"></textarea>
+             </div>
+           </form>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-primary">Send message</button>
+         </div>
+       </div>
+     </div>
+   </div>
    <!-- copyright section start -->
    <div class="copyright_section">
     <div class="container">
@@ -134,10 +184,30 @@
  </div>
  <!-- copyright section end -->
  
- 
  <!-- Javascript files-->
  <script src="js/jquery.min.js"></script>
  <script src="js/bootstrap.bundle.min.js"></script>
+
+ <script>
+    const exampleModal = document.getElementById('exampleModal')
+    if (exampleModal) {
+    exampleModal.addEventListener('show.bs.modal', event => {
+        // Button that triggered the modal
+        const button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        const recipient = button.getAttribute('data-bs-whatever')
+        // If necessary, you could initiate an Ajax request here
+        // and then do the updating in a callback.
+
+        // Update the modal's content.
+        const modalTitle = exampleModal.querySelector('.modal-title')
+        const modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+        modalTitle.textContent = `New message to ${recipient}`
+        modalBodyInput.value = recipient
+    })
+    }
+ </script>
 </body>
 
     
