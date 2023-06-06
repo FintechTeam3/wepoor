@@ -32,8 +32,9 @@
       media="screen">
     <!-- bootstrap CSS END-->  
     
-    <!-- hyejung CSS Start -->
+	<!-- hyejung CSS Start -->
     <link rel="stylesheet" type="text/css" href="css/mypage.css">
+    <link rel="stylesheet" type="text/css" href="css/pointdetail.css">
     <!-- hyejung CSS End -->
 </head>
 
@@ -56,81 +57,42 @@
             </div>
          </div>
          
-         <p style="color:white; font-size:30px; font-weight:530; font-family: 'Jua', sans-serif; letter-spacing: 3px;">마이페이지</p>
+         <p style="color:white; font-size:30px; font-weight:530; font-family: 'Jua', sans-serif; letter-spacing: 3px;">포인트내역</p>
          
       </nav>
    </div>
    <!-- header section end -->
    
-   <!-- mypage section start -->   
-   
- 
+   <!-- 페이지 작성하기 시작-->
    <div class="container">
       <div class="row">
          <div class="col-md-6 ">
          
-			<!-- pic section -->          
-            <div class="image_2"><img src="images/mywoogeoji.jpg" style="width:80px; height:80px; display:block; margin:0 auto;"/></div>
-            
-            <!-- nickname section --> 
-			<div>
-				<input type="text" class="nickname_input" th:value="${session.userId}" style="color:black; text-align:center;" readonly>
-			</div>
-			
-            <!-- point section --> 
+   <!-- point section --> 
+   		<div class="point_table">
             <table>
             	<tr>
-            		<th><input type="text" th:value="${userPoint}" class="point_input" style="color:white; text-align:center;" readonly></th>
+            		<th><input type="text" th:value="${userPoint}" class="point_input" readonly></th>
             		<th><span style="margin-left:5px;">포인트</span></th>
+            		<th><button class="indraw_btn">출금하기</button></th>
             	</tr>
             </table>
-            
-            <!-- page section -->
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-            <div>
-            	<a class="mypage_link" href="#">결제내역</a>
-            </div>
-            
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-            <div>
-            	<a class="mypage_link" href="#">내 정보 수정</a>
-            </div>
-            
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-            <div>
-            	<a class="mypage_link" href="/pointdetail">포인트 내역</a>
-            </div>
-            
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-            <div>
-            	<a class="mypage_link" href="#">My 거지방</a>
-            </div>
-            
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-         </div>
+   		</div>
+   	<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+   
+   
+   
+          </div>
       </div>
-   </div>
-
-
+   </div>  
    
    
    
    
    
    
-   
-   
-   
-   
-   
-   
-   <!-- mypage section end -->
-   
+   <!-- 페이지 작성하기 끝-->
+                  
    <!-- copyright section start -->
    <div class="copyright_section">
       <div class="container">

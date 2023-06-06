@@ -1,0 +1,22 @@
+table {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+}
+.point_table {
+	padding-top: 20px;
+}
+.point_input {
+	background-color: #e0e0e0;
+	color : black;
+	text-align:center;
+	border: none;
+	width: 135px;
+}
+.indraw_btn {
+	margin-left:20px;
+	width: 100px;
+	background-color: #1abc9c;
+	color: #FFFFFF;
+	border-radius: 15px;
+}

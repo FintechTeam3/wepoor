@@ -86,5 +86,18 @@ public class UserController {
 	    req.setAttribute("userPoint", userVO.getUserPoint());
 		return "mypage";
 	}
-
+	
+	// 포인트 내역 페이지
+	@GetMapping("/pointdetail")
+	public String pointdetail(HttpServletRequest req) {
+		HttpSession session = req.getSession(false);
+		
+		String userId = (String) session.getAttribute("userId");
+		
+		UserVO userVO = mapper.getUserByUserId(userId);
+	    req.setAttribute("userPoint", userVO.getUserPoint());
+		return "pointdetail";
+	}
+	
+	
 }
