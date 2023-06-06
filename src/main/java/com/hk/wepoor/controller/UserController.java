@@ -72,4 +72,8 @@ public class UserController {
 	}
 	
 
+	@GetMapping("/addtional_info")
+	public String info() {
+		return "additional_info";
+	}
 }
