@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+
+<head>
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <!-- mobile metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <!-- site metas -->
+   <title>Teab</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- bootstrap css -->
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+   <!-- style css -->
+   <link rel="stylesheet" type="text/css" href="css/style.css">
+   <!-- Responsive-->
+   <link rel="stylesheet" href="css/responsive.css">
+   <!-- fevicon -->
+   <!-- <link rel="icon" href="images/fevicon.png" type="image/gif" /> -->
+   <!-- Scrollbar Custom CSS -->
+   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+   <!-- Tweaks for older IEs-->
+   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+   <!-- owl stylesheets -->
+   <link rel="stylesheet" href="css/owl.carousel.min.css">
+   <link rel="stylesoeet" href="css/owl.theme.default.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+      media="screen">
+
+</head>
+
+<body>
+   <p class="text-center"> 저희 서비스를 이용하시기 위해서는</p> 
+   <p class="text-center"> 추가 정보 입력이 필요합니다.</p>
+	<div style="margin: 15px 25px 15px 0px;">
+		<div class="card-body">
+
+			<form id="joinForm" method="POST" action="kakaoSignin">
+			
+				<div class="mb-3">
+  					<!-- <label for="exampleFormControlInput1" class="form-label">이름</label> -->
+  					<input id="userName" name="userName" type="text" class="form-control" placeholder="이름입력(2~6글자)" required>
+				</div>
+
+			<!-- 	<label>핸드폰번호</label> -->
+				<div class="input-group mb-3">
+					<input id="phone" name="userPhone" type="text" class="form-control" placeholder="핸드폰번호 입력" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+					<button id="memberPhoneCheck"  style="color:black;font-weight:normal" class="btn btn-light" type="button">인증번호 전송</button>
+				</div>
+				
+			<!-- 	<label>인증번호 입력</label> -->
+				<div class="input-group mb-3">
+					<input name="memberPhoneCertify" type="text" class="form-control" placeholder="인증번호 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
+					<button id="certifyCheck"  style="color:black;font-weight:normal" class="btn btn-light" type="button">인증하기</button>
+				</div>
+				
+				<div class="p-t-15">
+					<button class="btn btn-light" style="color:black;font-weight:bold;float: left;" id="cancel" type="button" onclick="location.href='login_page'">Cancel</button>
+					<button class="btn btn-light" style="color:black;font-weight:bold;float: right;" id="submit" type="submit">Submit</button>
+					
+				</div>
+				
+			</form>
+		</div>
+	</div>
+
+   
+   
+   <!-- Javascript files-->
+   <script src="js/jquery.min.js"></script>
+   <script src="js/popper.min.js"></script>
+   <script src="js/bootstrap.bundle.min.js"></script>
+   <script src="js/jquery-3.0.0.min.js"></script>
+   <script src="js/plugin.js"></script>
+   <!-- sidebar -->
+   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+   <script src="js/custom.js"></script>
+   <!-- javascript -->
+   <script src="js/owl.carousel.js"></script>
+   <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+	<script type="text/javascript">
+	phone_check = false;
+	
+	$(function(){
+		$('#memberPhoneCheck').click(function() {
+
+			var to = $('input[name="userPhone"]').val();
+			$.ajax({
+				url: "/send-one",
+				type: "POST",
+				data: "to=" + to,
+				dataType: "text",
+				success: function(data) {
+					const checkNum = data;
+		
+					alert('checkNum:' + checkNum);
+
+					//인증하기 버튼 클릭 이벤트
+					$('#certifyCheck').click(function() {
+						const userNum = $('input[name="memberPhoneCertify"]').val();
+						if (checkNum == userNum) {
+							alert('인증 성공하였습니다.');
+							phone_check = true;
+						} else {
+							alert('인증 실패하였습니다. 다시 입력해주세요.');
+						}
+					});
+
+				},
+				error: function() {
+					alert("숫자 01012341234 형식으로 입력해주세요.")
+				}
+			});
+		});
+
+		
+		$("#submit").on("click", function(){
+			var reg_name =  /^[가-힣]{2,6}$/;
+			var input_name = $("#userName").val();
+
+			// 이름
+			if(!reg_name.test(input_name)){
+				alert("잘못된 이름형식입니다.");
+				$("#userName").focus();
+				return false;
+			}
+			
+			/* //핸드폰 인증
+			if(phone_check == false){
+				
+				alert("핸드폰 인증을 완료해주세요.")
+				$('#phone').focus();
+				return false;
+			} */
+			
+			return true;
+			
+		});
+		
+	});
+	
+	
+	</script>
+</body>
+</html>
