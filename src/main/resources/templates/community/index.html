@@ -65,6 +65,17 @@
     
     <!-- 페이지 작성하기 시작-->
         <div class="container mt-4">
+            <div style="background-color: #cbcbcb; color: black; padding: 2%; border-radius: 15px;">
+                <div>
+                    환영합니다, [커피] 참는 거지방입니다.
+                </div>
+                <div>
+                    참여기간은 [2020.05.01~2020.05.31]입니다. 
+                </div>
+                <div>
+                    30일 기준 [커피] 카드소비내역 허용 횟수는 [2]번 입니다. 
+                </div>
+            </div>
             <div class="d-flex mt-4">
                 <img src="images/woogeoji.png" alt="이미지 사진" style="width: 28px; height: 28px;">
                 <p th:text="${session.userId}" style="margin: 10px;"></p>
@@ -79,11 +90,31 @@
             <h1>Community List</h1>
             <div class="mb-3 form-control" th:each="community : ${communityList}">
                 <div>
-                    <div class="d-flex">
-                        <img src="images/woogeoji.png" alt="이미지 사진" style="width: 28px; height: 28px;">
-                        <p th:text="${community.user_nickname}" style="margin: 10px;"></p>
-                        <div>
-                            
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex">
+                            <img src="images/woogeoji.png" alt="이미지 사진" style="width: 28px; height: 28px;">
+                            <p th:text="${community.user_nickname}" style="margin: 10px;"></p>
+                        </div>
+                        <!-- 같은 유저라면 수정 -->
+                        <div class="d-flex align-items-center" th:if="${community.user_no} == ${session.userNo}">
+                            <form action="" class="mr-1">
+                                <button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square mr-2" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                </button>
+                            </form>
+                            <!-- 같은 유저라면 삭제 -->
+                            <form th:action="@{/community/delete}" method="post">
+                                <button>
+                                    <input type="hidden" name="delete" th:value="${community.commu_id}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                    </svg>
+                                </button>
+                            </form>
                         </div>
                     </div>
                     <h5 class="card-title" th:text="${community.commu_content}" style="margin: 0px;"></h5>
@@ -113,8 +144,8 @@
                                             <p th:text="${replyList.user_nickname}" style="margin: 10px;"></p>
                                         </div>
                                         <!-- 댓글 수정 / 해당 유저라면 -->
-                                        <div class="d-flex">
-                                            <form action="" th:if="${replyList.user_no} == ${session.userNo}" class="mr-2">
+                                        <div class="d-flex" th:if="${replyList.user_no} == ${session.userNo}">
+                                            <form action="" class="mr-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square mr-2" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">
                                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -122,7 +153,7 @@
                                             </form>
                                             <!-- <button type="button" class="btn btn-primary" >Open modal for @fat</button> -->
                                             <!-- 댓글 삭제 / 해당 유저라면 -->
-                                            <form th:action="@{/community/delete}" method="post" th:if="${replyList.user_no} == ${session.userNo}" class="d-flex align-items-center" >
+                                            <form th:action="@{/community/delete}" method="post" class="d-flex align-items-center" >
                                                 <button>
                                                     <input type="hidden" name="delete" th:value="${replyList.commu_id}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
