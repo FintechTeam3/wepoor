@@ -66,25 +66,41 @@ public class CommunityController {
         List<CommunityVO> communityList = communityService.selectAll();
         List<CommunityVO> replyList = communityService.selectAll();
         List<CategoryVO> categoryList = categoryService.selectAll();
+        List<UserVO> userList = userMapper.getAllUsers();
+
+
 
         // for문을 통해 유저리스트의 넘버값을 조회
         for (CommunityVO community : communityList) {
             int userNo = community.getUser_no();
+            
             // user_no를 기준으로 UserVO를 가져옴
             // userMapper에서 해당되는 userNo값을 UserVo user값에 할당
             UserVO user = userMapper.getUserByUserNo(userNo);
-            community.setUser_nickname(user.getUserNickname());
+            
+            if (user != null) {
+                community.setUser_nickname(user.getUserNickname());
+            } else {
+                community.setUser_nickname("Unknown User");
+            }
         }
+        
         // for문을 통해 대댓글 리스트의 넘버값을 조회
         for (CommunityVO reply : replyList) {
             int userNo = reply.getUser_no();
             // user_no를 기준으로 UserVO를 가져옴
             UserVO user = userMapper.getUserByUserNo(userNo);
-            reply.setUser_nickname(user.getUserNickname());
+            
+            if (user != null) {
+                reply.setUser_nickname(user.getUserNickname());
+            } else {
+                reply.setUser_nickname("Unknown User");
+            }
         }
         
-
-        
+        // 모든 유저를 검색
+        model.addAttribute("users", userList);
+        // System.out.println("userList는" + userList);
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("replyList", replyList);
         model.addAttribute("communityList", communityList); // communityList값이 community html로 넘어감
