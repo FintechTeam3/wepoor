@@ -22,7 +22,6 @@ public class Jwt {
 	// private final static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 	private final static byte[] keyBytes = "KMPpKMpKkmPkP3123123131313131231231MPMKM".getBytes(StandardCharsets.UTF_8);
 	private final static Key key = new SecretKeySpec(keyBytes, "HMACSHA256");
-	
 	private final static Long expiredMs = 1000 * 60 * 60l;
 	
 	public static String createJwt(String userId, int userNo) {
