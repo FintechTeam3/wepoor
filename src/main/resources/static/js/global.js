@@ -122,16 +122,24 @@
 			return false;
 		}
 		
-		
+		/*
 		//핸드폰 인증
-		if(phone_check == false){
+	/*	if(phone_check == false){
 			
 			alert("핸드폰 인증을 완료해주세요.")
 			$('#phone').focus();
 			return false;
+<<<<<<< HEAD
 		}
+<<<<<<< HEAD
 		
+=======
+		return true;*/
+=======
+		}*/
+>>>>>>> 08d5c2835e416ed1f1b8d2ad0d75dd6d01bd621b
 		return true;
+>>>>>>> refs/heads/parkhyejung
 		
 	});
 	

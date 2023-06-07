@@ -74,14 +74,16 @@
             
             <!-- nickname section --> 
 			<div>
-				<input type="text" class="nickname_input" readonly>
+				<input type="text" class="nickname_input" th:value="${session.userId}" style="color:black; text-align:center;" readonly>
 			</div>
 			
             <!-- point section --> 
-			<div>
-				<input type="text" class="point_input" th:text="${userId}" style="color:black;" readonly>
-				<h3 th:text="${userId}"></h3>
-			</div>
+            <table>
+            	<tr>
+            		<th><input type="text" th:value="${userPoint}" class="point_input" style="color:white; text-align:center;" readonly></th>
+            		<th><span style="margin-left:5px;">포인트</span></th>
+            	</tr>
+            </table>
             
             <!-- page section -->
             <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
@@ -99,7 +101,7 @@
             <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
             
             <div>
-            	<a class="mypage_link" href="#">포인트 내역</a>
+            	<a class="mypage_link" href="/pointdetail">포인트 내역</a>
             </div>
             
             <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">

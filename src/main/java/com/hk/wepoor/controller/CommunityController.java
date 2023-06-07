@@ -27,11 +27,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.hk.wepoor.jwt.Jwt;
 import com.hk.wepoor.jwt.JwtTokenDecoder;
 import com.hk.wepoor.model.UserMapper;
+import com.hk.wepoor.service.CategoryService;
 import com.hk.wepoor.service.CommunityService;
+import com.hk.wepoor.vo.CategoryVO;
 import com.hk.wepoor.vo.CommunityVO;
 import com.hk.wepoor.vo.UserVO;
 
@@ -52,6 +55,9 @@ public class CommunityController {
     private CommunityService communityService;
 
     @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
     private UserMapper userMapper;
 
     // 게시글 리스트 불러오기
@@ -59,7 +65,8 @@ public class CommunityController {
     public String getCommunity(Model model) {
         List<CommunityVO> communityList = communityService.selectAll();
         List<CommunityVO> replyList = communityService.selectAll();
-        
+        List<CategoryVO> categoryList = categoryService.selectAll();
+
         // for문을 통해 유저리스트의 넘버값을 조회
         for (CommunityVO community : communityList) {
             int userNo = community.getUser_no();
@@ -75,7 +82,10 @@ public class CommunityController {
             UserVO user = userMapper.getUserByUserNo(userNo);
             reply.setUser_nickname(user.getUserNickname());
         }
+        
 
+        
+        
         model.addAttribute("replyList", replyList);
         model.addAttribute("communityList", communityList); // communityList값이 community html로 넘어감
         return "community/index";
@@ -95,7 +105,7 @@ public class CommunityController {
 
         communityService.create(reply);
 
-        return "redirect:/community/index";
+        return "redirect:/community";
     }
 
     // 댓글 작성
@@ -119,7 +129,7 @@ public class CommunityController {
     
         communityService.create(reply);
 
-        return "redirect:/community/index";
+        return "redirect:/community";
     }
 
     // 댓글 수정
@@ -132,19 +142,35 @@ public class CommunityController {
 
         communityService.update(updatePost);
 
-        return "redirect:/community/index";
+        return "redirect:/community";
     }
 
     // 댓글 삭제
     @PostMapping("/community/delete")
-    @ResponseBody
-    public String delete(@RequestParam("delete") int commu_id) {
+    public String delete(@RequestParam("delete") int commu_id,
+                        @RequestParam("content") String content
+                        ) {
         // 댓글 삭제 로직
         // 넘어온 commu_id값을 가져와 삭제 처리
-        communityService.delete(commu_id);
+        CommunityVO deletePost = new CommunityVO();
+        deletePost.setCommu_id(commu_id);
+        deletePost.setCommu_content(content);         
+        communityService.update(deletePost);
         
-        return "redirect:/community/index";
+        return "redirect:/community";
     }
+
+    // 커뮤니티방 나가기
+    @PostMapping("/community/leave")
+    public String leave(@RequestParam("user_no") int userNo) {
+        
+        // int user_no = Integer.parseInt(userNo);
+        UserVO user = userMapper.getUserByUserNo(userNo);
+        user.setCate_id(0);
+        System.out.println("로직 실행돼?" + userNo);
+        return "category";        
+    }
+
 }
 
 
