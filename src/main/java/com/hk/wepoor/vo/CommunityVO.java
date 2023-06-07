@@ -19,5 +19,6 @@ public class CommunityVO {
 	Date create_time;
 	UserVO user;
 	String user_nickname;
+	int user_cateId;
 
 }
