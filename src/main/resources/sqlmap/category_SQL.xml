@@ -39,4 +39,11 @@
     UPDATE category SET cate_name = #{cate_name} WHERE cate_id = #{cate_id}
     ]]>
 	</update> 
+	
+	  <select id="selectAllWeekend" resultType="CategoryVO">
+    <![CDATA[
+    select * from category 
+   	Group by cate_weekend;
+    ]]>
+	</select>  
   </mapper>
