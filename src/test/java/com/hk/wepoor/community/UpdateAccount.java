@@ -17,7 +17,7 @@ class UpdateAccount {
 	void contextLoads() {
 		
 		CommunityVO communityVO = null;
-		communityVO = new CommunityVO(8, 0, 0, "별로 안반가워요", null);
+		communityVO = new CommunityVO(8, 0, 0, "별로 안반가워요", null,null,null);
 		
 		int affectRowCount = community_service.update(communityVO);
 		
