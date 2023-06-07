@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.hk.wepoor.model.PointMapper">
+  
+  <select id="selectAll" >
+    <![CDATA[
+    SELECT * FROM point
+    ]]>
+	</select>  
+  
+    <select id="select" >
+    <![CDATA[
+    SELECT * FROM point WHERE point_id=#{point_id}
+    ]]>
+	</select> 
+	
+	<insert id="insert" parameterType="PointVO">
+    <![CDATA[
+    INSERT INTO point (point_id, user_no, point_date, point_price) 
+    VALUES (#{point_id}, #{user_no}, #{point_date}, #{point_price})
+    ]]>
+	</insert> 
+	
+	<delete id="delete" parameterType="Integer">
+    <![CDATA[
+    DELETE FROM point WHERE point_id = #{point_id}
+    ]]>
+	</delete> 
+	
+	<update id="update" parameterType="PointVO">
+    <![CDATA[
+    UPDATE point SET user_no=#{user_no}, point_date=#{point_date}, point_price=#{point_price} 
+    WHERE point_id=#{point_id} 
+    ]]>
+	</update> 
+	
+	<!-- 사용자의 포인트 내역 조회 -->
+	<select id="selectAllUser">
+	<![CDATA[
+    SELECT * FROM point WHERE user_no=#{user_no} ORDER BY point_date DESC;
+    ]]>
+	</select>
+  
+  </mapper>
