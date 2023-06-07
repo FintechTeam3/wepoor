@@ -61,7 +61,7 @@ public class UserController {
 	public int idCheck(@RequestParam("userId") String userId) {
 
 		List<HashMap<String, String>> mails = mapper.getAllUserId();
-
+		
 		for (int i = 0; i < mails.size(); i++) {
 			for (Entry<String, String> elem : mails.get(i).entrySet()) {
 
