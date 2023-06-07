@@ -85,7 +85,7 @@ public class CommunityController {
         
 
         
-        
+        model.addAttribute("categoryList", categoryList);
         model.addAttribute("replyList", replyList);
         model.addAttribute("communityList", communityList); // communityList값이 community html로 넘어감
         return "community/index";
@@ -166,9 +166,12 @@ public class CommunityController {
         
         // int user_no = Integer.parseInt(userNo);
         UserVO user = userMapper.getUserByUserNo(userNo);
-        user.setCate_id(0);
+        user.setCateId(0);
+        //
+        userMapper.updateUser(user);
+
         System.out.println("로직 실행돼?" + userNo);
-        return "category";        
+        return "redirect:/category";        
     }
 
 }
