@@ -151,8 +151,10 @@ public class LoginController {
 			}
 		}
 
-		String userNickname = JsonkakaoUser.get("kakao_account").getAsJsonObject().get("profile").getAsJsonObject()
+		String userNickname = JsonkakaoUser.get("kakao_account").getAsJsonObject()
+				.get("profile").getAsJsonObject()
 				.get("nickname").getAsString();
+		
 		String profileImg = JsonkakaoUser.get("kakao_account").getAsJsonObject().get("profile").getAsJsonObject()
 				.get("profile_image_url").getAsString();
 		if (JsonkakaoUser.get("email") != null) {

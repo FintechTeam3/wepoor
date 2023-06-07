@@ -1,9 +1,11 @@
 package com.hk.wepoor.jwt;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.stereotype.Component;
 
@@ -17,13 +19,14 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class Jwt {
 
-	private static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-
+	// private final static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+	private final static byte[] keyBytes = "KMPpKMpKkmPkP3123123131313131231231MPMKM".getBytes(StandardCharsets.UTF_8);
+	private final static Key key = new SecretKeySpec(keyBytes, "HMACSHA256");
+	
+	private final static Long expiredMs = 1000 * 60 * 60l;
+	
 	public static String createJwt(String userId, int userNo) {
-
-		Long expiredMs = 1000 * 60 * 60l;
-		
-
+	
 		// payload저장
 		Claims claims = Jwts.claims();
 
@@ -40,7 +43,9 @@ public class Jwt {
 	public static Jws<Claims> parseToken(String jwtToken) {
 
 		SecretKey secretKeyByte = Keys.hmacShaKeyFor(key.getEncoded());
-		JwtParser parser = Jwts.parserBuilder().setSigningKey(secretKeyByte.getEncoded()).build();
+		JwtParser parser = Jwts.parserBuilder()
+				.setSigningKey(secretKeyByte.getEncoded())
+				.build();
 
 		return parser.parseClaimsJws(jwtToken);
 
