@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hk.wepoor.jwt.Jwt;
 import com.hk.wepoor.jwt.JwtTokenDecoder;
+import com.hk.wepoor.model.UserMapper;
 import com.hk.wepoor.service.CommunityService;
 import com.hk.wepoor.vo.CommunityVO;
 import com.hk.wepoor.vo.UserVO;
@@ -49,36 +50,52 @@ public class CommunityController {
     // CommunityService로 부터 비즈니스 로직을 끌고와서 컨트롤러로 전송
 	@Autowired
     private CommunityService communityService;
-    private String key;
+
+    @Autowired
+    private UserMapper userMapper;
 
     // 게시글 리스트 불러오기
     @GetMapping("/community")
     public String getCommunity(Model model) {
         List<CommunityVO> communityList = communityService.selectAll();
-
-        // System.out.println("커뮤아이디" + communityList);
-        // // 대댓글 리스트 가져오기
+        List<CommunityVO> replyList = communityService.selectAll();
+        
+        // for문을 통해 유저리스트의 넘버값을 조회
         for (CommunityVO community : communityList) {
-            // int topCommuId = community.getTop_commu_id(); // 게시글의 부모글을 가져옴
-            List<CommunityVO> replyList = communityService.selectAll();
-            // community.setCommu_id(replyList);
-            // community.setRList(replyList); // 대댓글 리스트를 게시글에 설정
-            // System.out.println("커뮤아이디 찍혀?" + replyList);
-            model.addAttribute("replyList", replyList);
+            int userNo = community.getUser_no();
+            // user_no를 기준으로 UserVO를 가져옴
+            // userMapper에서 해당되는 userNo값을 UserVo user값에 할당
+            UserVO user = userMapper.getUserByUserNo(userNo);
+            community.setUser_nickname(user.getUserNickname());
+        }
+        // for문을 통해 대댓글 리스트의 넘버값을 조회
+        for (CommunityVO reply : replyList) {
+            int userNo = reply.getUser_no();
+            // user_no를 기준으로 UserVO를 가져옴
+            UserVO user = userMapper.getUserByUserNo(userNo);
+            reply.setUser_nickname(user.getUserNickname());
         }
 
-    
+        model.addAttribute("replyList", replyList);
         model.addAttribute("communityList", communityList); // communityList값이 community html로 넘어감
         return "community/index";
     }
 
     // 게시글 생성하기
     @PostMapping("/community/create")
-    public String createCommunity(CommunityVO communityVO) {
+    public String createCommunity(@RequestParam("commu_content") String commu_content, HttpServletRequest request) {
         
-        communityService.create(communityVO);
+        // 세션 기반
+        HttpSession session = request.getSession(false);
+        int userNo = (int) session.getAttribute("userNo");
 
-        return "redirect:/community";
+        CommunityVO reply = new CommunityVO();
+        reply.setUser_no(userNo);
+        reply.setCommu_content(commu_content);
+
+        communityService.create(reply);
+
+        return "redirect:/community/index";
     }
 
     // 댓글 작성
@@ -86,63 +103,48 @@ public class CommunityController {
     @ResponseBody
     public String createReply(@RequestParam("parentId") int top_commu_id, 
                             @RequestParam("commu_content") String commu_content,
-                            @RequestParam("useId") int user_id) {
-             // JWT 토큰 값을 쿠키에서 가져오기
-        // Cookie[] cookies = request.getCookies();
-        // String jwtToken = null;
-        // if (cookies != null) {
-        //     for (Cookie cookie : cookies) {
-        //         if (cookie.getName().equals("jwtToken")) {
-        //             jwtToken = cookie.getValue();
-        //             break;
-        //         }
-        //     }
-        // }
+                            HttpServletRequest request) {
+        
+        // 세션 기반
+        HttpSession session = request.getSession(false);
+        int userNo = (int) session.getAttribute("userNo");
 
-        // System.out.println("여기부터 jwt");
-        // // JWT 토큰 값을 사용하여 유저 정보 추출
-        // if (jwtToken != null) {
-        //     Jws<Claims> jws = Jwt.parseToken(jwtToken);
-        //     Claims claims = jws.getBody();
-        //     String userId = claims.get("userId", String.class);
-        //     int userNo = claims.get("userNo", Integer.class);
-        //     System.out.println("여기 되나?");
-        //     // 유저 정보 및 게시물 정보를 사용하여 처리 로직을 작성
-        //     // ...
-       
-        // System.out.println("상위 게시물 값입니다: " + top_commu_id);
-        // System.out.println("유저 아이디 값입니다: " + userId);
-        // System.out.println("유저 번호 값입니다: " + userNo);
-        // System.out.println("컨텐트 값입니다: " + commu_content);
-        
-        // jwt 토큰값을 받아와서 암호를 해독,
-        // 해독한 내용을 토대로 유저의 pk값을 도출
-        // user의 user_id값을 통해 user의 넘버를 조회
-        // System.out.println("상위 게시물 값입니다: " + top_commu_id);
-        // // System.out.println("상위 게시물 값입니다: " + userId);
-
-        // System.out.println("컨텐트 값입니다: " + commu_content);
-        
-        // // 부모 댓글 조회
-        // CommunityVO parentComment = communityService.select(top_commu_id);
-        // model.addAttribute("communityList", communityCommentList);
-        
-        // if (parentComment == null) {
-        //     return "error"; // 부모 댓글이 존재하지 않으면 에러 처리
-        // }
-        System.out.println("user_id" + user_id);
+        System.out.println("유저 넘버는" + userNo);
         
         // 대댓글 생성
         CommunityVO reply = new CommunityVO();
         reply.setTop_commu_id(top_commu_id);
-        // reply.setUser_no(userNo);
+        reply.setUser_no(userNo);
         reply.setCommu_content(commu_content);
     
         communityService.create(reply);
 
+        return "redirect:/community/index";
+    }
 
-        return "redirect:/community";
-        }
+    // 댓글 수정
+    @PostMapping("/community/update")
+    @ResponseBody
+    public String updatePost(@RequestParam("commu_content") String commu_content) {
+        
+        CommunityVO updatePost = new CommunityVO();
+        updatePost.setCommu_content(commu_content);
+
+        communityService.update(updatePost);
+
+        return "redirect:/community/index";
+    }
+
+    // 댓글 삭제
+    @PostMapping("/community/delete")
+    @ResponseBody
+    public String delete(@RequestParam("delete") int commu_id) {
+        // 댓글 삭제 로직
+        // 넘어온 commu_id값을 가져와 삭제 처리
+        communityService.delete(commu_id);
+        
+        return "redirect:/community/index";
+    }
 }
 
 

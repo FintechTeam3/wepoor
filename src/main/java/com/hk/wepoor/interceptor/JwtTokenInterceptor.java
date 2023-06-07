@@ -61,7 +61,7 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
 			HttpSession session = request.getSession();
 			session.setAttribute("userNo", userNo);
 			session.setAttribute("userId", userId);
-			
+	
 			logger.info("[preHandle] login success");
 			return true; // 다음 진행을 나타냄 true = 통과, false=거부
 			
