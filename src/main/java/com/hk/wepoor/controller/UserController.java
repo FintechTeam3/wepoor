@@ -88,8 +88,14 @@ public class UserController {
 		String userId = (String) session.getAttribute("userId");
 		
 		UserVO userVO = mapper.getUserByUserId(userId);
+		req.setAttribute("userNickname", userVO.getUserNickname());
 	    req.setAttribute("userPoint", userVO.getUserPoint());
 		return "mypage";
+	}
+	
+	@GetMapping("/mymodify")
+	public String mymodify() {
+		return "mymodify";
 	}
 	
 }

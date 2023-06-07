@@ -77,8 +77,8 @@
    
    
 	<div class="col-md-6">
-		<div th:each="cl:${catelist}" class="box_main active" style="display: flex; justify-content: center;">
-			<button th:onclick="test()" th:text="${cl.cate_name}" style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">커피</button>
+		<div th:each="wl:${weekendlist}" class="box_main active" style="display: flex; justify-content: center;">
+			<button th:text="${wl.cate_weekend}" style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">주차</button>
 		</div>
 	</div>
                   
@@ -137,6 +137,7 @@
 			
 			var userID = $("#ID").val();
 			console.log(userID);
+			
 			
 		}	
 	
