@@ -45,11 +45,5 @@ public class CategoryService {
 		int affectRowCount = category_mapper.update(categoryVO);
 		return affectRowCount;
 	};
-	
-	// 주차 방 만들기 위한 select - 혜정
-		public List<CategoryVO> selectAllWeekend() {
-			List<CategoryVO> list = category_mapper.selectAllWeekend();
-			return list;
-		};
 
 }

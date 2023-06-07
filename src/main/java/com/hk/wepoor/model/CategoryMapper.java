@@ -13,7 +13,4 @@ public interface CategoryMapper {
 	int insert(String cateName);
 	int delte(int cateName);
 	int update(CategoryVO categoryVO);
-	
-	// 주차 방 만들기 위한 select - 혜정
-	List<CategoryVO> selectAllWeekend();
 }

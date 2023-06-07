@@ -18,7 +18,7 @@ class GetAllCategory {
 	void contextLoads() {
 	List<CategoryVO> list = null;
 		
-		list = category_service.selectAllWeekend();
+		list = category_service.selectAll();
 		
 		for(CategoryVO a:list) {
 			System.out.println(a);

@@ -26,12 +26,4 @@ public class CategoryController {
 		return "category";
 	}
 	
-	// 갑경님 주차 페이지 예시 - 혜정
-	@GetMapping("/weekendcategory")
-	public String weekendcategory(Model model) {
-		List<CategoryVO> list = category_service.selectAllWeekend();
-		model.addAttribute("weekendlist", list);
-		return "weekendcategory";
-	}
-	
 }

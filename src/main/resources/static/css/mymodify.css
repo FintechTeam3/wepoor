@@ -1,0 +1,55 @@
+.pwd_input {
+	display: block;
+	width: 338px;
+	border-style: none none solid none;
+	background-color: #fafafa;
+}
+.nick_input {
+	width: 240px;
+	border-style: none none solid none;
+	background-color: #fafafa;
+}
+::placeholder {
+  color: #e0e0e0;
+}
+.userdelete_btn {
+	width: 130px;
+	height: 30px;
+	background-color: #c0392b;
+	color: #FFFFFF;
+	border-radius: 15px;
+	margin-top: 30px;
+	margin-bottom: 15px;
+}
+.submit_btn {
+	width: 100px;
+	height: 30px;
+	background-color: #1abc9c;
+	color: #FFFFFF;
+	border-radius: 15px;
+	margin: 15px 20px 15px auto;
+	float: right;
+}
+.indraw_btn {
+	width: 80px;
+	height: 25px;
+	background-color: #1abc9c;
+	color: #FFFFFF;
+	border-radius: 15px;
+	margin-left: 10px;
+}
+.modify_box {
+	border-style: outset;
+	padding: 10px;
+	margin: 20px auto;
+	background-color: #fafafa;
+}
+.image_2 {
+    margin: 10px auto 10px auto;
+}
+.pwd, .pwd_check, .nick {
+	margin-top: 15px;
+}
+.copyright_section {
+    margin-top: 42px;
+}
