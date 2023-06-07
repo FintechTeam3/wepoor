@@ -49,6 +49,7 @@
         <![CDATA[
         UPDATE user SET
         user_id = #{userId},
+        cate_id = #{cateId}
         user_pwd = #{userPwd},
         user_name = #{userName},
         user_nickname = #{userNickname},

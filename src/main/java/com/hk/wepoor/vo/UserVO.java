@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 public class UserVO {
 	
 	int userNo;
-	int cate_id;
+	int cateId;
 	String userId;
 	String userPwd;
 	String userName;
