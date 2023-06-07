@@ -46,4 +46,9 @@ public class CategoryService {
 		return affectRowCount;
 	};
 
+	// 주차별 기간 선택 카테고리 조회
+	public List<CategoryVO> selectAllWeekend() {
+		List<CategoryVO> list = category_mapper.selectAllWeekend();
+		return list;
+	};
 }

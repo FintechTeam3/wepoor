@@ -23,5 +23,13 @@ public class CategoryController {
 		return "category";
 	}
 	
+	//주차별 기간 목록 보여주는 카테고리
+	@GetMapping("/weekend")//weekend.html
+	public String weekend(Model m1) {
+		List<CategoryVO> list = category_service.selectAllWeekend();
+		m1.addAttribute("weeklist", list);
+		return "weekend"; //weekend.html
+		
+	}
 	
 }

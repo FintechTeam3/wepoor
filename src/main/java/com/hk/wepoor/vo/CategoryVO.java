@@ -12,5 +12,7 @@ import lombok.NoArgsConstructor;
 public class CategoryVO {
 	int cate_id;
 	String cate_name;
-
+	int cate_cost;
+	String cate_date;
+	int cate_weekend;
 }

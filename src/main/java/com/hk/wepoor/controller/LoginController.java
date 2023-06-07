@@ -65,7 +65,7 @@ public class LoginController {
 			logger.info("userId: " + claims.getBody().get("userId"));
 			logger.info("claims:" + claims.getBody());
 
-			return "redirect:/category";
+			return "redirect:/weekend"; //weekend.html페이지로 이동
 		}
 	}
 
