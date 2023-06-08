@@ -15,7 +15,8 @@ public class UserVO {
 	String userNickname;
 	String userPhone;
 	int userPoint;
-	
-	
+	String userSeqNo ;
+	String accessToken ;
+	String refreshToken ;
 	
 }

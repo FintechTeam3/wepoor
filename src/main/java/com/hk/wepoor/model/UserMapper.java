@@ -1,9 +1,7 @@
 package com.hk.wepoor.model;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -29,5 +27,7 @@ public interface UserMapper {
 	String HashedPwd(String userPwd);
 
 	List<HashMap<String, String>> getAllUserId();
+	
+	List<UserVO> getUserNo();
 
 }

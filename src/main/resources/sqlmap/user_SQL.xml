@@ -12,12 +12,23 @@
         <result column="user_name" property="userName"/>
         <result column="user_nickname" property="userNickname"/>
         <result column="user_phone" property="userPhone"/>
-        <result column="user_point" property="userPoint"/>
+        <result column="user_seq_no" property="userSeqNo"/>
+        <result column="access_token" property="accessToken"/>
+        <result column="refresh_token" property="refreshToken"/>
     </resultMap>
+    
+     <select id="getUserNo" resultType="UserVO">
+        <![CDATA[
+        SELECT user_no as userNo, user_name as userName, user_seq_no as userSeqNo, access_token as accessToken
+        FROM user
+        where access_token is not null
+        ]]>
+    </select>
+    
 	<insert id="insertUser" parameterType="com.hk.wepoor.vo.UserVO">
         <![CDATA[
-        INSERT INTO user (user_id, user_pwd, user_name, user_nickname, user_phone)
-        VALUES (#{userId}, SHA2(#{userPwd}, 256), #{userName}, #{userNickname}, #{userPhone})
+        INSERT INTO user (user_id, user_pwd, user_name, user_nickname, user_phone, user_seq_no, access_token, refresh_token)
+        VALUES (#{userId}, SHA2(#{userPwd}, 256), #{userName}, #{userNickname}, #{userPhone}, #{userSeqNo}, #{accessToken}, #{refreshToken})
     	]]>
 	</insert>
 
@@ -70,7 +81,4 @@
         SELECT user_id FROM user;
         ]]>
 	</select>
-	
-	
-	
 </mapper>

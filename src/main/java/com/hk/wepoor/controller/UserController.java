@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hk.wepoor.model.UserMapper;
+import com.hk.wepoor.service.UserService;
+import com.hk.wepoor.vo.TokenVO;
 import com.hk.wepoor.vo.UserVO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,6 +30,12 @@ public class UserController {
 
 	@Autowired
 	UserMapper mapper;
+	
+	@Autowired
+	private UserService userService;
+
+	TokenVO tokenVO = new TokenVO();
+	String [] str;
 
 	@GetMapping("/login_page")
 	public String login() {
@@ -37,6 +45,16 @@ public class UserController {
 	@GetMapping("/join")
 	public String join() {
 		return "join";
+	}
+	
+	// 사용자인증 & 토큰받기
+	@GetMapping("/requesttoken")
+	public String reques(@RequestParam("code") String code) {
+		String [] str = userService.requesttoken(code,"requesttoken"); 
+		this.str=str;
+		  
+		  return "end";
+		  
 	}
 
 	@PostMapping("/join_insert")
@@ -50,10 +68,19 @@ public class UserController {
 		uservo.setUserNickname(userNickname);
 		uservo.setUserPhone(userPhone);
 		uservo.setUserPwd(userPwd);
+		uservo.setUserSeqNo(str[0]);
+		uservo.setAccessToken(str[1]);
+		uservo.setRefreshToken(str[2]);
 
 		mapper.insertUser(uservo);
 
 		return "redirect:/login_page";
+	}
+	
+	@GetMapping("/user_me")
+	public String requestUserMe() {
+		userService.requestuser();
+		return "poor";
 	}
 
 	@PostMapping("/id_check")
@@ -61,7 +88,7 @@ public class UserController {
 	public int idCheck(@RequestParam("userId") String userId) {
 
 		List<HashMap<String, String>> mails = mapper.getAllUserId();
-		
+
 		for (int i = 0; i < mails.size(); i++) {
 			for (Entry<String, String> elem : mails.get(i).entrySet()) {
 
@@ -74,22 +101,22 @@ public class UserController {
 
 		return 0;
 	}
-	
+
 	@GetMapping("/addtional_info")
 	public String info() {
 		return "additional_info";
 	}
-	
+
 	// 마이페이지 닉네임, 포인트 불러오기 - 혜정
 	@GetMapping("/mypage")
 	public String mypage(HttpServletRequest req) {
 		HttpSession session = req.getSession(false);
-		
+
 		String userId = (String) session.getAttribute("userId");
-		
+
 		UserVO userVO = mapper.getUserByUserId(userId);
-	    req.setAttribute("userPoint", userVO.getUserPoint());
+		req.setAttribute("userPoint", userVO.getUserPoint());
 		return "mypage";
 	}
-	
+
 }
