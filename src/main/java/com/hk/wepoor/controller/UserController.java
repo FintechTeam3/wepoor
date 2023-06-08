@@ -87,7 +87,11 @@ public class UserController {
 	}
 	
 	@GetMapping("/mymodify")
-	public String mymodify() {
+	public String mymodify(HttpServletRequest req) {
+		HttpSession session = req.getSession(false);
+		int userNo = (int) session.getAttribute("userNo");
+		UserVO userVO = mapper.getUserByUserNo(userNo);
+		req.setAttribute("userPoint", userVO.getUserPoint());
 		return "mymodify";
 	}
 	
@@ -116,6 +120,14 @@ public class UserController {
 		mapper.updateMy(uservo);
 		
 		return "redirect:/mymodify";
+	}
+	
+	@PostMapping("/deleteUser")
+	@ResponseBody
+	public int deleteUser(@RequestParam("userNo") int userNo) {
+		System.out.println(userNo);
+		mapper.deleteUser(userNo);
+		return 0;
 	}
 	
 }

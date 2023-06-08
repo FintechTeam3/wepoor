@@ -84,6 +84,7 @@
 				
 				<input id="userNo" name="userNo" type="hidden" th:value="${session.userNo}"/>
 				<input id="userId" name="userId" type="hidden" th:value="${session.userId}"/>
+				<input id="userPoint" name="userPoint" type="hidden" th:value="${userPoint}"/>
 				
 				<!-- nickname section -->
 	   			<div class="nick">
@@ -110,7 +111,7 @@
 				<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 	   			
 	   			<!-- delete button section -->
-	   			<button class="userdelete_btn">탈퇴하기</button>
+	   			<button id="udelete_btn" type="button" class="userdelete_btn">탈퇴하기</button>
    			</div>
    			
    			<!-- submit button section -->
@@ -127,7 +128,48 @@
    
    
    
-   
+   		<!-- Delete Modal -->
+<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      	<p class="modalP">정말로 우거지를 떠나시겠어요?</p>
+      	</div>
+       <div class="modal-body-btn">
+	       <button type="button" class="modalNoBtn" data-dismiss="modal">아니요</button>
+	       <button type="button" class="modalYesBtn" id="modalUDeleteBtn" data-dismiss="modal">네, 안녕</button>
+       </div>
+    </div>
+      </div>
+    </div>
+    
+       		<!-- point warn Modal -->
+<div class="modal fade" id="pointwarnmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      	<p class="modalP">포인트를 계좌로 출금 후<br>탈퇴를 진행해주세요.</p>
+      	</div>
+       <div class="modal-body-btn">
+	       <button type="button" class="modalConfirmBtn" data-dismiss="modal">확인</button>
+       </div>
+    </div>
+      </div>
+    </div>
+    
+           		<!-- delete confirm Modal -->
+<div class="modal fade" id="deleteconfirmmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      	<p class="modalP">탈퇴가 완료되었습니다.</p>
+      	</div>
+       <div class="modal-body-btn">
+	       <button type="button" class="deleteConfirmBtn" data-dismiss="modal">확인</button>
+       </div>
+    </div>
+      </div>
+    </div>
    
    <!-- 페이지 작성하기 끝-->
                   
@@ -196,6 +238,36 @@
 				$("#alert-danger").hide();
 			}
 		});
+	   
+	   $("#udelete_btn").click(function() {
+		   $("#deletemodal").modal();
+		   
+		   $("#modalUDeleteBtn").click(function() {
+			   
+			   var user_point = $("#userPoint").val();
+			   var userNo = $("#userNo").val();
+			   console.log(userNo);
+			   
+			   if(user_point == 0) {
+				   $.ajax({
+					   url: '/deleteUser',
+					   data: {"userNo": userNo},
+					   type: "POST",
+					   success: function(result) {
+						   console.log(result);
+						   if(result == 0) {
+							   alert("탈퇴성공");
+							   
+						   }
+					   }
+				   });
+				 
+					$("#deleteconfirmmodal").modal();
+			   } else {
+				   $("#pointwarnmodal").modal();
+			   }
+		   });
+	   });
 	   
    });
    </script>
