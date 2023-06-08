@@ -23,29 +23,28 @@ public class RoomDetailController {
 	public String roomdetail(HttpServletRequest req) {
 		HttpSession session = req.getSession(false);
 		int userNo = (int) session.getAttribute("userNo");
-		List<RoomDetailVO> list = svc.selectAll(userNo);
+		List<RoomDetailVO> myList = svc.selectAll(userNo);
 
 		Date dateNow = new Date();
 
 //		req.setAttribute("list", list);
-		for (RoomDetailVO v : list) {
-
+		for (RoomDetailVO v : myList) {
+			
 			if (dateNow.before(v.getStart_date())) {
-				v.setStatus("진행전");
+				v.setStatus("시작전");
 
 			} else {
 				if (dateNow.before(v.getEnd_date())) {
 					v.setStatus("진행중");
 				} else {
-					v.setStatus("끝");
+					v.setStatus("종료");
 				}
 			}
-			System.out.println(dateNow);
-			System.out.println(v.getCate_date());
-			System.out.println(v.getStatus());
 		}
-		req.setAttribute("list", list);
-		return "test";
+		req.setAttribute("myList", myList);
+		
+
+		return "roomDetail";
 	}
 
 }
