@@ -35,7 +35,7 @@ public class CategoryService {
 	};
 
 	// <삭제>
-	public int delte(int cateName) {
+	public int delete(int cateName) {
 		int affectRowCount = category_mapper.delte(cateName);
 		return affectRowCount;
 	};
