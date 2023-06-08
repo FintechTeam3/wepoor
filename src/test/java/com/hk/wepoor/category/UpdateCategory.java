@@ -18,7 +18,7 @@ class UpdateCategory {
 	void contextLoads() {
 		
 		
-		CategoryVO categoryVO =  new CategoryVO(10, "자동차", 10000, "5/1~5/7", 1,null,null);
+		CategoryVO categoryVO =  new CategoryVO(10, "자동차", 10000, "5/1~5/7", 1, null, null);
 		
 		int affectRowCount = category_service.update(categoryVO);
 		

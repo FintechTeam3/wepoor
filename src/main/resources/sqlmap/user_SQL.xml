@@ -60,7 +60,10 @@
         <![CDATA[
         UPDATE user SET
         user_id = #{userId},
+<<<<<<< HEAD
         cate_id = #{cateId}
+=======
+>>>>>>> refs/heads/parkhyejung
         user_pwd = SHA2(#{userPwd}, 256),
         user_name = #{userName},
         user_nickname = #{userNickname},
@@ -69,10 +72,19 @@
         WHERE user_no = #{userNo}
     	]]>
 	</update>
+	
+	<update id="updateMy" parameterType="com.hk.wepoor.vo.UserVO">
+        <![CDATA[
+        UPDATE user SET
+        user_pwd = SHA2(#{userPwd}, 256),
+        user_nickname = #{userNickname}
+        WHERE user_no = #{userNo}
+    	]]>
+	</update>
 
 	<delete id="deleteUser" parameterType="int">
     	<![CDATA[
-        DELETE FROM user WHERE user_no = #{userId}
+        DELETE FROM user WHERE user_no = #{userNo}
         ]]>
 	</delete>
 	
@@ -81,4 +93,15 @@
         SELECT user_id FROM user;
         ]]>
 	</select>
+<<<<<<< HEAD
+=======
+	
+	<select id = "getUserNick" parameterType="String" resultMap="memberResultMap">
+		<![CDATA[
+        SELECT * FROM user WHERE user_nickname = #{user_nickname}
+        ]]>
+	</select>
+	
+	
+>>>>>>> refs/heads/parkhyejung
 </mapper>

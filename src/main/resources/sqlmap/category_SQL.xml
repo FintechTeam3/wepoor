@@ -40,10 +40,17 @@
     ]]>
 	</update> 
 	
+<<<<<<< HEAD
 	  <select id="selectAllWeekend" resultType="CategoryVO">
     <![CDATA[
     select * from category 
    	Group by cate_weekend;
+=======
+	<select id="selectAllWeekend" resultType="CategoryVO">
+    <![CDATA[
+    SELECT cate_weekend FROM category
+	GROUP BY cate_weekend;
+>>>>>>> refs/heads/parkhyejung
     ]]>
 	</select>  
   </mapper>
