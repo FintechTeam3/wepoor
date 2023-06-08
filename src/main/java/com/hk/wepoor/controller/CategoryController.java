@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpSession;
 public class CategoryController {
 	
 	@Autowired
-	CategoryService category_service;
+	CategoryService categoryservice;
 	
 	@Autowired
 	UserMapper user_mapper;
@@ -42,7 +42,7 @@ public class CategoryController {
 		// 필요한 정보를 set 시킨다.
 		req.setAttribute("userNickname", userVO.getUserNickname());
 		
-		List<CategoryVO> list = category_service.selectAll();
+		List<CategoryVO> list = categoryservice.selectAll();
 		model.addAttribute("catelist", list);
 		
 		return "category";
@@ -53,7 +53,7 @@ public class CategoryController {
 	//주차별 기간 목록 보여주는 카테고리
 	@GetMapping("/weekend")//weekend.html
 	public String weekend(Model m1) {
-		List<CategoryVO> list = category_service.selectAllWeekend();
+		List<CategoryVO> list = categoryservice.selectAllWeekend();
 		m1.addAttribute("weeklist", list);
 		return "weekend"; //weekend.html
 		

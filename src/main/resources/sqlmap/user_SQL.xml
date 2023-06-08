@@ -60,10 +60,7 @@
         <![CDATA[
         UPDATE user SET
         user_id = #{userId},
-<<<<<<< HEAD
         cate_id = #{cateId}
-=======
->>>>>>> refs/heads/parkhyejung
         user_pwd = SHA2(#{userPwd}, 256),
         user_name = #{userName},
         user_nickname = #{userNickname},
@@ -93,8 +90,6 @@
         SELECT user_id FROM user;
         ]]>
 	</select>
-<<<<<<< HEAD
-=======
 	
 	<select id = "getUserNick" parameterType="String" resultMap="memberResultMap">
 		<![CDATA[
@@ -102,6 +97,4 @@
         ]]>
 	</select>
 	
-	
->>>>>>> refs/heads/parkhyejung
 </mapper>
