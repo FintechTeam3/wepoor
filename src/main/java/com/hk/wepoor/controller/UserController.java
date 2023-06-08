@@ -8,6 +8,9 @@ import java.util.Map.Entry;
 import javax.swing.text.html.parser.Entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +28,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import reactor.netty.http.server.HttpServerRequest;
 
+@Configuration
+@EnableScheduling
 @Controller
 public class UserController {
 
@@ -80,6 +85,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/user_me")
+	@Scheduled(cron = "0 0 0 * * *") // 매일 00시 00분 00초에 실행 // @Scheduled(fixedRate = 5000) // 5초마다 실행
 	public String requestUserMe() {
 		userService.requestuser();
 		return "poor";
