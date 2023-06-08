@@ -33,9 +33,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-
-	TokenVO tokenVO = new TokenVO();
-	String [] str;
+	
 
 	@GetMapping("/login_page")
 	public String login() {
@@ -47,6 +45,9 @@ public class UserController {
 		return "join";
 	}
 	
+	
+	String [] str;
+	
 	// 사용자인증 & 토큰받기
 	@GetMapping("/requesttoken")
 	public String reques(@RequestParam("code") String code) {
@@ -56,7 +57,7 @@ public class UserController {
 		  return "end";
 		  
 	}
-
+	
 	@PostMapping("/join_insert")
 	public String joinInsert(@RequestParam("userId") String userId, @RequestParam("userPhone") String userPhone,
 			@RequestParam("userName") String userName, @RequestParam("userNickname") String userNickname,
@@ -68,6 +69,7 @@ public class UserController {
 		uservo.setUserNickname(userNickname);
 		uservo.setUserPhone(userPhone);
 		uservo.setUserPwd(userPwd);
+		// 사용자일련번호
 		uservo.setUserSeqNo(str[0]);
 		uservo.setAccessToken(str[1]);
 		uservo.setRefreshToken(str[2]);

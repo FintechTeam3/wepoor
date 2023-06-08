@@ -36,6 +36,7 @@
     <link rel="stylesheet" type="text/css" href="css/homepage.css">
     <link rel="stylesheet" type="text/css" href="css/category.css">
     <!-- hyejung CSS End -->
+    <link rel="stylesheet" href="css/openbanking.css">
 </head>
 
 <body>
@@ -67,9 +68,12 @@
 
 			<form id="joinForm" method="POST" action="join_insert">
 			
-				<div class="mb-3">
+				<div class="input-group mb-3">
   					<label for="exampleFormControlInput1" class="form-label"></label>
   					<input id="userName" name="userName" type="text" class="form-control" placeholder="이름입력(2~6글자)" style="margin-top:65px;" required>
+  					<div class="btnn">
+  					<button class="btn btn-light" style="color:black;font-weight:bold;float: right;" type="button" onclick="authorization()">오픈뱅킹인증하기</button>
+  					</div>
 				</div>
 				
 				<div class="mb-3">
@@ -111,10 +115,7 @@
 				<div class="p-t-15">
 					<button class="btn btn-light" style="color:black;font-weight:bold;float: left;" id="cancel" type="button" onclick="location.href='login_page'">Cancel</button>
 					<button class="btn btn-light" style="color:black;font-weight:bold;float: right;" id="submit" type="submit">Submit</button>
-					
-				</div>
-				<button class="btn btn-light" style="color:black;font-weight:bold;float: right;" type="button" onclick="authorization()">오픈뱅킹인증하기</button>
-				
+				</div>				
 			</form>
 		</div>
 	</div>
