@@ -14,7 +14,7 @@ class DeleteCategory {
 	@Test
 	void contextLoads() {
 
-		int affectRowCount = category_service.delte(7);
+		int affectRowCount = category_service.delete(7);
 
 		if (affectRowCount == 1) {
 			System.out.println("★★★★★★★★★★★★삭제성공★★★★★★★★★★★★");

@@ -82,7 +82,7 @@
                     참여기간은 [<span style="font-weight: bolder;" th:text="${category.cate_date}"></span>>] 입니다. 
                 </div>
                 <div>
-                    일주일 기준 [<span style="font-weight: bolder;" th:text="${category.cate_name}"></span>] 카드소비내역 허용 횟수는 [2]번 입니다. 
+                    일주일 기준 [<span style="font-weight: bolder;" th:text="${category.cate_name}"></span>] 카드소비내역 허용 횟수는 <span style="font-weight: bolder;">[5]</span>번 입니다. 
                 </div>
             </div>
             <div class="d-flex mt-4">
@@ -96,43 +96,60 @@
                 </div>
             </form>
             
-            <div th:each="community : ${communityList}">
+            <div th:each="community : ${communityList}" >
                 <div class="mb-3 form-control" th:if="${community.top_commu_id} == 0">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex">
                             <img class="mt-1"src="images/woogeoji.png" alt="이미지 사진" style="width: 28px; height: 28px;">
                             <p th:text="${community.user_nickname}" style="margin: 10px; color: black; font-weight: bolder;"></p>
                         </div>
-                        <!-- 같은 유저라면 수정 -->
-                        <div class="d-flex align-items-center" th:if="${community.user_no} == ${session.userNo}">
-                            <form action="" class="mr-1">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square mr-2" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">
+                        <!-- 글 작성 -->
+                        <div class="d-flex">
+                            <div class="d-flex mt-1 mr-2" th:onclick="'newPost(' + ${community.commu_id} + ');'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                </svg>
+                            </div>
+                            <!-- 같은 유저라면 수정 -->
+                            <div class="d-flex mt-1" th:if="${community.user_no} == ${session.userNo}">
+                                <div th:id="'showForm'+${community.commu_id}" th:onclick="'updatePost(' + ${community.commu_id} + ');'">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square mr-2" viewBox="0 0 16 16">
+                                        
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
-                                </button>
-                            </form>
-                            <!-- 같은 유저라면 삭제 -->
-                            <form th:action="@{/community/delete}" method="post">
-                                <button>
-                                    <input type="hidden" name="delete" th:value="${community.commu_id}">
-                                    <input type="hidden" name="content" value="삭제 되었습니다.">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-                                    </svg>
-                                </button>
-                            </form>
-                        </div>
+                                </div>
+                                <!-- 같은 유저라면 삭제 -->
+                                <form th:action="@{/community/delete}" method="post">
+                                    <button>
+                                        <input type="hidden" name="delete" th:value="${community.commu_id}">
+                                        <input type="hidden" name="content" value="삭제 되었습니다.">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>    
                     </div>
+                    <!-- 본문 -->
                     <div th:if="${community.top_commu_id} == 0">
-                        <h5 class="card-title" th:text="${community.commu_content}" style="margin: 0px;"></h5>
+                        <h5 class="card-title" th:id="'content'+${community.commu_id}" th:text="${community.commu_content}" th:value="${community.commu_content}" style="margin: 0px;"></h5>
+
+                        <form th:id="'show'+${community.commu_id}" th:action="@{/community/update}" method="POST" style="display: none;">
+                            <input class="form-control my-2" name="commu_content" type="text" th:value="${community.commu_content}" >
+                            <input type="hidden" name="commu_id" th:value="${community.commu_id}">
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
+                            </div>
+                        </form>
+
                         <div th:text="${community.create_time}" class="d-flex justify-content-end" style="font-size: 10px;"></div>
-                        <form th:action="@{/community/createReply}" method="post">
+                        <form th:action="@{/community/createReply}" method="post" th:id="'contentForm'+${community.commu_id}" style="display: none;">
                             <!-- 상위 게시물의 commu_id 값을 전달하기 위해 hidden 필드 추가 -->
                             <input type="hidden" name="parentId" th:value="${community.commu_id}">
-
+                
                             <input class="form-control mb-2" name="commu_content" type="text" placeholder="댓글을 작성해주세요.">
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
@@ -144,7 +161,7 @@
                         <!-- 필터 1. commu_id 와 top_commu_id가 같은지 -->
                         <div th:each="replyList : ${replyList}" th:if="${community.commu_id} == ${replyList.top_commu_id}" class="form-control">
 
-                            <div  class="d-flex">
+                            <div class="d-flex">
                                 <div class="d-flex justify-content-center align-items-center mr-2">
                                     <img src="images/arrow-right.png" alt="" style="width: 20px; height: 20px;">
                                 </div>
@@ -156,12 +173,14 @@
                                         </div>
                                         <!-- 댓글 수정 / 해당 유저라면 -->
                                         <div class="d-flex" th:if="${replyList.user_no} == ${session.userNo}">
-                                            <form action="" class="mr-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square mr-2" viewBox="0 0 16 16" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">
+                                            <div th:onclick="'updateReplyPost(' + ${replyList.commu_id} + ');'">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square mr-2" viewBox="0 0 16 16">
                                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                                 </svg>
-                                            </form>
+                                            </div>
+                                            
+
                                             <!-- <button type="button" class="btn btn-primary" >Open modal for @fat</button> -->
                                             <!-- 댓글 삭제 / 해당 유저라면 -->
                                             <form th:action="@{/community/delete}" method="post" class="d-flex align-items-center" >
@@ -178,8 +197,17 @@
                                     </div>
                                     
                                     <!-- 대댓글 너비설정 -->
-                                    <h5 class="card-title" th:text="${replyList.commu_content}" style="margin: 0px; width: 70vw;"></h5>
-                                    <div th:text="${replyList.create_time}" class="d-flex justify-content-end" style="font-size: 10px;"></div>
+                                    <div style="margin: 0px; width: 70vw;">
+                                        <h5 th:id="'replyContent'+${replyList.commu_id}" class="card-title" th:text="${replyList.commu_content}" th:value="${replyList.commu_content}"></h5>
+                                        <form th:id="'showReplyForm'+${replyList.commu_id}" th:action="@{/community/update}" method="POST" style="display: none;">
+                                            <input class="form-control my-2" name="commu_content" type="text" th:value="${replyList.commu_content}" >
+                                            <input type="hidden" id="cno" name="commu_id" th:value="${replyList.commu_id}">
+                                            <div class="d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
+                                            </div>
+                                        </form>
+                                        <div th:text="${replyList.create_time}" class="d-flex justify-content-end" style="font-size: 10px;"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -189,34 +217,7 @@
         </div>
    <!-- 페이지 작성하기 끝-->
    
-   
-   
-   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog">
-       <div class="modal-content">
-         <div class="modal-header">
-           <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
-           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-         </div>
-         <div class="modal-body">
-           <form>
-             <div class="mb-3">
-               <label for="recipient-name" class="col-form-label">Recipient:</label>
-               <input type="text" class="form-control" id="recipient-name">
-             </div>
-             <div class="mb-3">
-               <label for="message-text" class="col-form-label">Message:</label>
-               <textarea class="form-control" id="message-text"></textarea>
-             </div>
-           </form>
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-           <button type="button" class="btn btn-primary">Send message</button>
-         </div>
-       </div>
-     </div>
-   </div>
+
    <!-- copyright section start -->
    <div class="copyright_section">
     <div class="container">
@@ -232,24 +233,76 @@
  <script src="js/bootstrap.bundle.min.js"></script>
 
  <script>
-    const exampleModal = document.getElementById('exampleModal')
-    if (exampleModal) {
-    exampleModal.addEventListener('show.bs.modal', event => {
-        // Button that triggered the modal
-        const button = event.relatedTarget
-        // Extract info from data-bs-* attributes
-        const recipient = button.getAttribute('data-bs-whatever')
-        // If necessary, you could initiate an Ajax request here
-        // and then do the updating in a callback.
+    // community 넘버
+    
 
-        // Update the modal's content.
-        const modalTitle = exampleModal.querySelector('.modal-title')
-        const modalBodyInput = exampleModal.querySelector('.modal-body input')
-
-        modalTitle.textContent = `New message to ${recipient}`
-        modalBodyInput.value = recipient
-    })
+    $('.intro_check').css('display','none');
+    // $('#show').css('display', 'block');
+    // for (var i=1; i < 300; i++) {
+    
+    function newPost(number) {
+        $(`#contentForm${number}`).css('display', 'block');
     }
+
+    function updatePost(number) {
+        console.log(`#showForm${number}`);
+        $(`#contentForm${number}`).css('display', 'none');
+        $(`#content${number}`).css('display', 'none');
+        $(`#show${number}`).css('display', 'flex');
+    };
+
+    function updateReplyPost(number) {
+        $(`#showReplyForm${number}`).css('display', 'block');
+        $(`#content${number}`).css('display', 'none');
+        $(`#replyContent${number}`).css('display', 'none');
+    }
+
+
+      $('#intro_btn').click(function(){
+	  		var introduce = $('#intro_text').val();
+	  		console.log("수정")
+            console.log(introduce)
+	  		$.ajax({
+				type : "post",
+				url : "/community/create",
+				data : {introduce:introduce},				
+				success : function(data) {
+					console.log(data);
+					var text ="";					
+					// text += '<img id="setting" src="/image/setting1.png" alt="소개수정" >';
+					text += "<p>"+data+"</p>";
+					console.log("text" + text);
+					document.getElementById('introduce').innerHTML = text;	
+                    location.reload();
+					//$('#introduce').html(data);
+								
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});	  		
+	  	});	  		 
+	  	
+	  	$('#intro_btn').click(function(){
+  			$('.introduce').css('display','block');
+			$('.intro_check').css('display','none');
+			$('#setting').css('display','block');			
+  		});
+    
+
+    function commentUpdate(cno, ccontent){
+	     var a ='';
+	     
+	     a += '<div id="commentModifyBox" class="commentBox"><div class="commentContent">';
+	     a += '<input type="text" class="ccontent" id="ccontent" name="ccontent_'+cno+'" value="'+ccontent+'"/>';
+	     a += '<div class="commentmodifybtn"><span class="commentbtn"><button id="ubtn" class="buttoncontent" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
+	     a += '<span class="commentbtn commentbtn2"><button id="ubtn" class="buttoncontent cancelbtn" type="button" onclick="commentList();">취소</button> </span></div>';
+	     a += '</div></div>';
+	     
+	     $('.commentContent'+cno).html(a);
+	     
+	 }
+    
  </script>
 </body>
 
