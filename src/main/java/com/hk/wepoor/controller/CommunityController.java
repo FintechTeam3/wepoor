@@ -60,6 +60,8 @@ public class CommunityController {
     @Autowired
     private UserMapper userMapper;
 
+        
+
     // 게시글 리스트 불러오기
     @GetMapping("/community")
     public String getCommunity(Model model) {
@@ -68,7 +70,7 @@ public class CommunityController {
         List<CategoryVO> categoryList = categoryService.selectAll();
         List<UserVO> userList = userMapper.getAllUsers();
 
-
+        // 카테고리에 대한 입장 가능 여부 확인
 
         // for문을 통해 유저리스트의 넘버값을 조회
         for (CommunityVO community : communityList) {
@@ -104,6 +106,7 @@ public class CommunityController {
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("replyList", replyList);
         model.addAttribute("communityList", communityList); // communityList값이 community html로 넘어감
+
         return "community/index";
     }
 
@@ -111,6 +114,7 @@ public class CommunityController {
     @PostMapping("/community/create")
     public String createCommunity(@RequestParam("commu_content") String commu_content, HttpServletRequest request) {
         
+        System.out.println("들어와?" + request);
         // 세션 기반
         HttpSession session = request.getSession(false);
         int userNo = (int) session.getAttribute("userNo");
@@ -126,7 +130,6 @@ public class CommunityController {
 
     // 댓글 작성
     @PostMapping("/community/createReply")
-    @ResponseBody
     public String createReply(@RequestParam("parentId") int top_commu_id, 
                             @RequestParam("commu_content") String commu_content,
                             HttpServletRequest request) {
@@ -142,6 +145,8 @@ public class CommunityController {
         reply.setTop_commu_id(top_commu_id);
         reply.setUser_no(userNo);
         reply.setCommu_content(commu_content);
+
+        // cate id 값도 넣기
     
         communityService.create(reply);
 
@@ -150,10 +155,11 @@ public class CommunityController {
 
     // 댓글 수정
     @PostMapping("/community/update")
-    @ResponseBody
-    public String updatePost(@RequestParam("commu_content") String commu_content) {
+    public String updatePost(@RequestParam("commu_content") String commu_content,
+                            @RequestParam("commu_id") int commu_id) {
         
         CommunityVO updatePost = new CommunityVO();
+        updatePost.setCommu_id(commu_id);
         updatePost.setCommu_content(commu_content);
 
         communityService.update(updatePost);
@@ -184,12 +190,38 @@ public class CommunityController {
         UserVO user = userMapper.getUserByUserNo(userNo);
         user.setCateId(0);
         //
+
         userMapper.updateUser(user);
 
         System.out.println("로직 실행돼?" + userNo);
         return "redirect:/category";        
     }
 
+    // 카테고리에 대한 입장 가능 여부 확인
+    private boolean checkCategoryAccess(int cateId,
+                                        HttpServletRequest request) {
+        // 여기에 해당 사용자(userNo)가 해당 카테고리(cateId)에 대한 입장 가능 여부를 판단하는 로직을 작성
+        
+        // 1. request로 넘어온 유저를 기반으로 현재 유저값 받아오기
+        // 2. 넘어온 cateId값으로 현재 유저가 가지고 있는 cateId값과 비교해서 true false 반환
+    
+        // 세션 기반
+        HttpSession session = request.getSession(false);
+        int userNo = (int) session.getAttribute("userNo");
+        
+        // 해당 유저를 찾아야함
+        UserVO userVo = userMapper.getUserByUserNo(userNo);
+        userVo.getCateId();
+
+        // 넘어온 cateId와 user가 가지고 있는 cateId가 일치해야함
+        if (cateId == userVo.getCateId()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    
 }
 
 
