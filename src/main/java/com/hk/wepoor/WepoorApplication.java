@@ -10,7 +10,7 @@ public class WepoorApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WepoorApplication.class, args);
-
+		
 	}
 
 }

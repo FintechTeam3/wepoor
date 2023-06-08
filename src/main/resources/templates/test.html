@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>테스트</title>
+</head>
+<body>
+	<h th:text="${session.userId}"></h>
+	<h th:text="${session.userNo}"></h>
+	<table>
+		<thead>
+			<tr>
+				<th>닉네임</th>
+				<th>카테고리</th>
+				<th>비용</th>
+				<th>기간</th>
+				<th>상태</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="item : ${list}">
+				<td th:text="${item.user_nickname}"></td>
+				<td th:text="${item.cate_name}"></td>
+				<td th:text="${item.cate_cost}"></td>
+				<td th:text="${item.cate_date}"></td>
+				<td th:text="${item.status}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

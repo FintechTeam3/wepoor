@@ -1,0 +1,16 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hk.wepoor.model.RoomDetailMapper">
+	<select id="getInfo" parameterType="int">
+    	<![CDATA[
+   			SELECT u.user_nickname, c.cate_name, c.cate_cost, c.cate_date, c.start_date, c.end_date FROM roomdetail as r
+			INNER JOIN user as u
+			ON r.user_no = u.user_no
+			INNER JOIN category as c 
+			ON c.cate_id = r.cate_id
+			WHERE r.user_no = #{userNo}
+    	]]>
+	</select>
+</mapper>

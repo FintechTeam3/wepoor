@@ -1,6 +1,7 @@
 package com.hk.wepoor.vo;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,4 +16,6 @@ public class CategoryVO {
 	int cate_cost;
 	String cate_date;
 	int cate_weekend;
+	Date start_date;
+	Date end_date;
 }
