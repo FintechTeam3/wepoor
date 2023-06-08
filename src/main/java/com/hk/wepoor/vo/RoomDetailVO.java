@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class RoomDetailVO {
+	int cate_id;
 	String user_nickname;
 	String cate_name;
 	String cate_cost;
