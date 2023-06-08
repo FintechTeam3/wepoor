@@ -1,18 +1,18 @@
 package com.hk.wepoor.controller;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map.Entry;
-import javax.swing.text.html.parser.Entity;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,7 +21,7 @@ import com.hk.wepoor.vo.UserVO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import reactor.netty.http.server.HttpServerRequest;
+
 
 @Controller
 public class UserController {
@@ -40,19 +40,12 @@ public class UserController {
 	}
 
 	@PostMapping("/join_insert")
-	public String joinInsert(@RequestParam("userId") String userId, @RequestParam("userPhone") String userPhone,
-			@RequestParam("userName") String userName, @RequestParam("userNickname") String userNickname,
-			@RequestParam("userPwd") String userPwd) {
+	public String joinInsert(@ModelAttribute UserVO reqVo) {
 
-		UserVO uservo = new UserVO();
-		uservo.setUserId(userId);
-		uservo.setUserName(userName);
-		uservo.setUserNickname(userNickname);
-		uservo.setUserPhone(userPhone);
-		uservo.setUserPwd(userPwd);
+		UserVO uservo = UserVO.User(reqVo);
 
 		mapper.insertUser(uservo);
-
+		
 		return "redirect:/login_page";
 	}
 
@@ -96,6 +89,33 @@ public class UserController {
 	@GetMapping("/mymodify")
 	public String mymodify() {
 		return "mymodify";
+	}
+	
+	@PostMapping("/nickCheck")
+	@ResponseBody
+	public String nickCheck(@RequestParam("userNick") String userNick) {
+		System.out.println(userNick);
+		String result = "";
+		
+		UserVO userVO = mapper.getUserNick(userNick);
+		if(userVO != null) {
+			result = "f";
+		} else {
+			result = "t";
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	@PostMapping("/userModify")
+	public String userModify(@ModelAttribute UserVO reqVo) {
+
+		UserVO uservo = UserVO.User(reqVo);
+		System.out.println(uservo);
+
+		mapper.updateMy(uservo);
+		
+		return "redirect:/mymodify";
 	}
 	
 }

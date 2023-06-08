@@ -53,3 +53,6 @@
 .copyright_section {
     margin-top: 42px;
 }
+.alert-success, .alert-danger {
+	margin-top:1rem;
+}

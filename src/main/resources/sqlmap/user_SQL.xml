@@ -49,11 +49,20 @@
         <![CDATA[
         UPDATE user SET
         user_id = #{userId},
-        user_pwd = #{userPwd},
+        user_pwd = SHA2(#{userPwd}, 256),
         user_name = #{userName},
         user_nickname = #{userNickname},
         user_phone = #{userPhone},
         user_point = #{userPoint}
+        WHERE user_no = #{userNo}
+    	]]>
+	</update>
+	
+	<update id="updateMy" parameterType="com.hk.wepoor.vo.UserVO">
+        <![CDATA[
+        UPDATE user SET
+        user_pwd = SHA2(#{userPwd}, 256),
+        user_nickname = #{userNickname}
         WHERE user_no = #{userNo}
     	]]>
 	</update>
@@ -70,6 +79,11 @@
         ]]>
 	</select>
 	
+	<select id = "getUserNick" parameterType="String" resultMap="memberResultMap">
+		<![CDATA[
+        SELECT * FROM user WHERE user_nickname = #{user_nickname}
+        ]]>
+	</select>
 	
 	
 </mapper>
