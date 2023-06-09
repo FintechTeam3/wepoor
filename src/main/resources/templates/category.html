@@ -87,14 +87,51 @@
    
    
    
-	<div class="col-md-6">
+	<!-- <div class="col-md-6">
 		<div th:each="cl:${catelist}" class="box_main active" style="display: flex; justify-content: center;">
 		<p th:text="${cl.cate_cost}"></p>		
 			<button th:text="${cl.cate_name}" th:onclick="requestPay()" style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">커피</button>
 		<span th:text="${cl.cate_date}"></span>
 		</div>
-	</div>
-                  
+	</div> -->
+
+   <div class="container">
+		<input th:text="${session.userId}" type="hidden" style="display: none;"></input>
+		<input th:text="${session.userNo}" type="hidden" style="display: none;"></input>
+		<div th:each="cate : ${catelist}">
+         <!-- category 값 넘기기 -->
+            <ul class="list-group" th:onclick="'requestPay(' + ${cate.cate_id} + ');'">
+                  <li class="list-group-item">
+                     <div class="d-flex justify-content-center" style="font-weight: bolder; color: black;">
+                        <span th:text="${cate.cate_name}" class="mr-1"></span>
+                        <span>거지방</span>
+                     </div>
+                     <div class="d-flex justify-content-center" style="font-size: 10px; color: #1abc9c;">
+                        <span th:text="${#dates.format(cate.start_date, 'MM/dd')}" style="font-weight: bolder;"></span>
+                        <span th:text="${#dates.format(cate.end_date, '~ MM/dd')}" style="font-weight: bolder;"></span>
+                        <span th:text="${cate.cate_name}" class="mx-1"></span>
+                        <span>소비를 5번 참아주세요</span>
+                     </div>
+                     <div class="d-flex justify-content-center" style="font-size: 10px; color: #1abc9c;"></div>
+                     </div>
+                     <div class="d-flex justify-content-center" style="color:red; font-weight: bolder;">
+                        <span th:text="${cate.cate_cost}"></span>
+                        <span>원</span>
+                     </div>
+                     <!-- <div th:if="${list.status} == '종료'" class="badge bg-secondary rounded-pill p-1" >
+                        <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
+                     </div>
+                     <div th:if="${list.status} == '진행중'" class="badge bg-success rounded-pill p-1" >
+                        <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
+                     </div>
+                     <div th:if="${list.status} == '시작전'" class="badge bg-danger rounded-pill p-1" >
+                        <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
+                     </div> -->
+                  </li>
+            </ul>
+         
+		</div>
+	</div>	
                   
    <!-- copyright section start -->
    <div class="copyright_section">
@@ -153,8 +190,8 @@
 			
 		}	
 	
-	
-		function requestPay() {
+      // cate_id가 number로 들어감
+		function requestPay(number) {
 			// 객체 초기화
 			const IMP = window.IMP;
 			IMP.init("imp47603282");
@@ -173,7 +210,7 @@
 				pay_method : 'card',
 				merchant_uid: "order_no_" + merchantID,
 				buyer_name : userID,
-				amount : 1
+				amount : 50000
 			}, function(rsp) {
 				if (rsp.success) {
 					confirm('결제완료');
