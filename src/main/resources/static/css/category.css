@@ -3,6 +3,7 @@
 }
 .header_section {
     clear:both;
+    background-color: #e0e0e0 !important;
 }
 .about_layout_padding {
    padding-top: 50px;
@@ -50,4 +51,14 @@
     margin-bottom: 0px;
     background-color: #e0e0e0;
     margin-top: 0px;
+}
+.hamburger_nickname_input {
+	background-color: #1abc9c;
+	color: black;
+	font-size: 18px;
+    border: none;
+    margin-left: 10px;
+}
+.hamburger_userinfo {
+	margin: 20px auto 20px 20px;
 }

@@ -110,7 +110,7 @@
 		
 		//아이디
 		if(current_id == "" || input_id !== current_id){
-			alert("아이디 중복여부를 확인해주세요.");
+			alert("아이디  중복여부를 확인해주세요.");
 			$('#userId').focus();
 			return false;
 		}
@@ -129,11 +129,22 @@
 			alert("핸드폰 인증을 완료해주세요.")
 			$('#phone').focus();
 			return false;
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/parkhyejung
 		}*/
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> refs/heads/parkhyejung
 		return true;
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> refs/heads/parkhyejung
 	});
 	
 })(jQuery);

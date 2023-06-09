@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
+<html lang="utf-8">
 
 <head>
    <!-- basic -->
@@ -36,10 +36,7 @@
     <link rel="stylesheet" type="text/css" href="css/category.css">
     <!-- hyejung CSS End -->
 </head>
-
-
 <body>
-
    <!-- header section start -->
    <div class="header_section">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -54,77 +51,68 @@
               	<a class="nav-item nav-link" href="/">Home</a>
                	<a class="nav-item nav-link" href="about.html">About</a>
                	<a class="nav-item nav-link" href="teashop.html">Teashop</a>
-               	<a id="logout" class="nav-item nav-link" onclick="logout()">Logout</a>
             </div>
          </div>
          
-         <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">기간선택</p>
+         <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">My거지방</p>
          
-         <div class="see_bt in_see_bt"><a href="roomdetail" style="font-size:16px; font-weight:700; font-family: 'Jua', sans-serif; color: black;">My 거지방</a></div>
+         <div class="see_bt in_see_bt"><a href="login_page" style="font-size:16px; font-weight:700; font-family: 'Jua', sans-serif; color: black;">버튼명</a></div>
          
       </nav>
    </div>
    <!-- header section end -->
    
-   
-   
-	 <div class="col-md-6">
-		<div th:each="wl:${weeklist}" class="box_main active"  style="display: flex; flex-direction: row; justify-content: center; align-items: center">
-		<p style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">5월</p>
-			<form action = "category" method="get">
-				<input type="hidden" th:value="${wl.cate_weekend}" name="cate_weekend">
-				<button th:text="${wl.cate_weekend}" type="submit" style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">커피</button>
-			</form>
-		<p style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">주차</p>
-		<span th:text="${wl.cate_date}"></span>
-		<a th:href="@{category.html}"></a>
+   <!-- 페이지 작성하기 시작-->
+   <div class="container">
+		<input th:text="${session.userId}" type="hidden"></input>
+		<input th:text="${session.userNo}" type="hidden"></input>
+		<div th:each="list : ${myList}">
+			<ul class="list-group">
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+				  	<div>
+						<div class="d-flex" style="font-weight: bolder; color: black;">
+							<span th:text="${list.cate_name}" class="mr-1"></span>
+							<span>거지방</span>
+						</div>
+						<div style="font-size: 10px; color: #1abc9c;">
+							<span th:text="${#dates.format(list.start_date, 'MM/dd')}"></span>
+							<span th:text="${#dates.format(list.end_date, '~ MM/dd')}"> </span>
+						</div>
+					</div>
+					<div style="color:red; font-weight: bolder;">
+						<span th:text="${list.cate_cost}"></span>
+						<span>원</span>
+					</div>
+					<div th:if="${list.status} == '종료'" class="badge bg-secondary rounded-pill p-1" >
+						<div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
+					</div>
+					<div th:if="${list.status} == '진행중'" class="badge bg-success rounded-pill p-1" >
+						<div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
+					</div>
+					<div th:if="${list.status} == '시작전'" class="badge bg-danger rounded-pill p-1" >
+						<div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
+					</div>
+				</li>
+			</ul>
 		</div>
-	</div>
-                  
-                  
-                  
-                  
-                  
+	</div>	
+
+<!-- 페이지 작성하기 끝-->
                   
    <!-- copyright section start -->
    <div class="copyright_section">
-      <div class="container">
-         <p class="copyright_text">Copyright 2023 All Right Reserved By.<a href="https://html.design"> Free html
-               Templates</a> Distributed by. <a href="/">life&money</a> </p>
-         </p>
-      </div>
-   </div>
-   <!-- copyright section end -->
-   
-   <input id="ID" type="hidden" th:value="${session.userId}"/>
-   <!-- Javascript files-->
-   <script src="js/jquery.min.js"></script>
-   <script src="js/bootstrap.bundle.min.js"></script>
-     <script>
-    function roomMake() {
-    	window.location.href = 'roomMake'
-    }  
-    
-    
-    function logout(){
-    	var id = $("#ID").val();
-    	console.log(id);
-    	
-    	if(id.indexOf("@kakao") != -1){
-    		$("#logout").prop('href', 'https://kauth.kakao.com/oauth/logout?client_id=e4e9f889e1bb27e6af7af657094f2743&logout_redirect_uri=http://localhost/logout');	
-    	
-    	}else{
-    		
-    		$("#logout").prop('href', "logout");
-    	}
-    	
-    	
-    }
-    
-    
-    
-    
-  </script>
+	<div class="container">
+	   <p class="copyright_text">Copyright 2023 All Right Reserved By.<a href="https://html.design"> Free html
+			 Templates</a> Distributed by. <a href="/">life&money</a> </p>
+	   </p>
+	</div>
+ </div>
+ <!-- copyright section end -->
+ 
+ 
+ <!-- Javascript files-->
+ <script src="js/jquery.min.js"></script>
+ <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
