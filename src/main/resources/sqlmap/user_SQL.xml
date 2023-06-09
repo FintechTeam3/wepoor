@@ -23,14 +23,39 @@
         FROM user
         where access_token is not null
         ]]>
-    </select>
-    
-	<insert id="insertUser" parameterType="com.hk.wepoor.vo.UserVO">
+    	</select>
+    	
+    	<!-- 다음은 주어진 코드를 참고하여 userSeqNo가 이미 존재하는 경우에는 레코드를 업데이트(덮어쓰기)하고, 
+    	존재하지 않는 경우에는 새로운 레코드를 추가하는 조건을 갖는 MySQL 쿼리문입니다 -->
+	    <insert id="insertUser" parameterType="com.hk.wepoor.vo.UserVO">
+	        <![CDATA[
+		    INSERT INTO user (
+		        user_no, user_id, user_pwd, user_name, user_nickname,
+		        user_phone, user_seq_no, access_token, refresh_token
+		    )
+		    VALUES (
+		        #{userNo}, #{userId}, #{userPwd}, #{userName}, #{userNickname},
+		        #{userPhone}, #{userSeqNo}, #{accessToken}, #{refreshToken}
+		    )
+		    ON DUPLICATE KEY UPDATE
+		        user_id = #{userId},
+		        user_pwd = #{userPwd},
+		        user_name = #{userName},
+		        user_nickname = #{userNickname},
+		        user_phone = #{userPhone},
+		        access_token = #{accessToken},
+		        refresh_token = #{refreshToken};
+	    	]]>
+	    </insert>
+<!-- 	<insert id="insertUser" parameterType="com.hk.wepoor.vo.UserVO">
         <![CDATA[
         INSERT INTO user (user_id, user_pwd, user_name, user_nickname, user_phone, user_seq_no, access_token, refresh_token)
         VALUES (#{userId}, SHA2(#{userPwd}, 256), #{userName}, #{userNickname}, #{userPhone}, #{userSeqNo}, #{accessToken}, #{refreshToken})
+       	
     	]]>
-	</insert>
+	</insert> -->
+	
+	
 
 	<select id="getUserByUserId" parameterType="String" resultMap="memberResultMap">
         <![CDATA[
