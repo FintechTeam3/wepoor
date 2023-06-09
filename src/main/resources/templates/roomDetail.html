@@ -48,15 +48,26 @@
          
          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
+            	
+            	<!-- user info section -->     
+            	<div class="hamburger_userinfo">
+	           		<img src="images/whitemywoogeoji.jpg" style="width:60px; height:60px;"/>
+	           		<input type="text" class="hamburger_nickname_input" th:value="${userNickname}" readonly>
+           		</div>     
+            	
+            	<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+            	
               	<a class="nav-item nav-link" href="/">Home</a>
+              	<a class="nav-item nav-link" href="/mypage">Mypage</a>
                	<a class="nav-item nav-link" href="about.html">About</a>
                	<a class="nav-item nav-link" href="teashop.html">Teashop</a>
+               	<a id="logout" class="nav-item nav-link" onclick="logout()">Logout</a>
+               	
+               	<hr style="height:2px;border-width:0;background-color:#e0e0e0; margin-bottom:1px;" class="mapage_hr">
             </div>
          </div>
          
          <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">My거지방</p>
-         
-         <div class="see_bt in_see_bt"><a href="login_page" style="font-size:16px; font-weight:700; font-family: 'Jua', sans-serif; color: black;">버튼명</a></div>
          
       </nav>
    </div>
