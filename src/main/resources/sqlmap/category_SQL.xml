@@ -40,10 +40,16 @@
     ]]>
 	</update> 
 	
-	  <select id="selectAllWeekend" resultType="CategoryVO">
+	<select id="selectAllWeekend" resultType="CategoryVO">
     <![CDATA[
     select * from category 
    	Group by cate_weekend;
     ]]>
 	</select>  
+	
+	<select id="selectAllRoomList" parameterType="int">
+	<![CDATA[
+	SELECT * FROM category WHERE cate_weekend=#{cate_weekend}
+	]]>
+	</select>
   </mapper>

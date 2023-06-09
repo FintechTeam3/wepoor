@@ -74,7 +74,7 @@
             
             <!-- nickname section --> 
 			<div>
-				<input type="text" class="nickname_input" th:value="${session.userId}" style="color:black; text-align:center;" readonly>
+				<input type="text" class="nickname_input" th:value="${userNickname}" style="color:black; text-align:center;" readonly>
 			</div>
 			
             <!-- point section --> 
@@ -95,7 +95,7 @@
             <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
             
             <div>
-            	<a class="mypage_link" href="#">내 정보 수정</a>
+            	<a class="mypage_link" href="/mymodify">내 정보 수정</a>
             </div>
             
             <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">

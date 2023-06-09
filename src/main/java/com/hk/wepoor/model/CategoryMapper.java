@@ -14,4 +14,5 @@ public interface CategoryMapper {
 	int delte(int cateName);
 	int update(CategoryVO categoryVO);
 	List<CategoryVO> selectAllWeekend();
+	List<CategoryVO> selectAllRoomList(int cate_weekend);
 }

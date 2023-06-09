@@ -5,7 +5,7 @@
 <mapper namespace="com.hk.wepoor.model.RoomDetailMapper">
 	<select id="getInfo" parameterType="int">
     	<![CDATA[
-   			SELECT r.cate_id,u.user_nickname, c.cate_name, c.cate_cost, c.cate_date, c.start_date, c.end_date FROM roomdetail as r
+   			SELECT r.cate_id,u.user_nickname, c.cate_name, c.cate_cost, c.cate_date, c.start_date, c.end_date FROM pay as r
 			INNER JOIN user as u
 			ON r.user_no = u.user_no
 			INNER JOIN category as c 

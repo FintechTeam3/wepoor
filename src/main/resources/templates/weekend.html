@@ -58,7 +58,7 @@
             </div>
          </div>
          
-         <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">카테고리</p>
+         <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">기간선택</p>
          
          <div class="see_bt in_see_bt"><a href="roomdetail" style="font-size:16px; font-weight:700; font-family: 'Jua', sans-serif; color: black;">My 거지방</a></div>
          
@@ -68,15 +68,22 @@
    
    
    
-	<div class="col-md-6">
+	 <div class="col-md-6">
 		<div th:each="wl:${weeklist}" class="box_main active"  style="display: flex; flex-direction: row; justify-content: center; align-items: center">
-		<a href="category.html"></a>
 		<p style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">5월</p>
-			<button th:text="${wl.cate_weekend}" style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">커피</button>
+			<form action = "category" method="get">
+				<input type="hidden" th:value="${wl.cate_weekend}" name="cate_weekend">
+				<button th:text="${wl.cate_weekend}" type="submit" style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">커피</button>
+			</form>
 		<p style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">주차</p>
 		<span th:text="${wl.cate_date}"></span>
+		<a th:href="@{category.html}"></a>
 		</div>
 	</div>
+                  
+                  
+                  
+                  
                   
                   
    <!-- copyright section start -->
