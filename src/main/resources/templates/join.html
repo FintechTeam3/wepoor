@@ -36,6 +36,7 @@
     <link rel="stylesheet" type="text/css" href="css/homepage.css">
     <link rel="stylesheet" type="text/css" href="css/category.css">
     <!-- hyejung CSS End -->
+    <link rel="stylesheet" href="css/openbanking.css">
 </head>
 
 <body>
@@ -67,9 +68,12 @@
 
 			<form id="joinForm" method="POST" action="join_insert">
 			
-				<div class="mb-3">
+				<div class="input-group mb-3">
   					<label for="exampleFormControlInput1" class="form-label"></label>
   					<input id="userName" name="userName" type="text" class="form-control" placeholder="이름입력(2~6글자)" style="margin-top:65px;" required>
+  					<div class="btnn">
+  					<button class="btn btn-light" style="color:black;font-weight:bold;float: right;" type="button" onclick="authorization()">오픈뱅킹인증하기</button>
+  					</div>
 				</div>
 				
 				<div class="mb-3">
@@ -111,9 +115,7 @@
 				<div class="p-t-15">
 					<button class="btn btn-light" style="color:black;font-weight:bold;float: left;" id="cancel" type="button" onclick="location.href='login_page'">Cancel</button>
 					<button class="btn btn-light" style="color:black;font-weight:bold;float: right;" id="submit" type="submit">Submit</button>
-					
-				</div>
-				
+				</div>				
 			</form>
 		</div>
 	</div>
@@ -164,5 +166,28 @@
                 });
             });
    </script>
+   <script>
+       function authorization() {
+          var url="https://testapi.openbanking.or.kr/oauth/2.0/authorize?"
+            +"response_type=code&"
+            +"client_id=86dd1ec4-2394-4815-963f-0e5d2c28428a&"
+            +"redirect_uri=http://localhost/requesttoken&"
+            +"scope=login cardinfo&"
+            +"state=12345678123456781234567812345678&"
+            +"auth_type=0";
+
+          var authWindow = window.open(url, "인증하기", "width=400px,height=850px");
+          
+          // 주기적으로 확인하여 창이 닫혔는지 체크
+          var timer = setInterval(()=> {
+            if (authWindow.location.href !== url) {
+              // 인증 창의 URL이 변경되었을 경우, 즉 화면이 바뀌었을 경우
+              clearInterval(timer); // 타이머 중지
+              authWindow.close(); // 창을 닫음
+              console.log("인증이 완료되지 않았습니다.");
+            }
+          }, 2000); // 1초마다 확인
+        }
+        </script>
 </body>
 </html>

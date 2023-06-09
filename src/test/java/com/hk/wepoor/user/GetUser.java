@@ -1,20 +1,19 @@
 package com.hk.wepoor.user;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hk.wepoor.model.UserMapper;
-import com.hk.wepoor.service.UserService;
+import com.hk.wepoor.service.AccountService;
+import com.hk.wepoor.vo.AccountVO;
 import com.hk.wepoor.vo.UserVO;
 
 @SpringBootTest
-class GetAllUser {
+class GetUser {
 	
 	@Autowired
-	UserService userservice;
+	AccountService account_service;
 	
 	@Autowired
 	UserMapper user_mapper;
@@ -22,13 +21,12 @@ class GetAllUser {
 	@Test
 	void contextLoads() {
 		
-		List<UserVO> list = null;
+		UserVO userVO = null;
 		
-		list = user_mapper.getAllUsers();
+		userVO = user_mapper.getUserNick("emhaki");
 		
-		for(UserVO u:list) {
-			System.out.println(u);
-		}
+		System.out.println(userVO);
+		
 		
 	}
 

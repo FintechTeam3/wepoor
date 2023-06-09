@@ -40,7 +40,7 @@
     ]]>
 	</update> 
 	
-	  <select id="selectAllWeekend" resultType="CategoryVO">
+	<select id="selectAllWeekend" resultType="CategoryVO">
     <![CDATA[
     select * from category 
    	Group by cate_weekend;

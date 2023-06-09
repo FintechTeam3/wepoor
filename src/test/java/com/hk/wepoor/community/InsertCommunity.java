@@ -20,6 +20,7 @@ class InsertCommunity {
 
 		communityVO = new CommunityVO(0, 7, 2, "반갑습니다!",null,null,null,0);
 
+
 		
 		int affectRowCount = community_service.create(communityVO);
 		
