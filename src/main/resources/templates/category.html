@@ -90,8 +90,8 @@
 	<div class="col-md-6">
 		<div th:each="cl:${catelist}" class="box_main active" style="display: flex; justify-content: center;">
 		<p th:text="${cl.cate_cost}"></p>		
-			<button th:text="${cl.cate_name}" th:onclick="requestPay()" style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">커피</button>
-		<span th:text="${cl.cate_date}"></span>
+			<button th:text="${cl.cate_name}" th:onclick="check()" style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">커피</button>
+		<span id ="cate_date" th:text="${cl.cate_date}"></span>
 		</div>
 	</div>
                   
@@ -137,8 +137,36 @@
   </script>
 </body>
 
+	
 	<!-- 결제 API -->
 	<script>
+		function check(){
+			
+			var cate_date = $("#cate_date").text();
+			
+			$.ajax({
+			      url: "/roomcheck", // POST 요청을 보낼 엔드포인트 URL
+			      type: 'POST',
+			      data: { "cate_date": cate_date }, // 전송할 데이터
+			      success: function(response) {
+			       	
+			    	if(response == true){
+			    		alert("기간내 하나의 방만 입장가능 합니다.")
+			    	}else{
+			    		requestPay();
+			    	}
+			      },
+			      error: function(xhr, status, error) {
+			        // 요청이 실패하였을 때의 동작
+			        console.log('요청이 실패하였습니다.');
+			        console.log('에러:', error);
+			      }
+			      
+			    });
+			
+		};
+	
+	
 		function test() {
 			var today = new Date();
 			var hour = String(today.getHours());

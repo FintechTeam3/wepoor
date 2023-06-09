@@ -57,4 +57,10 @@ public class CategoryService {
 		List<CategoryVO> list = categorymapper.selectAllRoomList(cate_weekend);
 		return list;
 	};
+	
+	public List<String> roomCheck(int user_no){
+		return categorymapper.roomCheck(user_no);
+	}
+	
+	
 }
