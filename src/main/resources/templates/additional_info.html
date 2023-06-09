@@ -60,7 +60,7 @@
 
 				<div class="p-t-15">
 					<button class="btn btn-light" style="color:black;font-weight:bold;float: left;" id="cancel" type="button" onclick="location.href='login_page'">Cancel</button>
-					<button class="btn btn-light" style="color:black;font-weight:bold;float: right;" id="submit" type="submit">Submit</button>
+					<button class="btn btn-light" style="color:black;font-weight:bold;float: right;" id="submit" type="submit" disabled = true>Submit</button>
 				</div>
 			
 			</form>
@@ -86,7 +86,7 @@
               authWindow.close(); // 창을 닫음
               console.log("인증이 완료되지 않았습니다.");
             }
-          }, 2000); // 1초마다 확인
+          }, 3000); // 1초마다 확인
         }
         </script>
    

@@ -99,9 +99,12 @@ public class UserController {
 		
 		return "redirect:/login_page";
 	}
+//	 private static final long INTERVAL = 5000; // 변수로 사용할 스케줄 간격 설정
 	
+	
+	// @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul") // 매일 00시 00분 00초에 실행 // @Scheduled(fixedRate = 5000) // 5초마다 실행
 	@GetMapping("/user_me")
-	@Scheduled(cron = "0 0 0 * * *") // 매일 00시 00분 00초에 실행 // @Scheduled(fixedRate = 5000) // 5초마다 실행
+//    @Scheduled(fixedDelay = INTERVAL)
 	public String requestUserMe() {
 		userService.requestuser();
 		return "poor";

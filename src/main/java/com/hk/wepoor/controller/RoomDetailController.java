@@ -42,8 +42,8 @@ public class RoomDetailController {
 			}
 
 		}
+		System.out.println("myList 입니다." + myList);
 		req.setAttribute("myList", myList);
-		
 
 		return "roomDetail";
 	}
