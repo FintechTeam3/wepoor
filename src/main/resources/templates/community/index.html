@@ -73,7 +73,7 @@
         <!-- header section end -->
     
     <!-- 페이지 작성하기 시작-->
-        <div class="container mt-4" th:each="category : ${categoryList}">
+        <div class="container mt-4" th:each="category : ${categoryList}" th:if="${category.cate_id} == ${cate_id}">
             <div style="background-color: #cbcbcb; color: black; padding: 2%; border-radius: 15px;">
                 <div >
                     환영합니다, <span th:text="${category.cate_weekend}" style="font-weight: bolder;"></span><span style="font-weight: bolder;">주차</span> [<span th:text="${category.cate_name}" style="font-weight: bolder;"></span>] 참는 거지방입니다.
@@ -91,12 +91,13 @@
             </div>
             <form th:action="@{/community/create}" method="POST">
                 <input class="form-control my-2" name="commu_content" type="text" placeholder="댓글을 작성해주세요." >
+                <input type="hidden" name="cate_id" th:value="${category.cate_id}">
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
                 </div>
             </form>
             
-            <div th:each="community : ${communityList}" >
+            <div th:each="community : ${communityList}" th:if="${community.cate_id} == ${cate_id}">
                 <div class="mb-3 form-control" th:if="${community.top_commu_id} == 0">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex">
@@ -140,6 +141,7 @@
                         <form th:id="'show'+${community.commu_id}" th:action="@{/community/update}" method="POST" style="display: none;">
                             <input class="form-control my-2" name="commu_content" type="text" th:value="${community.commu_content}" >
                             <input type="hidden" name="commu_id" th:value="${community.commu_id}">
+                            <input type="hidden" name="cate_id" th:value="${category.cate_id}">
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
                             </div>
@@ -149,7 +151,7 @@
                         <form th:action="@{/community/createReply}" method="post" th:id="'contentForm'+${community.commu_id}" style="display: none;">
                             <!-- 상위 게시물의 commu_id 값을 전달하기 위해 hidden 필드 추가 -->
                             <input type="hidden" name="parentId" th:value="${community.commu_id}">
-                
+                            <input type="hidden" name="cate_id" th:value="${category.cate_id}">
                             <input class="form-control mb-2" name="commu_content" type="text" placeholder="댓글을 작성해주세요.">
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
@@ -202,6 +204,7 @@
                                         <form th:id="'showReplyForm'+${replyList.commu_id}" th:action="@{/community/update}" method="POST" style="display: none;">
                                             <input class="form-control my-2" name="commu_content" type="text" th:value="${replyList.commu_content}" >
                                             <input type="hidden" id="cno" name="commu_id" th:value="${replyList.commu_id}">
+                                            <input type="hidden" name="cate_id" th:value="${category.cate_id}">
                                             <div class="d-flex justify-content-end">
                                                 <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
                                             </div>

@@ -20,8 +20,8 @@
 	
 	<insert id="insert" parameterType="CommunityVO">
     <![CDATA[
-    INSERT INTO community (commu_id, top_commu_id, user_no, commu_content) 
-    VALUES (#{commu_id}, #{top_commu_id}, #{user_no}, #{commu_content})
+    INSERT INTO community (commu_id, top_commu_id, user_no, commu_content, cate_id) 
+    VALUES (#{commu_id}, #{top_commu_id}, #{user_no}, #{commu_content}, #{cate_id})
     ]]>
 	</insert> 
 

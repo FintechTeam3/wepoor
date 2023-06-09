@@ -96,5 +96,14 @@
         SELECT * FROM user WHERE user_nickname = #{user_nickname}
         ]]>
 	</select>
+
+    <select id = "getUserCateId" parameterType="int">
+        <![CDATA[
+        SELECT COALESCE(cate_id, 0) 
+        AS cate_id FROM roomdetail 
+        WHERE user_no = #{userNo}
+        ]]>
+    </select>
+    
 	
 </mapper>

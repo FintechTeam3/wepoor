@@ -40,7 +40,7 @@ public class CommunityService {
 		CommunityVO communityVO = community_mapper.select(commu_id);
 		return communityVO;
 	}
-
+	
 	
 	public int create(CommunityVO communityVO) {
 		int affectRowCount = community_mapper.insert(communityVO);
