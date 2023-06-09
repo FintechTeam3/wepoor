@@ -51,4 +51,10 @@ public class CategoryService {
 		List<CategoryVO> list = category_mapper.selectAllWeekend();
 		return list;
 	};
+	
+	// N주차 방목록(8개 카테고리)
+	public List<CategoryVO> selectAllRoomList(int cate_weekend){
+		List<CategoryVO> list = category_mapper.selectAllRoomList(cate_weekend);
+		return list;
+	};
 }
