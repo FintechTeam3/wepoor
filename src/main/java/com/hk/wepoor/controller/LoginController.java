@@ -148,7 +148,7 @@ public class LoginController {
 					logger.info("JWTTOKEN: " + jwtToken);
 					logger.info("kakao_access_token: " + accessToken);
 
-					return "redirect:/category";
+					return "redirect:/weekend";
 
 				}
 
