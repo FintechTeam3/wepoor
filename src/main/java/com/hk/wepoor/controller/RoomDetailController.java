@@ -40,6 +40,7 @@ public class RoomDetailController {
 					v.setStatus("종료");
 				}
 			}
+
 		}
 		req.setAttribute("myList", myList);
 		
