@@ -52,4 +52,16 @@
 	SELECT * FROM category WHERE cate_weekend=#{cate_weekend}
 	]]>
 	</select>
+	
+	<select id="roomCheck" parameterType="int">
+	<![CDATA[
+	SELECT c.cate_date  FROM pay AS p
+	INNER JOIN category AS c
+	ON p.cate_id = c.cate_id
+	WHERE user_no = #{user_no};
+	]]>
+	</select>
+	
+	
+	
   </mapper>

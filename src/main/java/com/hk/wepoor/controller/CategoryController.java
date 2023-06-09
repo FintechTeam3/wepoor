@@ -1,16 +1,23 @@
 package com.hk.wepoor.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hk.wepoor.model.UserMapper;
 import com.hk.wepoor.service.CategoryService;
 import com.hk.wepoor.vo.CategoryVO;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class CategoryController {
@@ -60,4 +67,24 @@ public class CategoryController {
 		model.addAttribute("catelist", list);
 		return "category";
 	}
+
+
+	@PostMapping("/roomcheck")
+	@ResponseBody
+	public boolean roomcheck(@RequestParam("cate_date") String cate_date, HttpServletRequest req) {
+		
+		HttpSession session = req.getSession(false);
+		int user_no = (int) session.getAttribute("userNo");
+		
+		List<String> list = categoryService.roomCheck(user_no);
+		
+		Set<String> set = new HashSet<>(list);
+		
+		boolean check = set.contains(cate_date);
+		
+		// true이면 중복이 있다 => 기간 내에 하나만 false=> 가능
+		return check;
+	}
+
+
 }
