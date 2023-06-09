@@ -11,8 +11,9 @@ public class PayVO {
 	
 	int pay_id;
 	int user_no;
+	int cate_id;
 	String pay_date;
 	int pay_price;
 	String pay_card;
-	
+
 }

@@ -56,5 +56,10 @@ public class CommunityService {
 		int affectRowCount = community_mapper.update(communityVO);
 		return affectRowCount;
 	}
+
+	public List<CommunityVO> getUserNickName(int userNo) {
+		List<CommunityVO> list = community_mapper.getUserNickName(userNo);
+		return list;
+	}
 	
 }

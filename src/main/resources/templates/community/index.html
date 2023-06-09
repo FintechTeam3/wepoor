@@ -65,6 +65,7 @@
                             <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
                         </svg>
                         <input type="hidden" name="user_no" th:value="${session.userNo}">
+                        <input type="hidden" name="cate_id" th:value="${cate_id}">
                     </button>
                 </form>
             </div>
@@ -87,7 +88,7 @@
             </div>
             <div class="d-flex mt-4">
                 <img class="mt-1" src="images/woogeoji.png" alt="이미지 사진" style="width: 28px; height: 28px;">
-                <p th:text="${session.userId}" style="margin: 10px; color: black; font-weight: bold"></p>
+                <p th:text="${userNickName}" style="margin: 10px; color: black; font-weight: bold"></p>
             </div>
             <form th:action="@{/community/create}" method="POST">
                 <input class="form-control my-2" name="commu_content" type="text" placeholder="댓글을 작성해주세요." >
@@ -125,6 +126,7 @@
                                     <button>
                                         <input type="hidden" name="delete" th:value="${community.commu_id}">
                                         <input type="hidden" name="content" value="삭제 되었습니다.">
+                                        <input type="hidden" name="cate_id" th:value="${category.cate_id}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
                                             <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
@@ -142,6 +144,7 @@
                             <input class="form-control my-2" name="commu_content" type="text" th:value="${community.commu_content}" >
                             <input type="hidden" name="commu_id" th:value="${community.commu_id}">
                             <input type="hidden" name="cate_id" th:value="${category.cate_id}">
+                            <input type="hidden" name="userNo" th:value="${session.userNo}">
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
                             </div>
@@ -152,6 +155,7 @@
                             <!-- 상위 게시물의 commu_id 값을 전달하기 위해 hidden 필드 추가 -->
                             <input type="hidden" name="parentId" th:value="${community.commu_id}">
                             <input type="hidden" name="cate_id" th:value="${category.cate_id}">
+                            <input type="hidden" name="userNo" th:value="${session.userNo}">
                             <input class="form-control mb-2" name="commu_content" type="text" placeholder="댓글을 작성해주세요.">
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
@@ -189,6 +193,7 @@
                                                 <button>
                                                     <input type="hidden" name="delete" th:value="${replyList.commu_id}">
                                                     <input type="hidden" name="content" value="삭제 되었습니다.">
+                                                    <input type="hidden" name="cate_id" th:value="${category.cate_id}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
                                                         <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
@@ -205,6 +210,7 @@
                                             <input class="form-control my-2" name="commu_content" type="text" th:value="${replyList.commu_content}" >
                                             <input type="hidden" id="cno" name="commu_id" th:value="${replyList.commu_id}">
                                             <input type="hidden" name="cate_id" th:value="${category.cate_id}">
+                                            <input type="hidden" name="userNo" th:value="${session.userNo}">
                                             <div class="d-flex justify-content-end">
                                                 <button type="submit" class="btn btn-success" style="color: #ffffff; border-radius: 15px;">작성</button>
                                             </div>
