@@ -129,22 +129,9 @@
 			alert("핸드폰 인증을 완료해주세요.")
 			$('#phone').focus();
 			return false;
-<<<<<<< HEAD
+	}*/
 
-=======
->>>>>>> refs/heads/parkhyejung
-		}*/
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> refs/heads/parkhyejung
 		return true;
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> refs/heads/parkhyejung
 	});
 	
 })(jQuery);
