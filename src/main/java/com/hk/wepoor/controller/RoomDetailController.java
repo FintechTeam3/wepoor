@@ -40,9 +40,7 @@ public class RoomDetailController {
 					v.setStatus("끝");
 				}
 			}
-			System.out.println(dateNow);
-			System.out.println(v.getCate_date());
-			System.out.println(v.getStatus());
+
 		}
 		req.setAttribute("list", list);
 		return "test";

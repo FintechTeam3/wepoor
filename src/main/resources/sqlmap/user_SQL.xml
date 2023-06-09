@@ -61,7 +61,7 @@
 
 	<delete id="deleteUser" parameterType="int">
     	<![CDATA[
-        DELETE FROM user WHERE user_no = #{userId}
+        DELETE FROM user WHERE user_no = #{userNo}
         ]]>
 	</delete>
 	
