@@ -34,7 +34,7 @@
 		        user_phone, user_seq_no, access_token, refresh_token
 		    )
 		    VALUES (
-		        #{userNo}, #{userId}, #{userPwd}, #{userName}, #{userNickname},
+		        #{userNo}, #{userId}, SHA2(#{userPwd}, 256), #{userName}, #{userNickname},
 		        #{userPhone}, #{userSeqNo}, #{accessToken}, #{refreshToken}
 		    )
 		    ON DUPLICATE KEY UPDATE
@@ -44,18 +44,9 @@
 		        user_nickname = #{userNickname},
 		        user_phone = #{userPhone},
 		        access_token = #{accessToken},
-		        refresh_token = #{refreshToken};
+		        refresh_token = #{refreshToken}
 	    	]]>
 	    </insert>
-<!-- 	<insert id="insertUser" parameterType="com.hk.wepoor.vo.UserVO">
-        <![CDATA[
-        INSERT INTO user (user_id, user_pwd, user_name, user_nickname, user_phone, user_seq_no, access_token, refresh_token)
-        VALUES (#{userId}, SHA2(#{userPwd}, 256), #{userName}, #{userNickname}, #{userPhone}, #{userSeqNo}, #{accessToken}, #{refreshToken})
-       	
-    	]]>
-	</insert> -->
-	
-	
 
 	<select id="getUserByUserId" parameterType="String" resultMap="memberResultMap">
         <![CDATA[
