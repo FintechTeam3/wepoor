@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +40,6 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
 
 	@GetMapping("/login_page")
 	public String login() {
@@ -60,7 +59,7 @@ public class UserController {
 	public String reques(@RequestParam("code") String code) {
 		String [] str = userService.requesttoken(code,"requesttoken"); 
 		this.str=str;
-		  
+
 		  return "end";
 		  
 	}
@@ -91,9 +90,8 @@ public class UserController {
 	@PostMapping("/join_insert")
 	public String joinInsert(@ModelAttribute UserVO reqVo) {
 		// form 데이터는 modelAttribute로 넘깁니다.
-		// reqVo에 담긴 값들을 uservo로 넘겨주고 
-		UserVO uservo = UserVO.User(reqVo);
-		
+		// reqVo에 담긴 값들을 uservo로 넘겨주고 .
+		UserVO uservo = UserVO.User(reqVo, str);	
 		// insert 합니다.
 		mapper.insertUser(uservo);
 		
@@ -196,7 +194,7 @@ public class UserController {
 	public String userModify(@ModelAttribute UserVO reqVo) {
 		
 		// reqVo에 담긴 값들을 uservo로 넘겨주고
-		UserVO uservo = UserVO.User(reqVo);
+		UserVO uservo = UserVO.User(reqVo,str);
 		
 		// 받아온 정보로 사용자의 정보를 수정합니다.
 		mapper.updateMy(uservo);
