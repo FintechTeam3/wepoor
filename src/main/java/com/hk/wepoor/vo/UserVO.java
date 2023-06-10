@@ -21,7 +21,7 @@ public class UserVO {
 	String refreshToken ;
 	
 	
-	public UserVO(UserVO reqVO) {
+	public UserVO(UserVO reqVO, String[] str) {
 		this.userNo = reqVO.getUserNo();
 		this.cateId = reqVO.getCateId();
 		this.userId = reqVO.getUserId();
@@ -30,12 +30,12 @@ public class UserVO {
 		this.userNickname = reqVO.getUserNickname();
 		this.userPhone = reqVO.getUserPhone();
 		this.userPoint = reqVO.getUserPoint();
-		this.userSeqNo = reqVO.getUserSeqNo();
-		this.accessToken = reqVO.getAccessToken();
-		this.refreshToken = reqVO.getRefreshToken();
+		this.userSeqNo = str[0];
+		this.accessToken = str[1];
+		this.refreshToken = str[2];
 	}
 	
-	public static UserVO User(UserVO reqVO){
+	public static UserVO User(UserVO reqVO, String[] str){
 		return new UserVO(
 				reqVO.getUserNo(),
 				reqVO.getCateId(),
@@ -45,9 +45,9 @@ public class UserVO {
 				reqVO.getUserNickname(),
 				reqVO.getUserPhone(),
 				reqVO.getUserPoint(),
-				reqVO.getUserSeqNo(),
-				reqVO.getAccessToken(),
-				reqVO.getRefreshToken()
+				str[0],
+				str[1],
+				str[2]
 				);
 	}
 }

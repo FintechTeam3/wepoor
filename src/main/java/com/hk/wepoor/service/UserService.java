@@ -47,7 +47,9 @@ public class UserService {
 
 	public void requestuser() {
 		// user_no, user_name, user_seq_no, access_token 을 UserVO에 담는다.
-		List<UserVO> userVO = userMapper.getUserNo();
+
+		List<UserVO> userVO = userMapper.getCoffee();
+		
 		// 가입된 회원수 만큼 반복문이 돌아간다.
 		for (UserVO user : userVO) {
 			// Access_token
@@ -77,10 +79,12 @@ public class UserService {
 				for (int i = 0; i < list_num; i++) {
 
 					// 가맹점명
-					String Merchant_name = cardListVO.getBill_detail_list().get(i).getMerchant_name_masked();
+					String MerchaName = cardListVO.getBill_detail_list().get(i).getMerchant_name_masked();
+					String paidDate = cardListVO.getBill_detail_list().get(i).getPaid_date();					
+					
 					
 					// 가맹점명에 커피가 들어갔는지 확인
-					if (Merchant_name.contains("커피")) {
+					if (MerchaName.contains("커피")) {
 						coffeeNum++;
 					}
 				}

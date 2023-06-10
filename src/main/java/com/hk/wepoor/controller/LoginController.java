@@ -11,15 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+ 
+ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.hk.wepoor.config.MyApiClient;
-import com.hk.wepoor.jwt.Jwt;
+ import com.hk.wepoor.jwt.Jwt;
 import com.hk.wepoor.model.UserMapper;
 import com.hk.wepoor.service.LoginService;
 import com.hk.wepoor.service.UserService;
@@ -193,7 +188,7 @@ public class LoginController {
 		String userId = (String) session.getAttribute("userId");
 		String userNickname = (String) session.getAttribute("userNickname");
 		String profileImg = (String) session.getAttribute("profileImg");
-		System.out.println(str+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@3");
+		
 		UserVO uservo = new UserVO();
 		uservo.setUserId(userId);
 		uservo.setUserName(userName);
@@ -203,10 +198,7 @@ public class LoginController {
 		uservo.setUserSeqNo(str[0]);
 		uservo.setAccessToken(str[1]);
 		uservo.setRefreshToken(str[2]);
-		System.out.println(str[0]+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println(str[1]+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println(str[2]+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-
+ 
 		mapper.insertUser(uservo);
 
 		session.invalidate();
