@@ -36,7 +36,9 @@ public interface UserMapper {
 	List<UserVO> getUserNo();
 
 	List<UserVO> getCoffee();
-		
+			
+	int getUserCateId(int userNo);
+
 	// 사용자 nickname 으로 조회하기 (중복조회 위함)
 	UserVO getUserNick(String user_nickname);
 

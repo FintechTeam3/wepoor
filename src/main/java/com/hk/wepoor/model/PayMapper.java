@@ -14,5 +14,6 @@ public interface PayMapper {
 	int insert(PayVO payVO);
 	int delete(int pay_id);
 	int update(PayVO payVO);
+	int updateLeave(PayVO payVO);
 	
 }

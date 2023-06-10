@@ -20,8 +20,8 @@
 	
 	<insert id="insert" parameterType="CommunityVO">
     <![CDATA[
-    INSERT INTO community (commu_id, top_commu_id, user_no, commu_content) 
-    VALUES (#{commu_id}, #{top_commu_id}, #{user_no}, #{commu_content})
+    INSERT INTO community (commu_id, top_commu_id, user_no, commu_content, cate_id) 
+    VALUES (#{commu_id}, #{top_commu_id}, #{user_no}, #{commu_content}, #{cate_id})
     ]]>
 	</insert> 
 
@@ -36,5 +36,13 @@
     UPDATE community SET commu_content = #{commu_content} WHERE commu_id = #{commu_id}
     ]]>
 	</update> 
+
+    <select id="getUserNickName">
+    <![CDATA[
+        SELECT c.commu_id, c.top_commu_id, c.user_no, u.user_nickname, c.commu_content, c.create_time, c.cate_id FROM community c
+        INNER JOIN user u ON c.user_no = u.user_no
+    ]]>
+    </select>
+
   
   </mapper>

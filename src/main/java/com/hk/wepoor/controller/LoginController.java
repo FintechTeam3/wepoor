@@ -211,7 +211,7 @@ public class LoginController {
 
 		logger.info("JWTTOKEN: " + jwtToken);
 
-		return "redirect:/category";
+		return "redirect:/weekend";
 	}
 
 	/*

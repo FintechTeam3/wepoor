@@ -17,5 +17,6 @@ public interface CommunityMapper {
 	int delete(int commu_id);
 	int update(CommunityVO communityVO);
 	List<CommunityVO> selectRepliesByParentId(int top_commu_id);
+	List<CommunityVO> getUserNickName(int userNo);
 
 }

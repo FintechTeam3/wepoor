@@ -41,7 +41,7 @@
 <body>
 
    <!-- header section start -->
-   <div class="header_section">
+  <div class="header_section">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
       
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -51,14 +51,26 @@
          
          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
+            	
+            	<!-- user info section -->     
+            	<div class="hamburger_userinfo">
+	           		<img src="images/whitemywoogeoji.jpg" style="width:60px; height:60px;"/>
+	           		<input type="text" class="hamburger_nickname_input" th:value="${userNickname}" readonly>
+           		</div>     
+            	
+            	<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+            	
               	<a class="nav-item nav-link" href="/">Home</a>
+              	<a class="nav-item nav-link" href="/mypage">Mypage</a>
                	<a class="nav-item nav-link" href="about.html">About</a>
                	<a class="nav-item nav-link" href="teashop.html">Teashop</a>
                	<a id="logout" class="nav-item nav-link" onclick="logout()">Logout</a>
+               	
+               	<hr style="height:2px;border-width:0;background-color:#e0e0e0; margin-bottom:1px;" class="mapage_hr">
             </div>
          </div>
          
-         <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">기간선택</p>
+         <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">기간</p>
          
          <div class="see_bt in_see_bt"><a href="roomdetail" style="font-size:16px; font-weight:700; font-family: 'Jua', sans-serif; color: black;">My 거지방</a></div>
          
@@ -68,20 +80,45 @@
    
    
    
-	 <div class="col-md-6">
+	 <!-- <div class="col-md-6">
 		<div th:each="wl:${weeklist}" class="box_main active"  style="display: flex; flex-direction: row; justify-content: center; align-items: center">
-		<p style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">5월</p>
-			<form action = "category" method="get">
+		<a href="category">
+         <p style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">5월</p>
 				<input type="hidden" th:value="${wl.cate_weekend}" name="cate_weekend">
 				<button th:text="${wl.cate_weekend}" type="submit" style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">커피</button>
-			</form>
 		<p style="background:#CCCCCC; font-size:30px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">주차</p>
 		<span th:text="${wl.cate_date}"></span>
 		<a th:href="@{category.html}"></a>
+      </a>
+   </div>
+      
+	</div> -->
+
+   <div class="container" style="height: 85vh;">
+		<input th:text="${session.userId}" type="hidden" style="display: none;"></input>
+		<input th:text="${session.userNo}" type="hidden" style="display: none;"></input>
+		<div th:each="list : ${weeklist}">
+         <a th:href="@{/category(cate_weekend = ${list.cate_weekend})}" >
+            <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-center align-items-center">
+                     <div style="font-size: 20px;">
+                        <div class="d-flex" style="font-weight: bolder; color: black;">
+                           <div th:text="${#dates.format(list.end_date, 'MM ')}"></div>
+                           <div class="mr-2">월</div>
+                           <div th:text="${list.cate_weekend}"></div>
+                           <div>주차</div>
+                        </div>
+                        <div class="d-flex">
+                           <span>(</span>
+                           <div th:text="${list.cate_date}"></div>
+                           <span>)</span>
+                        </div>
+                     </div>
+                  </li>
+            </ul>
+         </a>
 		</div>
-	</div>
-                  
-                  
+	</div>	               
                   
                   
                   

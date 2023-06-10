@@ -38,5 +38,11 @@ public class PayService {
 		int affectRowCount = pay_mapper.update(payVO);
 		return affectRowCount;
 	}
+
+	public int updateLeave(PayVO payVO) {
+		int success = pay_mapper.updateLeave(payVO);
+		return success;
+	}
+	
 	
 }

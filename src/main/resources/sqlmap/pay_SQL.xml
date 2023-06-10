@@ -37,5 +37,12 @@
     WHERE pay_id = #{pay_id}
     ]]>
 	</update> 
+
+    <update id="updateLeave" parameterType="PayVO">
+        <![CDATA[
+        UPDATE pay SET cate_id = #{cate_id}
+        WHERE user_no = #{user_no} AND cate_id = #{cate_id};
+        ]]>
+    </update>
   
   </mapper>

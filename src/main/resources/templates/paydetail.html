@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="utf-8">
 
 <head>
    <!-- basic -->
@@ -33,7 +33,7 @@
     <!-- bootstrap CSS END-->  
     
     <!-- hyejung CSS Start -->
-    <link rel="stylesheet" type="text/css" href="css/mypage.css">
+    <link rel="stylesheet" type="text/css" href="css/category.css">
     <!-- hyejung CSS End -->
 </head>
 
@@ -56,67 +56,42 @@
             </div>
          </div>
          
-         <p style="color:white; font-size:30px; font-weight:530; font-family: 'Jua', sans-serif; letter-spacing: 3px;">참가비결제</p>
+         <p style="color:white; font-size:30px; font-weight:530; font-family: 'Jua', sans-serif; letter-spacing: 3px;">마이페이지</p>
          
       </nav>
    </div>
    <!-- header section end -->
    
-   <!-- mypage section start -->   
+   <!-- 페이지 작성하기 시작-->
    
- 
-   <div class="container">
-      <div class="row">
-         <div class="col-md-6 ">
-         
-			<!-- pic section -->          
-            <div class="image_2"><img src="images/mywoogeoji.jpg" style="width:80px; height:80px; display:block; margin:0 auto;"/></div>
-            
-            <!-- nickname section --> 
-			<div>
-				<input type="text" class="nickname_input" th:value="${userNickname}" style="color:black; text-align:center;" readonly>
-			</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 ">
 			
-            <!-- point section --> 
-            <table>
-            	<tr>
-            		<th><input type="text" th:value="${userPoint}" class="point_input" style="color:white; text-align:center;" readonly></th>
-            		<th><span style="margin-left:5px;">포인트</span></th>
-            	</tr>
-            </table>
-            
-            <!-- page section -->
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-            <div>
-            	<a class="mypage_link" href="#">결제내역</a>
+			<div style="background-color: #cbcbcb; color: black; padding: 2%; border-radius: 15px;">
+                <div >
+                    환영합니다, <span th:text="${category.cate_weekend}" style="font-weight: bolder;"></span><span style="font-weight: bolder;">주차</span> [<span th:text="${category.cate_name}" style="font-weight: bolder;"></span>] 참는 거지방입니다.
+                </div>
+                <div>
+                    참여기간은 [<span style="font-weight: bolder;" th:text="${category.cate_date}"></span>>] 입니다. 
+                </div>
             </div>
-            
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-            <div>
-            	<a class="mypage_link" href="/mymodify">내 정보 수정</a>
-            </div>
-            
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-            <div>
-            	<a class="mypage_link" href="/pointdetail">포인트 내역</a>
-            </div>
-            
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-            <div>
-            	<a class="mypage_link" href="#">My 거지방</a>
-            </div>
-            
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-         </div>
-      </div>
-   </div>
-
-
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</div>
+		</div>
+	</div>
    
    
    
@@ -129,8 +104,8 @@
    
    
    
-   <!-- mypage section end -->
-   
+   <!-- 페이지 작성하기 끝-->
+                  
    <!-- copyright section start -->
    <div class="copyright_section">
       <div class="container">
