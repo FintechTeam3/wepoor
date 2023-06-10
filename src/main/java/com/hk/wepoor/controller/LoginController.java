@@ -135,6 +135,7 @@ public class LoginController {
 
 					// jwt토큰 쿠키 저장
 					String jwtToken = logsvc.loginCheck(userId, "-");
+					
 					Cookie cookie2 = new Cookie("jwtToken", jwtToken);
 					cookie2.setHttpOnly(true);
 					cookie2.setMaxAge(3600);
