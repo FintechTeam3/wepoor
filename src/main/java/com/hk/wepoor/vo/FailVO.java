@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FailVO {
 	
-	int fail_id;
-	int user_no;
-	int fail_num;
+	int failId;
+	int userNo;
+	int failNum;
 	
 }

@@ -16,6 +16,7 @@ public class UserVO {
 	String userNickname;
 	String userPhone;
 	int userPoint;
+	int userSuccess;
 	String userSeqNo ;
 	String accessToken ;
 	String refreshToken ;
@@ -30,6 +31,7 @@ public class UserVO {
 		this.userNickname = reqVO.getUserNickname();
 		this.userPhone = reqVO.getUserPhone();
 		this.userPoint = reqVO.getUserPoint();
+		this.userSuccess = reqVO.getUserSuccess();
 		this.userSeqNo = str[0];
 		this.accessToken = str[1];
 		this.refreshToken = str[2];
@@ -45,6 +47,7 @@ public class UserVO {
 				reqVO.getUserNickname(),
 				reqVO.getUserPhone(),
 				reqVO.getUserPoint(),
+				reqVO.getUserSuccess(),
 				str[0],
 				str[1],
 				str[2]

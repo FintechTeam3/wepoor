@@ -12,21 +12,41 @@
         <result column="user_name" property="userName"/>
         <result column="user_nickname" property="userNickname"/>
         <result column="user_phone" property="userPhone"/>
+        <result column="user_success" property="userSuccess"/>
         <result column="user_seq_no" property="userSeqNo"/>
         <result column="access_token" property="accessToken"/>
         <result column="refresh_token" property="refreshToken"/>
     </resultMap>
     
+    <select id = "getAllUserId" resultType="hashmap">
+		<![CDATA[
+        SELECT user_id FROM user;
+        ]]>
+	</select>
+	
+	<select id = "getUserNick" parameterType="String" resultMap="memberResultMap">
+		<![CDATA[
+        SELECT * FROM user WHERE user_nickname = #{user_nickname}
+        ]]>
+	</select>
+
+    <select id = "getUserCateId" parameterType="int">
+        <![CDATA[
+        SELECT COALESCE(cate_id, 0) 
+        AS cate_id FROM roomdetail 
+        WHERE user_no = #{userNo}
+        ]]>
+    </select>
+    
 
      <select id="getCoffee" resultType="UserVO">
         <![CDATA[
-        
 	 	select user_no as userNo, user_name as userName, user_seq_no as userSeqNo, access_token as accessToken
 	 	from user
 	 	where user_no IN (
 						 	SELECT user_no
 							FROM pay 
-							WHERE cate_id =(
+							WHERE cate_id in(
 											SELECT cate_id
 											FROM category 
 											WHERE DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%c/%e') = CONCAT(SUBSTRING_INDEX(cate_date, '~', -1), '')
@@ -35,37 +55,28 @@
 	        ]]>
     </select>
     
+    <select id="getCateCost" parameterType="UserVO">
+        <![CDATA[
+      SELECT s.cate_date
+		FROM user u
+		JOIN (
+		    SELECT p.user_no, c.cate_date
+		    FROM pay p
+		    JOIN category c ON p.cate_id = c.cate_id
+		    WHERE p.cate_id = c.cate_id
+		) AS s ON u.user_no = s.user_no
+			WHERE u.user_no = #{userNo};
+      	        ]]>
+    </select>
+    
      <select id="getUserNo" resultType="UserVO">
         <![CDATA[
-        SELECT user_no as userNo, user_name as userName, user_seq_no as userSeqNo, access_token as accessToken
-        FROM user
-        where access_token is not null
+	        SELECT user_no as userNo, user_name as userName, user_seq_no as userSeqNo, access_token as accessToken
+	        FROM user
+	        where access_token is not null
         ]]>
     </select>
     	
-    	<!-- 다음은 주어진 코드를 참고하여 userSeqNo가 이미 존재하는 경우에는 레코드를 업데이트(덮어쓰기)하고, 
-    	존재하지 않는 경우에는 새로운 레코드를 추가하는 조건을 갖는 MySQL 쿼리문입니다 -->
-	    <insert id="insertUser" parameterType="com.hk.wepoor.vo.UserVO">
-	        <![CDATA[
-		    INSERT INTO user (
-		        user_no, user_id, user_pwd, user_name, user_nickname,
-		        user_phone, user_seq_no, access_token, refresh_token
-		    )
-		    VALUES (
-		        #{userNo}, #{userId}, SHA2(#{userPwd}, 256), #{userName}, #{userNickname},
-		        #{userPhone}, #{userSeqNo}, #{accessToken}, #{refreshToken}
-		    )
-		    ON DUPLICATE KEY UPDATE
-		        user_id = #{userId},
-		        user_pwd = SHA2(#{userPwd}, 256),
-		        user_name = #{userName},
-		        user_nickname = #{userNickname},
-		        user_phone = #{userPhone},
-		        access_token = #{accessToken},
-		        refresh_token = #{refreshToken}
-	    	]]>
-	    </insert>
-
 	<select id="getUserByUserId" parameterType="String" resultMap="memberResultMap">
         <![CDATA[
         SELECT * FROM user WHERE user_id = #{userId}
@@ -89,6 +100,66 @@
         SELECT SHA2(#{userPwd}, 256)
     	]]>
 	</select>
+	
+	   <!-- 다음은 주어진 코드를 참고하여 userSeqNo가 이미 존재하는 경우에는 레코드를 업데이트(덮어쓰기)하고, 
+    	존재하지 않는 경우에는 새로운 레코드를 추가하는 조건을 갖는 MySQL 쿼리문입니다 -->
+	    <insert id="insertUser" parameterType="com.hk.wepoor.vo.UserVO">
+	        <![CDATA[
+		    INSERT INTO user (
+		        user_no, user_id, user_pwd, user_name, user_nickname,
+		        user_phone, user_seq_no, access_token, refresh_token
+		    )
+		    VALUES (
+		        #{userNo}, #{userId}, SHA2(#{userPwd}, 256), #{userName}, #{userNickname},
+		        #{userPhone}, #{userSeqNo}, #{accessToken}, #{refreshToken}
+		    )
+		    ON DUPLICATE KEY UPDATE
+		        user_id = #{userId},
+		        user_pwd = SHA2(#{userPwd}, 256),
+		        user_name = #{userName},
+		        user_nickname = #{userNickname},
+		        user_phone = #{userPhone},
+		        access_token = #{accessToken},
+		        refresh_token = #{refreshToken}
+	    	]]>
+	    </insert>
+	    
+	    <!--  -->
+	    <insert id="createTempUserTable" >
+	     <![CDATA[
+	    CREATE TEMPORARY TABLE temp_user
+	    SELECT user_no
+	    FROM user
+	    WHERE user_success = 1;
+	    ]]>
+	  </insert>
+  
+	  <insert id="insertDataIntoPointTable" >
+	   <![CDATA[
+	    INSERT INTO point (user_no, point_date, point_price)
+	    SELECT p.user_no, DATE_FORMAT(CONVERT_TZ(NOW(), '+00:00', '+09:00'), '%Y-%m-%d'), SUM(p.count * c.cate_cost) AS total_cost
+	    FROM (
+	      SELECT p.user_no, p.cate_id, COUNT(p.cate_id) AS count
+	      FROM pay p
+	      WHERE p.user_no IN (
+	        SELECT user_no
+	        FROM temp_user
+	      )
+	      GROUP BY p.user_no, p.cate_id
+	    ) p
+	    JOIN category c ON c.cate_id = p.cate_id
+	    WHERE c.cate_date LIKE CONCAT('%', DATE_FORMAT(CONVERT_TZ(NOW(), '+00:00', '+09:00')), '%c/%e'), '%')
+	    GROUP BY p.user_no;
+	    ]]>
+	  </insert>
+  
+	  <insert id="dropTempUserTable" >
+	   <![CDATA[
+	    DROP TEMPORARY TABLE IF EXISTS temp_user;
+	    ]]>
+	  </insert>
+	    
+	    <!--  -->
 
 	<update id="updateUser" parameterType="com.hk.wepoor.vo.UserVO">
         <![CDATA[
@@ -112,32 +183,19 @@
         WHERE user_no = #{userNo}
     	]]>
 	</update>
+	
+	<update id="updateUserSuccess" parameterType="com.hk.wepoor.vo.UserVO">
+        <![CDATA[
+        UPDATE user SET
+        user_success = #{userSuccess}
+        WHERE user_seq_no = #{userSeqNo}
+    	]]>
+	</update>
 
 	<delete id="deleteUser" parameterType="int">
     	<![CDATA[
         DELETE FROM user WHERE user_no = #{userNo}
         ]]>
 	</delete>
-	
-	<select id = "getAllUserId" resultType="hashmap">
-		<![CDATA[
-        SELECT user_id FROM user;
-        ]]>
-	</select>
-	
-	<select id = "getUserNick" parameterType="String" resultMap="memberResultMap">
-		<![CDATA[
-        SELECT * FROM user WHERE user_nickname = #{user_nickname}
-        ]]>
-	</select>
-
-    <select id = "getUserCateId" parameterType="int">
-        <![CDATA[
-        SELECT COALESCE(cate_id, 0) 
-        AS cate_id FROM roomdetail 
-        WHERE user_no = #{userNo}
-        ]]>
-    </select>
-    
 	
 </mapper>
