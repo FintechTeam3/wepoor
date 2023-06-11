@@ -18,5 +18,7 @@ public interface PayMapper {
 	
 	// 구매 완료 화면
 	PayVO selectPayComplete(int pay_id);
+	// 결제 내역 화면
+	List<PayVO> selectPayHistory(int user_no);
 	
 }

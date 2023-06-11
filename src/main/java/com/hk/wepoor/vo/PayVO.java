@@ -17,4 +17,9 @@ public class PayVO {
 	String pay_card;
 	String pay_how;
 	
+	// 결제내역조회
+	int usePoint;
+	String cate_name;
+	String cate_date;
+	String cate_cost;
 }

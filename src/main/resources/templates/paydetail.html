@@ -217,9 +217,9 @@
 				IMP.init("imp47603282");
 				
 				var today = new Date();
-				var hour = String(today.getHours());
-				var minute = String(today.getMinutes());
-				var second = String(today.getSeconds());
+				var hour = String(('0' + today.getHours()).slice(-2));
+				var minute = String(('0' + today.getMinutes()).slice(-2));
+				var second = String(('0' + today.getSeconds()).slice(-2));
 				var millisecond = String(today.getMilliseconds());
 				var merchantID = hour + minute + second + millisecond;
 				var userName=/*[[${userName}]]*/'구매자';

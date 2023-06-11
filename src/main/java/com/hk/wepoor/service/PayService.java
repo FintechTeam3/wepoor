@@ -50,4 +50,10 @@ public class PayService {
 		return payVO;
 	}
 	
+	// 결제 내역 화면 조회 - 혜정
+	public List<PayVO> selectPayHistory(int user_no) {
+		List<PayVO> list = pay_mapper.selectPayHistory(user_no);
+		return list;
+	}
+	
 }

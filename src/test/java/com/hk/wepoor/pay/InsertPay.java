@@ -17,7 +17,7 @@ class InsertPay {
 	void contextLoads() {
 		
 		PayVO payVO = null;
-		payVO = new PayVO(0, 1,1, "20230601", 50000, "신한카드!", "카드");
+		payVO = new PayVO(0, 1,1, "20230601", 50000, "신한카드!", "카드", 0, null, null, null);
 		
 		int affectRowCount = pay_service.create(payVO);
 		

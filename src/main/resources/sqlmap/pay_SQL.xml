@@ -59,5 +59,15 @@
 	WHERE p.pay_id=#{pay_id}
     ]]>
 	</select> 
-  
+	
+	<!-- 결제내역 조회 -->
+  	<select id="selectPayHistory" resultType="PayVO">
+    <![CDATA[
+    SELECT c.cate_name, c.cate_date, p.pay_price, p.pay_date, p.pay_how, 
+	p.pay_card, c.cate_cost, c.cate_cost-p.pay_price AS usePoint FROM pay p
+	INNER JOIN category c ON p.cate_id=c.cate_id
+	WHERE p.user_no=#{user_no}
+    ]]>
+	</select> 
+	
   </mapper>

@@ -32,12 +32,15 @@ table td {
     font-size: 20px;
 }
 .cardHistory_btn {
-	font-size: 20px;
 	width: 150px;
 	height: 40px;
 	background-color: #1abc9c;
-	color: #FFFFFF;
 	border-radius: 30px;
-	margin: 15px 20px 15px auto;
+	margin: auto;
 	float: right;
+	text-align: center;
+}
+.cardHistory_btn a {
+	color: #FFFFFF;
+	font-size: 20px;
 }

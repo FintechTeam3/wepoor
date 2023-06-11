@@ -1,5 +1,7 @@
 package com.hk.wepoor.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,5 +73,15 @@ public class PayController {
 		model.addAttribute("point", point);
 		
 		return "paycomplete";
+	}
+	
+	// 결제 내역 화면 - 혜정
+	@GetMapping("payhistory")
+	public String payhistory(HttpServletRequest req, Model model) {
+		HttpSession session = req.getSession(false);
+		int userNo = (int) session.getAttribute("userNo");
+		List<PayVO> list = payService.selectPayHistory(userNo);
+		model.addAttribute("payhistorylist", list);
+		return "payhistory";
 	}
 }
