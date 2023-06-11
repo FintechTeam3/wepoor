@@ -84,7 +84,7 @@
 					<span class="login100-form-title p-b-43"><img src="images/woogeoji.png" width="40%" height="40%" style="border-radius: 10%;"> </span>
 
 					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="userId"> <span class="focus-input100"></span> <span class="label-input100">아이디</span>
+						<input id="username" class="input100" type="text" name="userId"> <span class="focus-input100"></span> <span class="label-input100">아이디</span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
@@ -97,10 +97,10 @@
 						</div>
 
 						<div>
-							<a href="#" class="txt1"> Forgot Password? </a>
+							<a href="#" id="modal_link" class="txt1"> Forgot Password? </a>
 						</div>
 					</div>
-
+									
 					<div class="container-login100-form-btn">
 						<button id="login" class="login100-form-btn">로그인</button>
 					</div>
@@ -119,7 +119,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<!-- copyright section start -->
 	<div class="copyright_section">
 		<div class="container">
@@ -128,6 +128,74 @@
 			</p>
 		</div>
 	</div>
+	
+<!-- 모달 부분 -->	
+	<!-- 모달 1-->
+	<div class="modal fade" id="findPassword" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			<div class="modal-header">
+        		<h5 class="modal-title">개인정보 입력</h5>
+      		</div>
+				<div class="modal-body">
+				
+					<div class="input-group mb-3">
+  						<input id="userId" name="userId" type="text" class="form-control" placeholder="아이디 입력" required>
+  					</div>
+  					
+					<div class="input-group mb-3">
+						<input id="phone" name="userPhone" type="text" class="form-control" placeholder="핸드폰번호 입력" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+						<button id="memberPhoneCheck"  style="color:black;font-weight:normal" class="btn btn-light" type="button">인증번호 전송</button>
+					</div>
+				
+					<div class="input-group mb-3">
+						<input name="memberPhoneCertify" type="text" class="form-control" placeholder="인증번호 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
+						<button id="certifyCheck"  style="color:black;font-weight:normal" class="btn btn-light" type="button">인증하기</button>
+					</div>
+					
+				</div>
+				
+				<div class="p-t-15">
+					<button class="btn btn-light" style="color:black;font-weight:bold;float: left;" id="cancel" type="button" onclick="location.href='login_page'">Cancel</button>
+					<button class="btn btn-light" style="color:black;font-weight:bold;float: right;" id="modalSubmit" type="button">Submit</button>
+				</div>
+       			
+    		</div>
+		</div>
+	</div>
+	<!-- 모달1 끝 -->
+	
+	<!--  모달2 시작-->				
+	<div class="modal fade" id="resetPassword" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			<div class="modal-header">
+        		<h5 class="modal-title">비밀번호 변경</h5>
+      		</div>
+				<div class="modal-body">
+					
+					<div class="mb-3">
+						<input id="userPwd" type="password" name="userPwd" class="form-control" placeholder="비밀번호" required>
+					</div>
+					<span id="divid" style="display:none;">/</span>
+					<div class="mb-3">
+						<input id="pwdCheck"  type="password" name="pwdCheck" class="form-control" placeholder="비밀번호 확인" required>
+					</div>
+					
+					<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+					<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>	
+				</div>
+				
+				<div class="p-t-15">
+					<button class="btn btn-light" style="color:black;font-weight:bold;float: left;" id="cancel" type="button" onclick="location.href='login_page'">Cancel</button>
+					<button class="btn btn-light" style="color:black;font-weight:bold;float: right;" id="resetbtn" type="button">Submit</button>
+				</div>
+       			
+    		</div>
+		</div>
+	</div>
+<!-- 모달2 끝 -->
+	
 	<!-- copyright section end -->
 
 	<!--===============================================================================================-->
@@ -146,5 +214,8 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script>
+		
+	</script>
 </body>
 </html>
