@@ -11,8 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
- 
- import com.google.gson.JsonObject;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
  import com.hk.wepoor.jwt.Jwt;
 import com.hk.wepoor.model.UserMapper;
@@ -254,4 +255,7 @@ public class LoginController {
 		return "redirect:/login_page";
 	}
 
+	
+	
+	
 }

@@ -95,12 +95,9 @@
         <![CDATA[
         UPDATE user SET
         user_id = #{userId},
-        cate_id = #{cateId}
         user_pwd = SHA2(#{userPwd}, 256),
-        user_name = #{userName},
         user_nickname = #{userNickname},
-        user_phone = #{userPhone},
-        user_point = #{userPoint}
+        user_phone = #{userPhone}
         WHERE user_no = #{userNo}
     	]]>
 	</update>
