@@ -15,5 +15,6 @@ public class PayVO {
 	String pay_date;
 	int pay_price;
 	String pay_card;
-
+	String pay_how;
+	
 }

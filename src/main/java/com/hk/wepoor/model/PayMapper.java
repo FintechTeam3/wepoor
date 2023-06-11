@@ -16,4 +16,7 @@ public interface PayMapper {
 	int update(PayVO payVO);
 	int updateLeave(PayVO payVO);
 	
+	// 구매 완료 화면
+	PayVO selectPayComplete(int pay_id);
+	
 }

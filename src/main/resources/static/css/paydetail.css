@@ -1,0 +1,96 @@
+.paydetailNoticeBox {
+	background-color: #cbcbcb; 
+	color: black; 
+	border-radius: 5px;
+	margin-top: 15px;
+    margin-bottom: 15px;
+}
+.paydetailNoticeCateName {
+	font-weight: bolder; 
+	color: black;
+	font-size: 18px;
+}
+.paydetailNoticeCateName span {
+	margin-top: 10px;
+}
+.paydetailNoticeTodo {
+	font-size: 10px; 
+	color: #1abc9c;
+	font-size: 15px;
+	font-weight: bolder; 
+}
+.paydetailNoticeTodo span {
+	margin-bottom: 10px;
+}
+.catePriceTable, .pointTable {
+	width: 360px;
+}
+.catePriceTable td {
+	width: 180px;
+	font-size: 20px;
+	font-weight: bolder; 
+}
+.mypoint, .paydetail {
+    font-size: 15px;
+}
+.pointTable {
+	width: 340px;
+	margin-left: 20px;
+	font-size: 18px;
+}
+.firstcell {
+	width: 80px;
+}
+.secondcell {
+	width: 140px;
+}
+.thirdcell {
+	width: 120px;
+}
+.point_input {
+	border-radius: 3px;
+	border: none;
+	background-color: #e0e0e0;
+	width: 140px;
+	text-align: center;
+}
+.usepoint_input {
+	border-radius: 3px;
+	border-style: none none solid none;
+	width: 140px;
+	text-align: center;
+}
+.allPoint_btn {
+	width: 100px;
+	background-color: #e0e0e0;
+	border-radius: 5px;
+	margin-left: 20px;
+}
+.payDetailTable {
+	width: 340px;
+	margin-left: 20px;
+	font-size: 20px;
+}
+.payDetailTable td {
+	width: 170px;
+}
+.usePointInput, .realPrice {
+	width: 170px;
+	border: none;
+}
+.noticePay {
+	margin-left: 10px;
+}
+.noticePay p {
+	margin: 5px;
+}
+.pay_btn {
+	font-size: 20px;
+	width: 150px;
+	height: 40px;
+	background-color: #1abc9c;
+	color: #FFFFFF;
+	border-radius: 30px;
+	margin: 15px 20px 15px auto;
+	float: right;
+}

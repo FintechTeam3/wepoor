@@ -44,5 +44,10 @@ public class PayService {
 		return success;
 	}
 	
+	// 구매 완료 화면 조회 - 혜정
+	public PayVO selectPayComplete(int pay_id) {
+		PayVO payVO = pay_mapper.selectPayComplete(pay_id);
+		return payVO;
+	}
 	
 }

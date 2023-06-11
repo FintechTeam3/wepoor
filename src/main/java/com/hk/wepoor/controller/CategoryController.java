@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hk.wepoor.model.UserMapper;
 import com.hk.wepoor.service.CategoryService;
 import com.hk.wepoor.vo.CategoryVO;
+import com.hk.wepoor.vo.UserVO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -53,18 +54,32 @@ public class CategoryController {
 	
 	//주차별 기간 목록 보여주는 카테고리
 	@GetMapping("/weekend")//weekend.html
-	public String weekend(Model m1) {
+	public String weekend(Model m1, HttpServletRequest req) {
 		List<CategoryVO> list = categoryService.selectAllWeekend();
 		m1.addAttribute("weeklist", list);
+		
+		// 햄버거 바를 위한 것 - 혜정
+		HttpSession session = req.getSession(false);
+		int userNo = (int) session.getAttribute("userNo");
+		UserVO userVO = user_mapper.getUserByUserNo(userNo);
+		req.setAttribute("userNickname", userVO.getUserNickname());
+		
 		return "weekend"; //weekend.html
 		
 	}
 	
 	// N주차 방목록(8개 카테고리)
 	@GetMapping("/category")
-	public String selectAllRoomList(Model model, @RequestParam("cate_weekend") int cate_weekend) {
+	public String selectAllRoomList(Model model, @RequestParam("cate_weekend") int cate_weekend, HttpServletRequest req) {
 		List<CategoryVO> list = categoryService.selectAllRoomList(cate_weekend);
 		model.addAttribute("catelist", list);
+		
+		// 햄버거 바를 위한 것 - 혜정
+		HttpSession session = req.getSession(false);
+		int userNo = (int) session.getAttribute("userNo");
+		UserVO userVO = user_mapper.getUserByUserNo(userNo);
+		req.setAttribute("userNickname", userVO.getUserNickname());
+		
 		return "category";
 	}
 

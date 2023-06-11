@@ -21,8 +21,13 @@
 	<insert id="insert" parameterType="PointVO">
     <![CDATA[
     INSERT INTO point (point_id, user_no, point_date, point_price) 
-    VALUES (#{point_id}, #{user_no}, #{point_date}, #{point_price})
+    VALUES (NULL, #{user_no}, #{point_date}, #{point_price})
     ]]>
+    	<selectKey keyProperty="point_id" resultType="Integer" order="AFTER">
+	    <![CDATA[
+		SELECT LAST_INSERT_ID()
+	    ]]>
+		</selectKey>
 	</insert> 
 	
 	<delete id="delete" parameterType="Integer">

@@ -18,11 +18,17 @@
     ]]>
 	</select> 
 	
+	<!-- 구매 -->
 	<insert id="insert" parameterType="PayVO">
     <![CDATA[
-    INSERT INTO pay (pay_id, user_no, pay_date, pay_price, pay_card)
-    VALUES (#{pay_id}, #{user_no}, #{pay_date}, #{pay_price}, #{pay_card})
+    INSERT INTO pay (pay_id, cate_id, user_no, pay_date, pay_price, pay_card, pay_how)
+    VALUES (NULL, #{cate_id}, #{user_no}, #{pay_date}, #{pay_price}, #{pay_card}, #{pay_how})
     ]]>
+    	<selectKey keyProperty="pay_id" resultType="Integer" order="AFTER">
+	    <![CDATA[
+		SELECT LAST_INSERT_ID()
+	    ]]>
+		</selectKey>
 	</insert> 
 	
 	<delete id="delete" parameterType="Integer">
@@ -44,5 +50,14 @@
         WHERE user_no = #{user_no} AND cate_id = #{cate_id};
         ]]>
     </update>
+    
+    <!-- 구매완료화면 조회 -->
+    <select id="selectPayComplete" resultType="PayVO">
+    <![CDATA[
+    SELECT * FROM pay p
+	INNER JOIN category c ON p.cate_id=c.cate_id
+	WHERE p.pay_id=#{pay_id}
+    ]]>
+	</select> 
   
   </mapper>

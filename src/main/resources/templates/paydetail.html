@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="utf-8">
+<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
    <!-- basic -->
@@ -34,7 +34,15 @@
     
     <!-- hyejung CSS Start -->
     <link rel="stylesheet" type="text/css" href="css/category.css">
+    <link rel="stylesheet" type="text/css" href="css/paydetail.css">
     <!-- hyejung CSS End -->
+    
+    <!-- 결제 API -->
+    <!-- jQuery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<!-- iamport.payment.js -->
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	
 </head>
 
 
@@ -50,13 +58,26 @@
          
          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
+            	
+            	<!-- user info section -->     
+            	<div class="hamburger_userinfo">
+	           		<img src="images/whitemywoogeoji.jpg" style="width:60px; height:60px;"/>
+	           		<input type="text" class="hamburger_nickname_input" th:value="${userNickname}" readonly>
+           		</div>     
+            	
+            	<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+            	
               	<a class="nav-item nav-link" href="/">Home</a>
+              	<a class="nav-item nav-link" href="/mypage">Mypage</a>
                	<a class="nav-item nav-link" href="about.html">About</a>
                	<a class="nav-item nav-link" href="teashop.html">Teashop</a>
+               	<a id="logout" class="nav-item nav-link" onclick="logout()">Logout</a>
+               	
+               	<hr style="height:2px;border-width:0;background-color:#e0e0e0; margin-bottom:1px;" class="mapage_hr">
             </div>
          </div>
          
-         <p style="color:white; font-size:30px; font-weight:530; font-family: 'Jua', sans-serif; letter-spacing: 3px;">마이페이지</p>
+         <p style="color:white; font-size:30px; font-weight:530; font-family: 'Jua', sans-serif; letter-spacing: 3px;">참가비결제</p>
          
       </nav>
    </div>
@@ -68,22 +89,73 @@
 		<div class="row">
 			<div class="col-md-6 ">
 			
-			<div style="background-color: #cbcbcb; color: black; padding: 2%; border-radius: 15px;">
-                <div >
-                    환영합니다, <span th:text="${category.cate_weekend}" style="font-weight: bolder;"></span><span style="font-weight: bolder;">주차</span> [<span th:text="${category.cate_name}" style="font-weight: bolder;"></span>] 참는 거지방입니다.
+			<div class="paydetailNoticeBox">
+	            <div class="d-flex justify-content-center paydetailNoticeCateName">
+                    <span th:text="${category.cate_name}" class="mr-1"></span>
+                    <span>거지방</span>
                 </div>
-                <div>
-                    참여기간은 [<span style="font-weight: bolder;" th:text="${category.cate_date}"></span>>] 입니다. 
-                </div>
+                <div class="d-flex justify-content-center paydetailNoticeTodo">
+                    <span th:text="${#dates.format(category.start_date, 'M/d')}"></span>
+                    <span th:text="${#dates.format(category.end_date, '~ M/d')}"></span>
+                    <span th:text="${category.cate_name}" class="mx-1"></span>
+                    <span>소비를 5번 참아주세요</span>
+                 </div>
             </div>
+            
+            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+			
+			<table class="catePriceTable">
+				<tr>
+            		<td>주문금액</td>
+            		<td th:text="${category.cate_cost}+${' 원'}" th:style="${'color:#e74c3c;'}">주문금액</td>
+            	</tr>
+			</table>
 			
 			
+			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
+			<span class="mypoint">My 포인트</span>
+			<table class="pointTable">
+				<tr>
+            		<td class="firstcell">보유</td>
+            		<td class="secondcell"><input type="text" id="userPoint" th:value="${userPoint}" class="point_input"></td>
+            		<td class="thirdcell"></td>
+            	</tr>
+            	<tr>
+            		<td>사용</td>
+            		<td><input type="text" id="inPoint" th:onkeypress="pointchange()" placeholder="포인트를 입력" class="usepoint_input"></td>
+            		<td><button class="allPoint_btn">전액사용</button></td>
+            	</tr>
+			</table>
 			
+			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
+			<span class="paydetail">결제상세</span>
+			<table class="payDetailTable">
+				<tr>
+            		<td>포인트 사용</td>
+            		<td><input type="text" id="usePoint" class="usePointInput" th:value="${zero}" readonly></td>
+            	</tr>
+				<tr>
+            		<td>실 결제금액</td>
+            		<td><input type="text" id="totalPrice" class="realPrice" th:value="${category.cate_cost}" readonly></td>
+            	</tr>
+			</table>
 			
+			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
+			<div class="noticePay">
+				<p>환불 규정안내</p>
+				<p>* 거지방은 환불이 불가능 합니다.</p>
+				<p>* 거지방 도중 나가기 : 환불 불가</p>
+				<p>* 미션 실패 : 환불 불가</p>
+			</div>
 			
+			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+			
+			<input type="checkbox" id="agree"><span> 결제 내용, 환불 규정을 확인하였으며 이에 동의합니다.</span>
+			
+			<button class="pay_btn" onclick=requestPay()>결제하기</button>
 			
 			
 			
@@ -122,4 +194,75 @@
    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
+	<script th:inline="javascript">
+	
+		/* 포인트 사용 */
+		function pointchange() {
+			var inputPoint = $("#inPoint").val();
+			var cateCost=/*[[${category.cate_cost}]]*/'금액';
+				if (event.keyCode == 13) {
+					$("#usePoint").attr('value', inputPoint);
+					var usePoint= $("#usePoint").val();
+					$("#totalPrice").attr('value', cateCost-usePoint);
+					var totalPrice= $("#totalPrice").val();
+				}
+		}	
+		
+		/* 결제 API */
+		function requestPay() {
+			
+			if (document.getElementById('agree').checked==true) {
+				// 객체 초기화
+				const IMP = window.IMP;
+				IMP.init("imp47603282");
+				
+				var today = new Date();
+				var hour = String(today.getHours());
+				var minute = String(today.getMinutes());
+				var second = String(today.getSeconds());
+				var millisecond = String(today.getMilliseconds());
+				var merchantID = hour + minute + second + millisecond;
+				var userName=/*[[${userName}]]*/'구매자';
+				var cateName=/*[[${category.cate_name}]]*/'방이름';
+				var cateCost=/*[[${category.cate_cost}]]*/'금액';
+				var userNo=/*[[${session.userNo}]]*/'사용자번호';
+				var cateId=/*[[${category.cate_id}]]*/'카테아이디';
+				var totalPrice= $("#totalPrice").val();
+				var usePoint= $("#usePoint").val();
+				var year = today.getFullYear();
+				var month = ('0' + (today.getMonth() + 1)).slice(-2);
+				var day = ('0' + today.getDate()).slice(-2);
+				var payDate = String(year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second);
+				var pointDate = String(year+'-'+month+'-'+day);
+				
+				IMP.request_pay({
+					pg: 'html5_inicis',
+					pay_method : '카드',
+					merchant_uid: "order_no_" + merchantID,
+					name: cateName,
+					buyer_name : userName,
+					amount : totalPrice
+				}, function(rsp) {
+					if (rsp.success) {
+						var go = confirm('결제완료');
+						if(go == true) {
+							location.href = "/paycomplete?user_no="+userNo
+											+"&cate_id="+cateId
+											+"&pay_price="+totalPrice
+											+"&pay_how="+rsp.pay_method
+											+"&pay_card="+rsp.card_name
+											+"&point_price="+(-usePoint)
+											+"&pay_date="+payDate
+											+"&point_date="+pointDate;
+						}
+					} else {
+						confirm('결제실패');
+					}
+				})
+			} else {
+				alert("동의 후 결제를 진행해주세요.")
+			}
+		};
+	</script>
+	
 </html>
