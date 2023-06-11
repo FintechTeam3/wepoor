@@ -232,4 +232,28 @@ public class UserController {
 		}
 		return 0;
 	}
+	
+	@PostMapping("/findPassword")
+	@ResponseBody
+	public boolean findPassword(@RequestParam("userId") String userId, @RequestParam("phone") String phone) {
+		boolean result = true;
+		UserVO uservo =  mapper.getUserByUserId(userId);
+		if(uservo == null || !uservo.getUserPhone().equals(phone)) {
+			result = false;
+		}
+		return result;
+	}
+	
+	
+	@PostMapping("/resetPassword")
+	@ResponseBody
+	public String resetPassword(@RequestParam("userId") String userId, @RequestParam("password") String password) {
+		UserVO uservo = mapper.getUserByUserId(userId);
+		uservo.setUserPwd(password);
+		mapper.updateUser(uservo);
+		return "1";
+	}
+	
+	
+	
 }

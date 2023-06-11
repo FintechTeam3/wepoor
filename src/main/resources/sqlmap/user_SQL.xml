@@ -13,6 +13,8 @@
         <result column="user_nickname" property="userNickname"/>
         <result column="user_phone" property="userPhone"/>
         <result column="user_success" property="userSuccess"/>
+
+        <result column="user_point" property="userPoint"/>
         <result column="user_seq_no" property="userSeqNo"/>
         <result column="access_token" property="accessToken"/>
         <result column="refresh_token" property="refreshToken"/>
@@ -165,12 +167,9 @@
         <![CDATA[
         UPDATE user SET
         user_id = #{userId},
-        cate_id = #{cateId}
         user_pwd = SHA2(#{userPwd}, 256),
-        user_name = #{userName},
         user_nickname = #{userNickname},
-        user_phone = #{userPhone},
-        user_point = #{userPoint}
+        user_phone = #{userPhone}
         WHERE user_no = #{userNo}
     	]]>
 	</update>

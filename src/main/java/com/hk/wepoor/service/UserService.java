@@ -165,4 +165,29 @@ public class UserService {
 		System.out.println(userVO.toString());
 		userMapper.insertUser(userVO);
 	}
+	
+	// selectAll, update, delete, selectbyid,selectbyno
+	
+	
+	public List<UserVO> selectAll(){
+		return userMapper.getAllUsers();
+	}
+	
+	public void updateUser(UserVO uservo) {
+		userMapper.updateUser(uservo);
+	}
+	
+	public void deleteUser(int userNo) {
+		userMapper.deleteUser(userNo);
+	}
+	
+	public UserVO selectByUserId(String userId) {
+		return userMapper.getUserByUserId(userId);
+	}
+	
+	public UserVO selectByUserNo(int userNo) {
+		return userMapper.getUserByUserNo(userNo);
+	}
+	
+	
 }

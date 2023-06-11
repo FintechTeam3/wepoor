@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 public class UserVO {
 	
 	int userNo;
-	int cateId;
 	String userId;
 	String userPwd;
 	String userName;
@@ -24,7 +23,6 @@ public class UserVO {
 	
 	public UserVO(UserVO reqVO, String[] str) {
 		this.userNo = reqVO.getUserNo();
-		this.cateId = reqVO.getCateId();
 		this.userId = reqVO.getUserId();
 		this.userPwd = reqVO.getUserPwd();
 		this.userName = reqVO.getUserName();
@@ -40,7 +38,6 @@ public class UserVO {
 	public static UserVO User(UserVO reqVO, String[] str){
 		return new UserVO(
 				reqVO.getUserNo(),
-				reqVO.getCateId(),
 				reqVO.getUserId(),
 				reqVO.getUserPwd(),
 				reqVO.getUserName(),

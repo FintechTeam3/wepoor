@@ -2,10 +2,8 @@ package com.hk.wepoor.model;
 
 import java.util.HashMap;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
-
 import com.hk.wepoor.vo.UserVO;
 
 @Repository
@@ -25,10 +23,9 @@ public interface UserMapper {
 	
 	void updateMy(UserVO uservo);
 
-	void deleteUser(int userId);
-	
 	int getUserCateId(int userNo);
 	
+	void deleteUser(int userNo);
 
 	String HashedPwd(String userPwd);
 	
