@@ -34,6 +34,7 @@
     
     <!-- hyejung CSS Start -->
     <link rel="stylesheet" type="text/css" href="css/category.css">
+    <link rel="stylesheet" type="text/css" href="css/paydetail.css">
     <!-- hyejung CSS End -->
     
     <!-- 결제 API -->
@@ -88,57 +89,74 @@
 		<div class="row">
 			<div class="col-md-6 ">
 			
-			<div style="background-color: #cbcbcb; color: black; padding: 2%; border-radius: 15px;">
-	            <div class="d-flex justify-content-center" style="font-weight: bolder; color: black;">
-                        <span th:text="${category.cate_name}" class="mr-1"></span>
-                        <span>거지방</span>
-                     </div>
-                <div class="d-flex justify-content-center" style="font-size: 10px; color: #1abc9c;">
-                        <span th:text="${#dates.format(category.start_date, 'M/d')}" style="font-weight: bolder;"></span>
-                        <span th:text="${#dates.format(category.end_date, '~ M/d')}" style="font-weight: bolder;"></span>
-                        <span th:text="${category.cate_name}" class="mx-1"></span>
-                        <span id = "cate_date" hidden th:text = "${category.cate_date}"></span> <!-- 지우면안됨 -->
-                        <span>소비를 5번 참아주세요</span>
-                     </div>
+			<div class="paydetailNoticeBox">
+	            <div class="d-flex justify-content-center paydetailNoticeCateName">
+                    <span th:text="${category.cate_name}" class="mr-1"></span>
+                    <span>거지방</span>
+                </div>
+                <div class="d-flex justify-content-center paydetailNoticeTodo">
+                    <span th:text="${#dates.format(category.start_date, 'M/d')}"></span>
+                    <span th:text="${#dates.format(category.end_date, '~ M/d')}"></span>
+                    <span th:text="${category.cate_name}" class="mx-1"></span>
+                    <span>소비를 5번 참아주세요</span>
+                 </div>
             </div>
             
             <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
-			<span>주문금액</span>
-			<span th:text="${category.cate_cost}"></span>
-			<span>원</span>
+			<table class="catePriceTable">
+				<tr>
+            		<td>주문금액</td>
+            		<td th:text="${category.cate_cost}+${' 원'}" th:style="${'color:#e74c3c;'}">주문금액</td>
+            	</tr>
+			</table>
+			
 			
 			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
-			<span>내 포인트</span>
-			<input type="text" id="userPoint" th:value="${userPoint}">
-			<input type="text" id="inPoint" th:onkeypress="pointchange()" placeholder="포인트를 입력">
-			<button>전액사용</button>
+			<span class="mypoint">My 포인트</span>
+			<table class="pointTable">
+				<tr>
+            		<td class="firstcell">보유</td>
+            		<td class="secondcell"><input type="text" id="userPoint" th:value="${userPoint}" class="point_input"></td>
+            		<td class="thirdcell"></td>
+            	</tr>
+            	<tr>
+            		<td>사용</td>
+            		<td><input type="text" id="inPoint" th:onkeypress="pointchange()" placeholder="포인트를 입력" class="usepoint_input"></td>
+            		<td><button class="allPoint_btn">전액사용</button></td>
+            	</tr>
+			</table>
 			
 			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
-			<div>결제상세</div>
-			<span>포인트 사용</span>
-			<input type="text" id="usePoint"><br>
-			<span>실 결제금액</span>
-			<input type="text" id="totalPrice">
+			<span class="paydetail">결제상세</span>
+			<table class="payDetailTable">
+				<tr>
+            		<td>포인트 사용</td>
+            		<td><input type="text" id="usePoint" class="usePointInput" th:value="${zero}" readonly></td>
+            	</tr>
+				<tr>
+            		<td>실 결제금액</td>
+            		<td><input type="text" id="totalPrice" class="realPrice" th:value="${category.cate_cost}" readonly></td>
+            	</tr>
+			</table>
 			
 			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
-			<div>환불 규정안내</div>
-			<div>시작전</div>
-			<div>도중나가기</div>
-			<div>실패</div>
+			<div class="noticePay">
+				<p>환불 규정안내</p>
+				<p>* 거지방은 환불이 불가능 합니다.</p>
+				<p>* 거지방 도중 나가기 : 환불 불가</p>
+				<p>* 미션 실패 : 환불 불가</p>
+			</div>
 			
 			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
-			<button onclick=requestPay()>결제하기</button>
+			<input type="checkbox" id="agree"><span> 결제 내용, 환불 규정을 확인하였으며 이에 동의합니다.</span>
 			
-			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+			<button class="pay_btn" onclick=requestPay()>결제하기</button>
 			
-			<span>동의합니다</span>
-			
-			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
 			
 			
@@ -187,77 +205,63 @@
 					var usePoint= $("#usePoint").val();
 					$("#totalPrice").attr('value', cateCost-usePoint);
 					var totalPrice= $("#totalPrice").val();
-					
-					var today = new Date();
-					var hour = String(today.getHours());
-					var minute = String(today.getMinutes());
-					var second = String(today.getSeconds());
-					var millisecond = String(today.getMilliseconds());
-					var year = today.getFullYear();
-					var month = ('0' + (today.getMonth() + 1)).slice(-2);
-					var day = ('0' + today.getDate()).slice(-2);
-					var payDate = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
-					var pointDate = year+'-'+month+'-'+day;
-					
-					console.log(payDate)
-					console.log(pointDate)
-					
-					
-					
-					
 				}
 		}	
 		
 		/* 결제 API */
 		function requestPay() {
 			
-			// 객체 초기화
-			const IMP = window.IMP;
-			IMP.init("imp47603282");
-			
-			var today = new Date();
-			var hour = String(today.getHours());
-			var minute = String(today.getMinutes());
-			var second = String(today.getSeconds());
-			var millisecond = String(today.getMilliseconds());
-			var merchantID = hour + minute + second + millisecond;
-			var userName=/*[[${userName}]]*/'구매자';
-			var cateName=/*[[${category.cate_name}]]*/'방이름';
-			var cateCost=/*[[${category.cate_cost}]]*/'금액';
-			var userNo=/*[[${session.userNo}]]*/'사용자번호';
-			var cateId=/*[[${category.cate_id}]]*/'카테아이디';
-			var totalPrice= $("#totalPrice").val();
-			var usePoint= $("#usePoint").val();
-			var year = today.getFullYear();
-			var month = ('0' + (today.getMonth() + 1)).slice(-2);
-			var day = ('0' + today.getDate()).slice(-2);
-			var payDate = String(year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second);
-			var pointDate = String(year+'-'+month+'-'+day);
-			
-			IMP.request_pay({
-				pg: 'html5_inicis',
-				pay_method : '카드',
-				merchant_uid: "order_no_" + merchantID,
-				name: cateName,
-				buyer_name : userName,
-				amount : totalPrice
-			}, function(rsp) {
-				if (rsp.success) {
-					var go = confirm('결제완료');
-					if(go == true) {
-						location.href = "/paycomplete?user_no="+userNo
-										+"&cate_id="+cateId
-										+"&pay_price="+totalPrice
-										+"&pay_how="+rsp.pay_method
-										+"&pay_card="+rsp.card_name
-										+"&point_price="+(-usePoint)
-										+"&pay_date="+payDate
-										+"&point_date="+pointDate;
+			if (document.getElementById('agree').checked==true) {
+				// 객체 초기화
+				const IMP = window.IMP;
+				IMP.init("imp47603282");
+				
+				var today = new Date();
+				var hour = String(today.getHours());
+				var minute = String(today.getMinutes());
+				var second = String(today.getSeconds());
+				var millisecond = String(today.getMilliseconds());
+				var merchantID = hour + minute + second + millisecond;
+				var userName=/*[[${userName}]]*/'구매자';
+				var cateName=/*[[${category.cate_name}]]*/'방이름';
+				var cateCost=/*[[${category.cate_cost}]]*/'금액';
+				var userNo=/*[[${session.userNo}]]*/'사용자번호';
+				var cateId=/*[[${category.cate_id}]]*/'카테아이디';
+				var totalPrice= $("#totalPrice").val();
+				var usePoint= $("#usePoint").val();
+				var year = today.getFullYear();
+				var month = ('0' + (today.getMonth() + 1)).slice(-2);
+				var day = ('0' + today.getDate()).slice(-2);
+				var payDate = String(year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second);
+				var pointDate = String(year+'-'+month+'-'+day);
+				
+				IMP.request_pay({
+					pg: 'html5_inicis',
+					pay_method : '카드',
+					merchant_uid: "order_no_" + merchantID,
+					name: cateName,
+					buyer_name : userName,
+					amount : totalPrice
+				}, function(rsp) {
+					if (rsp.success) {
+						var go = confirm('결제완료');
+						if(go == true) {
+							location.href = "/paycomplete?user_no="+userNo
+											+"&cate_id="+cateId
+											+"&pay_price="+totalPrice
+											+"&pay_how="+rsp.pay_method
+											+"&pay_card="+rsp.card_name
+											+"&point_price="+(-usePoint)
+											+"&pay_date="+payDate
+											+"&point_date="+pointDate;
+						}
+					} else {
+						confirm('결제실패');
 					}
-				} else {
-					confirm('결제실패');
-				}
-			})
+				})
+			} else {
+				alert("동의 후 결제를 진행해주세요.")
+			}
 		};
 	</script>
 	
