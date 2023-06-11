@@ -57,13 +57,26 @@
          
          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
+            	
+            	<!-- user info section -->     
+            	<div class="hamburger_userinfo">
+	           		<img src="images/whitemywoogeoji.jpg" style="width:60px; height:60px;"/>
+	           		<input type="text" class="hamburger_nickname_input" th:value="${userNickname}" readonly>
+           		</div>     
+            	
+            	<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+            	
               	<a class="nav-item nav-link" href="/">Home</a>
+              	<a class="nav-item nav-link" href="/mypage">Mypage</a>
                	<a class="nav-item nav-link" href="about.html">About</a>
                	<a class="nav-item nav-link" href="teashop.html">Teashop</a>
+               	<a id="logout" class="nav-item nav-link" onclick="logout()">Logout</a>
+               	
+               	<hr style="height:2px;border-width:0;background-color:#e0e0e0; margin-bottom:1px;" class="mapage_hr">
             </div>
          </div>
          
-         <p style="color:white; font-size:30px; font-weight:530; font-family: 'Jua', sans-serif; letter-spacing: 3px;">마이페이지</p>
+         <p style="color:white; font-size:30px; font-weight:530; font-family: 'Jua', sans-serif; letter-spacing: 3px;">참가비결제</p>
          
       </nav>
    </div>
@@ -91,15 +104,24 @@
             
             <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
-			<span>결제금액</span>
+			<span>주문금액</span>
 			<span th:text="${category.cate_cost}"></span>
 			<span>원</span>
 			
 			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
 			<span>내 포인트</span>
-			<input type="text" th:value="${userPoint}">
-			<button>사용하기</button>
+			<input type="text" id="userPoint" th:value="${userPoint}">
+			<input type="text" id="inPoint" th:onkeypress="pointchange()" placeholder="포인트를 입력">
+			<button>전액사용</button>
+			
+			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+			
+			<div>결제상세</div>
+			<span>포인트 사용</span>
+			<input type="text" id="usePoint"><br>
+			<span>실 결제금액</span>
+			<input type="text" id="totalPrice">
 			
 			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
 			
@@ -156,7 +178,37 @@
 
 	<script th:inline="javascript">
 	
-		<!-- 결제 API -->
+		/* 포인트 사용 */
+		function pointchange() {
+			var inputPoint = $("#inPoint").val();
+			var cateCost=/*[[${category.cate_cost}]]*/'금액';
+				if (event.keyCode == 13) {
+					$("#usePoint").attr('value', inputPoint);
+					var usePoint= $("#usePoint").val();
+					$("#totalPrice").attr('value', cateCost-usePoint);
+					var totalPrice= $("#totalPrice").val();
+					
+					var today = new Date();
+					var hour = String(today.getHours());
+					var minute = String(today.getMinutes());
+					var second = String(today.getSeconds());
+					var millisecond = String(today.getMilliseconds());
+					var year = today.getFullYear();
+					var month = ('0' + (today.getMonth() + 1)).slice(-2);
+					var day = ('0' + today.getDate()).slice(-2);
+					var payDate = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+					var pointDate = year+'-'+month+'-'+day;
+					
+					console.log(payDate)
+					console.log(pointDate)
+					
+					
+					
+					
+				}
+		}	
+		
+		/* 결제 API */
 		function requestPay() {
 			
 			// 객체 초기화
@@ -174,6 +226,13 @@
 			var cateCost=/*[[${category.cate_cost}]]*/'금액';
 			var userNo=/*[[${session.userNo}]]*/'사용자번호';
 			var cateId=/*[[${category.cate_id}]]*/'카테아이디';
+			var totalPrice= $("#totalPrice").val();
+			var usePoint= $("#usePoint").val();
+			var year = today.getFullYear();
+			var month = ('0' + (today.getMonth() + 1)).slice(-2);
+			var day = ('0' + today.getDate()).slice(-2);
+			var payDate = String(year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second);
+			var pointDate = String(year+'-'+month+'-'+day);
 			
 			IMP.request_pay({
 				pg: 'html5_inicis',
@@ -181,16 +240,19 @@
 				merchant_uid: "order_no_" + merchantID,
 				name: cateName,
 				buyer_name : userName,
-				amount : cateCost
+				amount : totalPrice
 			}, function(rsp) {
 				if (rsp.success) {
 					var go = confirm('결제완료');
 					if(go == true) {
 						location.href = "/paycomplete?user_no="+userNo
 										+"&cate_id="+cateId
-										+"&pay_price="+cateCost
+										+"&pay_price="+totalPrice
 										+"&pay_how="+rsp.pay_method
-										+"&pay_card="+rsp.card_name;
+										+"&pay_card="+rsp.card_name
+										+"&point_price="+(-usePoint)
+										+"&pay_date="+payDate
+										+"&point_date="+pointDate;
 					}
 				} else {
 					confirm('결제실패');

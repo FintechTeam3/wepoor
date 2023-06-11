@@ -22,7 +22,7 @@
 	<insert id="insert" parameterType="PayVO">
     <![CDATA[
     INSERT INTO pay (pay_id, cate_id, user_no, pay_date, pay_price, pay_card, pay_how)
-    VALUES (NULL, #{cate_id}, #{user_no}, SYSDATE(), #{pay_price}, #{pay_card}, #{pay_how})
+    VALUES (NULL, #{cate_id}, #{user_no}, #{pay_date}, #{pay_price}, #{pay_card}, #{pay_how})
     ]]>
     	<selectKey keyProperty="pay_id" resultType="Integer" order="AFTER">
 	    <![CDATA[
