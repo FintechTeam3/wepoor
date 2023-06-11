@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 public class UserVO {
 	
 	int userNo;
-	int cateId;
 	String userId;
 	String userPwd;
 	String userName;
 	String userNickname;
 	String userPhone;
 	int userPoint;
+	int usersuccess;
 	String userSeqNo ;
 	String accessToken ;
 	String refreshToken ;
@@ -23,13 +23,13 @@ public class UserVO {
 	
 	public UserVO(UserVO reqVO, String[] str) {
 		this.userNo = reqVO.getUserNo();
-		this.cateId = reqVO.getCateId();
 		this.userId = reqVO.getUserId();
 		this.userPwd = reqVO.getUserPwd();
 		this.userName = reqVO.getUserName();
 		this.userNickname = reqVO.getUserNickname();
 		this.userPhone = reqVO.getUserPhone();
 		this.userPoint = reqVO.getUserPoint();
+		this.usersuccess = reqVO.getUsersuccess();
 		this.userSeqNo = str[0];
 		this.accessToken = str[1];
 		this.refreshToken = str[2];
@@ -38,13 +38,13 @@ public class UserVO {
 	public static UserVO User(UserVO reqVO, String[] str){
 		return new UserVO(
 				reqVO.getUserNo(),
-				reqVO.getCateId(),
 				reqVO.getUserId(),
 				reqVO.getUserPwd(),
 				reqVO.getUserName(),
 				reqVO.getUserNickname(),
 				reqVO.getUserPhone(),
 				reqVO.getUserPoint(),
+				reqVO.getUsersuccess(),
 				str[0],
 				str[1],
 				str[2]
