@@ -28,6 +28,7 @@ public interface UserMapper {
 	void deleteUser(int userId);
 	
 	int getUserCateId(int userNo);
+	
 
 	String HashedPwd(String userPwd);
 	

@@ -13,4 +13,10 @@
 			WHERE r.user_no = #{userNo}
     	]]>
 	</select>
+	
+	 <select id="getUserByUserSuccess" parameterType="int" >
+    	<![CDATA[
+        SELECT user_success FROM user WHERE user_no = #{userNo};
+        ]]>
+    </select>
 </mapper>
