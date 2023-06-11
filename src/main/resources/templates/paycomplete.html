@@ -34,6 +34,7 @@
     
     <!-- hyejung CSS Start -->
     <link rel="stylesheet" type="text/css" href="css/category.css">
+    <link rel="stylesheet" type="text/css" href="css/paycomplete.css">
     <!-- hyejung CSS End -->
 </head>
 
@@ -56,7 +57,7 @@
             </div>
          </div>
          
-         <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">결제완료</p>
+         <p style="color:white; font-size:30px; font-weight:530; font-family: 'Jua', sans-serif; letter-spacing: 3px;">결제완료</p>
          
       </nav>
    </div>
@@ -68,10 +69,10 @@
 		<div class="row">
 			<div class="col-md-6 ">
 			
-			<div style="background-color: #cbcbcb; color: black; padding: 2%; border-radius: 15px;">
-	            <div class="d-flex justify-content-center" style="font-weight: bolder; color: black;">
-                        <span>결제가 완료되었습니다.</span>
-                     </div>
+			<div class="payCompleteNotice">
+	            <div class="d-flex justify-content-center noticeContent">
+        	        <span>결제가 완료되었습니다.</span>
+                </div>
             </div>
             
             <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
@@ -109,8 +110,8 @@
             
             <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
             
-            <span>결제상세</span>
-            <table>
+            <span class="paydetail">결제상세</span>
+            <table class="paydetailtable">
             	<tr>
             		<td>포인트사용</td>
             		<td th:text="${point.point_price}">포인트사용</td>
@@ -127,7 +128,7 @@
             
             <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
             
-            <button>결제이력</button>
+            <button class="cardHistory_btn">결제이력</button>
             
             </div>
 		</div>
