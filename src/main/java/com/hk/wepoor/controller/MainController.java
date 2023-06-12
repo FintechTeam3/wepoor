@@ -1,11 +1,21 @@
 package com.hk.wepoor.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hk.wepoor.model.UserMapper;
+import com.hk.wepoor.service.GiftService;
+import com.hk.wepoor.service.PointService;
+import com.hk.wepoor.vo.GiftVO;
+import com.hk.wepoor.vo.PointVO;
 import com.hk.wepoor.vo.UserVO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,6 +26,12 @@ public class MainController {
 	
 	@Autowired
 	UserMapper userMapper;
+	
+	@Autowired
+	GiftService giftService;
+	
+	@Autowired
+	PointService pointService;
 	
 	// 메인페이지
 	@GetMapping("/")
@@ -52,6 +68,22 @@ public class MainController {
 		UserVO userVO = userMapper.getUserByUserNo(userNo);
 		model.addAttribute("userNickname", userVO.getUserNickname());
 		return "gift";
+	}
+	
+	// 신청하기
+	@PostMapping("/giftSend")
+	public String giftSend(@ModelAttribute GiftVO giftVO, HttpServletRequest req, int giftPrice) {
+		HttpSession session = req.getSession(false);
+		int userNo = (int) session.getAttribute("userNo");
+		giftVO.setUser_no(userNo);
+		giftService.create(giftVO);
+		
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		PointVO pointVO = new PointVO(0, userNo, formatter.format(date), -giftPrice);
+		pointService.create(pointVO);
+		
+		return "redirect:/gift";
 	}
 	
 }

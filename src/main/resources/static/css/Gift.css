@@ -1,0 +1,14 @@
+.image_2 img{
+	width:200px; 
+	height:200px; 
+	display:block; 
+	margin:0 auto;
+}
+.gift_input, .please {
+	text-align: center;
+}
+.giftname_input, .giftprice_input {
+	width:200px; 
+	border: none;
+	text-align: center;
+}

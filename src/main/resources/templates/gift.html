@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="utf-8">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
    <!-- basic -->
@@ -34,7 +34,14 @@
     
     <!-- hyejung CSS Start -->
     <link rel="stylesheet" type="text/css" href="css/category.css">
+    <link rel="stylesheet" type="text/css" href="css/gift.css">
     <!-- hyejung CSS End -->
+    
+    <script>
+    function modal() {
+    	$("#giftbuyconfirmmodal").modal();
+    }
+    </script>
 </head>
 
 
@@ -74,19 +81,92 @@
    <!-- header section end -->
    
    <!-- 페이지 작성하기 시작-->
+	
+	<!-- coffee gift section start-->  
+	<form id="giftForm" method="POST" action="giftSend">
+		<!-- pic section -->          
+		<div class="image_2">
+			<img src="images/coffee_gift.JPG"/>
+		</div>
+		
+		<!-- gift name section --> 
+		<div class="gift_input">
+			<input class="giftname_input" name="giftName" value="아이스 아메리카노" id="giftName" type="text" readonly>
+		</div>
+	   
+		<!-- gift price section --> 
+		<div class="gift_input">
+			<input class="giftprice_input" name="giftPrice" value="4500" id="giftPrice" type="text" readonly>
+		</div>
+		
+		<!-- gift please button section --> 
+		<div class="please">
+			<button onclick="modal()" type="submit">신청하기</button>
+		</div>
+	</form>
+	<!-- coffee gift section end-->  
    
+	<!-- bing gift section start-->  
+	<form id="giftForm" method="POST" action="giftSend">
+		<!-- pic section -->          
+		<div class="image_2">
+			<img src="images/bing_gift.JPG"/>
+		</div>
+		
+		<!-- gift name section --> 
+		<div class="gift_input">
+			<input class="giftname_input" name="giftName" value="초코브라우니빙수" id="giftName" type="text" readonly>
+		</div>
+	   
+		<!-- gift price section --> 
+		<div class="gift_input">
+			<input class="giftprice_input" name="giftPrice" value="11900" id="giftPrice" type="text" readonly>
+		</div>
+		
+		<!-- gift please button section --> 
+		<div class="please">
+			<button onclick="giftbuyconfirmmodal()" type="submit">신청하기</button>
+		</div>
+	</form>
+	<!-- bing gift section end--> 
    
+	<!-- cake gift section start-->  
+	<form id="giftForm" method="POST" action="giftSend">
+		<!-- pic section -->          
+		<div class="image_2">
+			<img src="images/cake_gift.JPG"/>
+		</div>
+		
+		<!-- gift name section --> 
+		<div class="gift_input">
+			<input class="giftname_input" name="giftName" value="생크림케이크" id="giftName" type="text" readonly>
+		</div>
+	   
+		<!-- gift price section --> 
+		<div class="gift_input">
+			<input class="giftprice_input" name="giftPrice" value="29000" id="giftPrice" type="text" readonly>
+		</div>
+		
+		<!-- gift please button section --> 
+		<div class="please">
+			<button id="please_btn" onclick="giftbuyconfirmmodal()" type="submit">신청하기</button>
+		</div>
+	</form>
+	<!-- cake gift section end--> 
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+	<!-- gift buy confirm Modal -->
+	<div class="modal fade" id="giftbuyconfirmmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  		<div class="modal-dialog modal-dialog-centered" role="document">
+    		<div class="modal-content">
+      			<div class="modal-body">
+      				<p class="modalP">신청이 완료됐습니다.</p>
+      			</div>
+       			<div class="modal-body-btn">
+	       			<button type="button" onClick="location.href='/'" class="deleteConfirmBtn" data-dismiss="modal">확인</button>
+       			</div>
+    		</div>
+		</div>
+	</div>
    
    <!-- 페이지 작성하기 끝-->
                   
@@ -100,10 +180,10 @@
    </div>
    <!-- copyright section end -->
    
-   
    <!-- Javascript files-->
    <script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.bundle.min.js"></script>
+   
 </body>
 
 </html>
