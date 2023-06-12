@@ -63,8 +63,6 @@
             	
               	<a class="nav-item nav-link" href="/">Home</a>
               	<a class="nav-item nav-link" href="/mypage">Mypage</a>
-               	<a class="nav-item nav-link" href="about.html">About</a>
-               	<a class="nav-item nav-link" href="teashop.html">Teashop</a>
                	<a id="logout" class="nav-item nav-link" onclick="logout()">Logout</a>
                	
                	<hr style="height:2px;border-width:0;background-color:#e0e0e0; margin-bottom:1px;" class="mapage_hr">
@@ -89,38 +87,43 @@
 		</div>
 	</div> -->
 
-   <div class="container">
+   <div class="container" style="min-height: 85vh;">
 		<input th:text="${session.userId}" type="hidden" style="display: none;"></input>
 		<input th:text="${session.userNo}" type="hidden" style="display: none;"></input>
 		<div th:each="cate : ${catelist}">
          <!-- category 값 넘기기 -->
-            <ul class="list-group" >
-                  <li class="list-group-item" th:onclick="'check(' + ${cate.cate_id} + ');'">
-                     <div class="d-flex justify-content-center" style="font-weight: bolder; color: black;">
-                        <span th:text="${cate.cate_name}" class="mr-1"></span>
-                        <span>거지방</span>
+            <ul class="list-group p-1">
+               <li class="list-group-item p-1" th:onclick="'check(' + ${cate.cate_id} + ');'">
+                  <div class="row">
+                     <div class="col ml-4 d-flex justify-content-center align-items-center" style="padding: 0px;">
+                        <img th:if="${cate.cate_name} == '교통비'" src="images/taxi.jpg" alt="" style="width: 20vw; height: 10vh;">
+                        <img th:if="${cate.cate_name} == '커피'" src="images/cup-img-5.png" alt="" style="width: 20vw; height: 10vh;">
+                        <img th:if="${cate.cate_name} == '배달음식'" src="images/chicken.jpg" alt="" style="width: 20vw; height: 10vh;">
+                        <img th:if="${cate.cate_name} == '화장품'" src="images/makeup.png" alt="" style="width: 20vw; height: 10vh;">
+                        <img th:if="${cate.cate_name} == '빵'" src="images/bread.png" alt="" style="width: 20vw; height: 10vh;">
+                        <img th:if="${cate.cate_name} == '옷'" src="images/clothes.png" alt="" style="width: 20vw; height: 10vh;"> 
                      </div>
-                     <div class="d-flex justify-content-center" style="font-size: 10px; color: #1abc9c;">
-                        <span th:text="${#dates.format(cate.start_date, 'M/d')}" style="font-weight: bolder;"></span>
-                        <span th:text="${#dates.format(cate.end_date, '~ M/d')}" style="font-weight: bolder;"></span>
-                        <span th:text="${cate.cate_name}" class="mx-1"></span>
-                        <span id = "cate_date" hidden th:text = "${cate.cate_date}"></span> <!-- 지우면안됨 -->
-                        <span>소비를 5번 참아주세요</span>
+                     <div class="col-9" style="font-weight: bolder; padding:0px;">
+                        <div class="d-flex justify-content-end mr-3" style="font-size: 13px; color: #666666">
+                           <span th:text="${#dates.format(cate.start_date, 'M/d')}" style="font-weight: bolder;"></span>
+                           <span th:text="${#dates.format(cate.end_date, '~ M/d')}" style="font-weight: bolder;"></span>
+                        </div>
+                        <div class="d-flex justify-content-center mr-4" style="font-size:19px; font-weight: bolder; color: black;">
+                           <span th:text="${cate.cate_name}" class="mr-1"></span>
+                           <span>거지방</span>
+                        </div>
+                        <div class="d-flex justify-content-center mr-4" style="font-size: 14px; color: #1abc9c;">
+                           <span th:text="${cate.cate_name}" class="mx-1"></span>
+                           <span id = "cate_date" hidden th:text = "${cate.cate_date}"></span> <!-- 지우면안됨 -->
+                           <span>소비를 5번 참아주세요</span>
+                        </div>
+                        <div class="d-flex justify-content-center mr-4" style="color:red; font-weight: bolder;">
+                           <span th:text="${cate.cate_cost}"></span>
+                           <span>원</span>
+                        </div>
                      </div>
-                     <div class="d-flex justify-content-center" style="color:red; font-weight: bolder;">
-                        <span th:text="${cate.cate_cost}"></span>
-                        <span>원</span>
-                     </div>
-                     <!-- <div th:if="${list.status} == '종료'" class="badge bg-secondary rounded-pill p-1" >
-                        <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
-                     </div>
-                     <div th:if="${list.status} == '진행중'" class="badge bg-success rounded-pill p-1" >
-                        <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
-                     </div>
-                     <div th:if="${list.status} == '시작전'" class="badge bg-danger rounded-pill p-1" >
-                        <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
-                     </div> -->
-                  </li>
+                  </div>
+               </li>
             </ul>
          
 		</div>

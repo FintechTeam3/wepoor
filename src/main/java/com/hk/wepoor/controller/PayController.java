@@ -54,7 +54,7 @@ public class PayController {
 	
 	// 구매 완료 - 혜정
 	@GetMapping("paycomplete")
-	public String paycomplete(PayVO payVO, Model model, PointVO pointVO) {
+	public String paycomplete(PayVO payVO, Model model, PointVO pointVO, HttpServletRequest req) {
 		payService.create(payVO);
 		pointService.create(pointVO);
 		
@@ -72,6 +72,11 @@ public class PayController {
 		PointVO point = pointService.select(pointId);
 		model.addAttribute("point", point);
 		
+		HttpSession session = req.getSession(false);
+		int userNo = (int) session.getAttribute("userNo");
+		UserVO user = userMapper.getUserByUserNo(userNo);
+		req.setAttribute("userNickname", user.getUserNickname());
+		
 		return "paycomplete";
 	}
 	
@@ -81,6 +86,10 @@ public class PayController {
 		HttpSession session = req.getSession(false);
 		int userNo = (int) session.getAttribute("userNo");
 		List<PayVO> list = payService.selectPayHistory(userNo);
+		
+		UserVO user = userMapper.getUserByUserNo(userNo);
+		req.setAttribute("userNickname", user.getUserNickname());
+
 		model.addAttribute("payhistorylist", list);
 		return "payhistory";
 	}

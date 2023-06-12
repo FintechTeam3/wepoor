@@ -1,5 +1,5 @@
-
-<html xmlns:th="http://www.thymeleaf.org" lang="utf-8">
+<!DOCTYPE html>
+<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- basic -->
@@ -41,26 +41,36 @@
     <!-- header section start -->
         <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="d-flex justify-content-between align-items-center" style="width: 100vw;">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+		            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		            <span class="navbar-toggler-icon"></span>
+		         </button>
                 
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="/">Home</a>
-                            <a class="nav-item nav-link" href="about.html">About</a>
-                            <a class="nav-item nav-link" href="teashop.html">Teashop</a>
-                    </div>
+            	
+		            	<!-- user info section -->     
+		            	<div class="hamburger_userinfo">
+			           		<img src="images/whitemywoogeoji.jpg" style="width:60px; height:60px;"/>
+			           		<input type="text" class="hamburger_nickname_input" th:value="${userNickName}" readonly>
+		           		</div>     
+		            	
+		            	<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+		            	
+		              	<a class="nav-item nav-link" href="/">Home</a>
+		              	<a class="nav-item nav-link" href="/mypage">Mypage</a>
+		               	<a id="logout" class="nav-item nav-link" onclick="logout()">Logout</a>
+		               	
+		               	<hr style="height:2px;border-width:0;background-color:#e0e0e0; margin-bottom:1px;" class="mapage_hr">
+		            </div>
                 </div>
                 
-                <div style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">
+                <div style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px; flex-grow: 1;">
                     <span>애껴</span>
                 </div>
                 
                 <form th:action="@{community/leave}" method="post" class="mt-2">
-                    <button>
+                    <button class="leave_btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-right-square" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
                         </svg>
@@ -68,13 +78,12 @@
                         <input type="hidden" name="cate_id" th:value="${cate_id}">
                     </button>
                 </form>
-            </div>
         </nav>
         </div>
         <!-- header section end -->
     
     <!-- 페이지 작성하기 시작-->
-        <div class="container mt-4" th:each="category : ${categoryList}" th:if="${category.cate_id} == ${cate_id}">
+        <div class="container mt-4" th:each="category : ${categoryList}" th:if="${category.cate_id} == ${cate_id}" style="min-height: 85vh;">
             <div style="background-color: #cbcbcb; color: black; padding: 2%; border-radius: 15px;">
                 <div >
                     환영합니다, <span th:text="${category.cate_weekend}" style="font-weight: bolder;"></span><span style="font-weight: bolder;">주차</span> [<span th:text="${category.cate_name}" style="font-weight: bolder;"></span>] 참는 거지방입니다.
@@ -238,6 +247,7 @@
  <!-- copyright section end -->
  
  <!-- Javascript files-->
+ <input id="ID" type="hidden" th:value="${session.userId}" />
  <script src="js/jquery.min.js"></script>
  <script src="js/bootstrap.bundle.min.js"></script>
 
@@ -311,7 +321,20 @@
 	     $('.commentContent'+cno).html(a);
 	     
 	 }
-    
+    function logout(){
+    	var id = $("#ID").val();
+    	console.log(id);
+    	
+    	if(id.indexOf("@kakao") != -1){
+    		$("#logout").prop('href', 'https://kauth.kakao.com/oauth/logout?client_id=e4e9f889e1bb27e6af7af657094f2743&logout_redirect_uri=http://localhost/logout');	
+    	
+    	}else{
+    		
+    		$("#logout").prop('href', "logout");
+    	}
+    	
+    	
+    }
  </script>
 </body>
 

@@ -64,36 +64,60 @@
    <!-- header section end -->
    
    <!-- 페이지 작성하기 시작-->
-   <div class="container">
-      <div class="row">
-         <div class="col-md-6 ">
+   <div class="container" style="min-height: 85vh;">
+      <table style="height: 80px;">
+         <tr>
+            <th><input type="text" th:value="${userPoint}" class="point_input" readonly></th>
+            <th><span style="margin-left:5px;">포인트</span></th>
+            <th>
+               <a href="/gift">
+                  <button class="indraw_btn">기프티샵</button>
+               </a>
+            </th>
+         </tr>
+      </table>
+		<hr>
+      
+		<div th:each="point : ${pointlist}">
+         <!-- category 값 넘기기 -->
+            <ul class="list-group p-1">
+               <li class="list-group-item p-1">
+                  <div class="row">
+                     
+                     <div class="col-3 d-flex justify-content-center align-items-center">
+                        <img src="images/good.png" alt="" th:if="${point.point_price} >= 0">
+                        <img src="images/bad.png" alt="" th:if="${point.point_price} < 0">
+                     </div>
+                     <div class="col-9" style="padding:5px;">
+                        <div class="row">
+                           <div class="col-7">
+                              <div th:if="${point.point_price} >= 0" style="font-weight:bolder;">
+                                 포인트 적립
+                              </div>
+                              <div th:if="${point.point_price} < 0" style="font-weight:bolder;">
+                                 포인트 사용
+                              </div>
+                           </div>
+                           <div class="col-5" th:text="${point.point_date}" style="font-size: 11px;">
+   
+                           </div> 
+                        </div>
+                        <div style="color:black">
+                           <span th:text="${point.cate_name}"></span>
+                           <span>거지방</span>
+                        </div>
+                        
+                        <span th:text="${point.point_price}">
+                           
+                        </span>
+                        <span>원</span>
+                     </div>
+                  </div>
+               </li>
+            </ul>
          
-   <!-- point section --> 
-   		<div class="point_table">
-            <table>
-            	<tr>
-            		<th><input type="text" th:value="${userPoint}" class="point_input" readonly></th>
-            		<th><span style="margin-left:5px;">포인트</span></th>
-            		<th><button class="indraw_btn">출금하기</button></th>
-            	</tr>
-            </table>
-   		</div>
-   		
-   			<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-   
-			<table>
-            	<tr th:each=pl:${pointlist}>
-            		<th><span th:text="${pl.point_date}">적립or사용일자</span></th>
-            		<th><span>구분</span></th>
-            		<th><span th:text="${pl.point_price}">적립or사용금액</span></th>
-            	</tr>
-            </table>
-   
-   
-          </div>
-      </div>
-   </div>  
-   
+		</div>
+	</div>	
    
    
    

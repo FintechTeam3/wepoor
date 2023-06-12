@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
    <!-- basic -->
@@ -34,8 +34,9 @@
     
     <!-- hyejung CSS Start -->
     <link rel="stylesheet" type="text/css" href="css/category.css">
-    <link rel="stylesheet" type="text/css" href="css/paycomplete.css">
+    <link rel="stylesheet" type="text/css" href="css/gift.css">
     <!-- hyejung CSS End -->
+    
 </head>
 
 
@@ -68,94 +69,85 @@
             </div>
          </div>
          
-         <p style="color:white; font-size:30px; font-weight:530; font-family: 'Jua', sans-serif; letter-spacing: 3px;">결제완료</p>
+         <p style="color:white; font-size:35px; font-weight:700; font-family: 'Jua', sans-serif; letter-spacing: 5px;">기프트샵</p>
          
       </nav>
    </div>
    <!-- header section end -->
    
    <!-- 페이지 작성하기 시작-->
-   
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 ">
-			
-			<div class="payCompleteNotice">
-	            <div class="d-flex justify-content-center noticeContent">
-        	        <span>결제가 완료되었습니다.</span>
-                </div>
-            </div>
-            
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-            <table>
-            	<tr>
-            		<td>방 이름</td>
-            		<td th:text="${category.cate_name}">방 이름</td>
-            	</tr>
-            	<tr>
-            		<td>기간</td>
-            		<td th:text="${category.cate_date}">기간</td>
-            	</tr>
-            	<tr>
-            		<td>주문금액</td>
-            		<td th:text="${category.cate_cost}">주문금액</td>
-            	</tr>
-            	<tr>
-            		<td>결제일자</td>
-            		<td th:text="${pay.pay_date}">결제일자</td>
-            	</tr>
-            	<tr>
-            		<td>구매자</td>
-            		<td th:text="${user.userName}">구매자</td>
-            	</tr>
-            	<tr>
-            		<td>결제방식</td>
-            		<td th:text="${pay.pay_how}">결제방식</td>
-            	</tr>
-            	<tr>
-            		<td>결제카드</td>
-            		<td th:text="${pay.pay_card}">결제카드</td>
-            	</tr>
-            </table>
-            
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-            <span class="paydetail">결제상세</span>
-            <table class="paydetailtable">
-            	<tr>
-            		<td>포인트사용</td>
-            		<td th:text="${point.point_price}">포인트사용</td>
-            	</tr>
-            	<tr>
-            		<td>남은포인트</td>
-            		<td th:text="${user.userPoint}">남은포인트</td>
-            	</tr>
-            	<tr>
-            		<td>실결제금액</td>
-            		<td th:text="${pay.pay_price}">실결제금액</td>
-            	</tr>
-            </table>
-            
-            <hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
-            
-            <div class="cardHistory_btn"><a href="/payhistory">결제이력</a></div>
-            
-            </div>
+	
+	<!-- coffee gift section start-->  
+	<form id="giftForm" method="POST" action="giftSend">
+		<!-- pic section -->          
+		<div class="image_2">
+			<img src="images/coffee_gift.JPG"/>
 		</div>
-	</div>
-            
+		
+		<!-- gift name section --> 
+		<div class="gift_input">
+			<input class="giftname_input" name="giftName" value="아이스 아메리카노" id="giftName" type="text" readonly>
+		</div>
+	   
+		<!-- gift price section --> 
+		<div class="gift_input">
+			<input class="giftprice_input" name="giftPrice" value="4500" id="giftPrice" type="text" readonly>
+		</div>
+		
+		<!-- gift please button section --> 
+		<div class="please">
+			<button class="apply_btn" type="submit">신청하기</button>
+		</div>
+	</form>
+	<!-- coffee gift section end-->  
    
+	<!-- bing gift section start-->  
+	<form id="giftForm" method="POST" action="giftSend">
+		<!-- pic section -->          
+		<div class="image_2">
+			<img src="images/bing_gift.JPG"/>
+		</div>
+		
+		<!-- gift name section --> 
+		<div class="gift_input">
+			<input class="giftname_input" name="giftName" value="초코브라우니빙수" id="giftName" type="text" readonly>
+		</div>
+	   
+		<!-- gift price section --> 
+		<div class="gift_input">
+			<input class="giftprice_input" name="giftPrice" value="11900" id="giftPrice" type="text" readonly>
+		</div>
+		
+		<!-- gift please button section --> 
+		<div class="please">
+			<button class="apply_btn" type="submit">신청하기</button>
+		</div>
+	</form>
+	<!-- bing gift section end--> 
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
+	<!-- cake gift section start-->  
+	<form id="giftForm" method="POST" action="giftSend">
+		<!-- pic section -->          
+		<div class="image_2">
+			<img src="images/cake_gift.JPG"/>
+		</div>
+		
+		<!-- gift name section --> 
+		<div class="gift_input">
+			<input class="giftname_input" name="giftName" value="생크림케이크" id="giftName" type="text" readonly>
+		</div>
+	   
+		<!-- gift price section --> 
+		<div class="gift_input">
+			<input class="giftprice_input" name="giftPrice" value="29000" id="giftPrice" type="text" readonly>
+		</div>
+		
+		<!-- gift please button section --> 
+		<div class="please">
+			<button class="apply_btn" type="submit">신청하기</button>
+		</div>
+	</form>
+	<!-- cake gift section end--> 
    
    <!-- 페이지 작성하기 끝-->
                   
@@ -169,10 +161,10 @@
    </div>
    <!-- copyright section end -->
    
-   
    <!-- Javascript files-->
    <script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.bundle.min.js"></script>
+   
 </body>
 
 </html>

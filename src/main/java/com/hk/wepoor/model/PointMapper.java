@@ -17,5 +17,6 @@ public interface PointMapper {
 	
 	// 사용자의 포인트 내역 조회
 	List<PointVO> selectAllUser(int user_no);
+	List<PointVO> selectPointHistory(int user_no);
 	
 }

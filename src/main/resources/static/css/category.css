@@ -62,3 +62,6 @@
 .hamburger_userinfo {
 	margin: 20px auto 20px 20px;
 }
+.leave_btn {
+	display: flex;
+}

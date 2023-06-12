@@ -16,7 +16,7 @@ class UpdatePoint {
 	@Test
 	void contextLoads() {
 		
-		PointVO pointVO = new PointVO(7, 38, "2023-06-01", 100000);
+		PointVO pointVO = new PointVO(7, 38, "2023-06-01", 100000, null);
 		
 		int affectRowCount = point_service.update(pointVO);
 		

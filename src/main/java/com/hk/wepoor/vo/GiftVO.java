@@ -1,7 +1,5 @@
 package com.hk.wepoor.vo;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,13 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PointVO {
+public class GiftVO {
 	
-	int point_id;
+	int giftId;
 	int user_no;
-	String point_date;
-	int point_price;
+	String giftName;
+	int giftPrice;
 	
-	// 방 내역
-	String cate_name;
 }
