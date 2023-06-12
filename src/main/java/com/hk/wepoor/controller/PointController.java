@@ -30,17 +30,16 @@ public class PointController {
 		HttpSession session = req.getSession(false);
 		
 		String userId = (String) session.getAttribute("userId");
-		
 		UserVO userVO = user_mapper.getUserByUserId(userId);
 	    req.setAttribute("userPoint", userVO.getUserPoint());
 	    
 	    // 포인트 내역 불러오기
-		
 		int userNo = (int) session.getAttribute("userNo");
-		
 	    List<PointVO> pointdetail = point_service.selectAllUser(userNo);
-	    model.addAttribute("pointlist", pointdetail);
-	    
+	
+
+		model.addAttribute("pointlist", pointdetail);
+
 		return "pointdetail";
 	}
 	

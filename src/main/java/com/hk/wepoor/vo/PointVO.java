@@ -14,4 +14,6 @@ public class PointVO {
 	String point_date;
 	int point_price;
 	
+	// 방 내역
+	String cate_name;
 }
