@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FailVO {
+public class GiftVO {
 	
-	int failId;
-	int userNo;
-	int failNum;
+	int giftId;
+	int user_no;
+	String giftName;
+	int giftPrice;
 	
 }

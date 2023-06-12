@@ -15,13 +15,13 @@ public class UserVO {
 	String userNickname;
 	String userPhone;
 	int userPoint;
-	int usersuccess;
+	int userSuccess;
 	String userSeqNo ;
 	String accessToken ;
 	String refreshToken ;
 	
 	
-	public UserVO(UserVO reqVO, String[] str) {
+	public UserVO(UserVO reqVO, TokenVO tokenVO) {
 		this.userNo = reqVO.getUserNo();
 		this.userId = reqVO.getUserId();
 		this.userPwd = reqVO.getUserPwd();
@@ -29,13 +29,13 @@ public class UserVO {
 		this.userNickname = reqVO.getUserNickname();
 		this.userPhone = reqVO.getUserPhone();
 		this.userPoint = reqVO.getUserPoint();
-		this.usersuccess = reqVO.getUsersuccess();
-		this.userSeqNo = str[0];
-		this.accessToken = str[1];
-		this.refreshToken = str[2];
+		this.userSuccess = reqVO.getUserSuccess();
+		this.userSeqNo = tokenVO.getUserSeqNo();
+		this.accessToken = tokenVO.getAccessToken();
+		this.refreshToken = tokenVO.getRefreshToken();
 	}
 	
-	public static UserVO User(UserVO reqVO, String[] str){
+	public static UserVO User(UserVO reqVO, TokenVO tokenVO){
 		return new UserVO(
 				reqVO.getUserNo(),
 				reqVO.getUserId(),
@@ -44,10 +44,10 @@ public class UserVO {
 				reqVO.getUserNickname(),
 				reqVO.getUserPhone(),
 				reqVO.getUserPoint(),
-				reqVO.getUsersuccess(),
-				str[0],
-				str[1],
-				str[2]
+				reqVO.getUserSuccess(),
+				tokenVO.getUserSeqNo(),
+				tokenVO.getAccessToken(),
+				tokenVO.getRefreshToken()
 				);
 	}
 }

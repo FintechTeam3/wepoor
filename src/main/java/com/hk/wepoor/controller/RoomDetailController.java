@@ -26,8 +26,13 @@ public class RoomDetailController {
 
 	@GetMapping("/roomdetail")
 	public String roomdetail(HttpServletRequest req) {
+		
 		HttpSession session = req.getSession(false);
-		int userNo = (int) session.getAttribute("userNo");
+		
+		int userNo = (int) session.getAttribute("userNo"); 
+		
+		String userSuccess = svc.userSuccess(userNo);
+		
 		List<RoomDetailVO> myList = svc.selectAll(userNo);
 		
 		Date dateNow = new Date();
@@ -49,10 +54,12 @@ public class RoomDetailController {
 		}
 		System.out.println("myList 입니다." + myList);
 		req.setAttribute("myList", myList);
-		
+		req.setAttribute("userSuccess", userSuccess);
+
 		// 햄버거바 닉네임
 		UserVO userVO = userMapper.getUserByUserNo(userNo);
 		req.setAttribute("userNickname", userVO.getUserNickname());
+
 		return "roomDetail";
 	}
 

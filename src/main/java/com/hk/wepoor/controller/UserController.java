@@ -11,11 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -52,57 +50,34 @@ public class UserController {
 	}
 	
 	
-	String [] str;
-	
-	// 사용자인증 & 토큰받기
+    TokenVO	tokenVO;
+	// 회원가입전 사용자인증 & 토큰받기 - 오혁
 	@GetMapping("/requesttoken")
 	public String reques(@RequestParam("code") String code) {
-		String [] str = userService.requesttoken(code,"requesttoken"); 
-		this.str=str;
-
+		  TokenVO tokenVO = userService.requesttoken(code,"requesttoken"); 
+		  this.tokenVO = tokenVO;
 		  return "end";
 		  
 	}
-	
-	// 회원가입 - 민표님 (예전의 그것)
-//	@PostMapping("/join_insert")
-//	public String joinInsert(@RequestParam("userId") String userId, @RequestParam("userPhone") String userPhone,
-//			@RequestParam("userName") String userName, @RequestParam("userNickname") String userNickname,
-//			@RequestParam("userPwd") String userPwd) {
-//
-//		UserVO uservo = new UserVO();
-//		uservo.setUserId(userId);
-//		uservo.setUserName(userName);
-//		uservo.setUserNickname(userNickname);
-//		uservo.setUserPhone(userPhone);
-//		uservo.setUserPwd(userPwd);
-//		// 사용자일련번호
-//		uservo.setUserSeqNo(str[0]);
-//		uservo.setAccessToken(str[1]);
-//		uservo.setRefreshToken(str[2]);
-//		
-//		mapper.insertUser(uservo);
-//		
-//		return "redirect:/login_page";
-//	}
 	
 	// 회원가입 - 민표님
 	@PostMapping("/join_insert")
 	public String joinInsert(@ModelAttribute UserVO reqVo) {
 		// form 데이터는 modelAttribute로 넘깁니다.
 		// reqVo에 담긴 값들을 uservo로 넘겨주고 .
-		UserVO uservo = UserVO.User(reqVo, str);	
+		UserVO uservo = UserVO.User(reqVo, tokenVO);	
 		// insert 합니다.
 		mapper.insertUser(uservo);
 		
 		return "redirect:/login_page";
-	}
-//	 private static final long INTERVAL = 5000; // 변수로 사용할 스케줄 간격 설정
+	}	
 	
+	// @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul") 매일 00시 00분 00초에 실행 
+	// @Scheduled(fixedRate = 5000) // 5초마다 실행
 	
-	// @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul") // 매일 00시 00분 00초에 실행 // @Scheduled(fixedRate = 5000) // 5초마다 실행
+	// 
 	@GetMapping("/user_me")
-//    @Scheduled(fixedDelay = INTERVAL)
+	@Scheduled(cron = "0 1 0 ? * MON", zone = "Asia/Seoul")
 	public String requestUserMe() {
 		userService.requestuser();
 		return "poor";
@@ -194,7 +169,7 @@ public class UserController {
 	public String userModify(@ModelAttribute UserVO reqVo) {
 		
 		// reqVo에 담긴 값들을 uservo로 넘겨주고
-		UserVO uservo = UserVO.User(reqVo,str);
+		UserVO uservo = UserVO.User(reqVo,tokenVO);
 		
 		// 받아온 정보로 사용자의 정보를 수정합니다.
 		mapper.updateMy(uservo);

@@ -1,5 +1,7 @@
 package com.hk.wepoor.vo;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +16,6 @@ public class PointVO {
 	String point_date;
 	int point_price;
 	
+	// 방 내역
+	String cate_name;
 }

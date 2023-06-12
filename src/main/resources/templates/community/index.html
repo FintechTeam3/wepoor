@@ -83,7 +83,7 @@
         <!-- header section end -->
     
     <!-- 페이지 작성하기 시작-->
-        <div class="container mt-4" th:each="category : ${categoryList}" th:if="${category.cate_id} == ${cate_id}">
+        <div class="container mt-4" th:each="category : ${categoryList}" th:if="${category.cate_id} == ${cate_id}" style="min-height: 85vh;">
             <div style="background-color: #cbcbcb; color: black; padding: 2%; border-radius: 15px;">
                 <div >
                     환영합니다, <span th:text="${category.cate_weekend}" style="font-weight: bolder;"></span><span style="font-weight: bolder;">주차</span> [<span th:text="${category.cate_name}" style="font-weight: bolder;"></span>] 참는 거지방입니다.

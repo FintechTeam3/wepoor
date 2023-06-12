@@ -43,5 +43,10 @@ public class PointService {
 		List<PointVO> list = point_mapper.selectAllUser(user_no);
 		return list;
 	}
+
+	public List<PointVO> selectPointHistory(int user_no) {
+		List<PointVO> list = point_mapper.selectPointHistory(user_no);
+		return list;
+	}
 	
 }

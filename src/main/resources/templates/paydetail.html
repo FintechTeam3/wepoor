@@ -116,7 +116,7 @@
 			<table class="pointTable">
 				<tr>
             		<td class="firstcell">보유</td>
-            		<td class="secondcell"><input type="text" id="userPoint" th:value="${userPoint}" class="point_input"></td>
+            		<td class="secondcell"><input type="text" id="userPoint" th:value="${userPoint}" class="point_input" readonly></td>
             	</tr>
             	<tr>
             		<td>사용</td>
@@ -251,9 +251,21 @@
 											+"&pay_date="+payDate
 											+"&point_date="+pointDate;
 						}
+					} else if (totalPrice == 0){
+						location.href = "/paycomplete?user_no="+userNo
+						+"&cate_id="+cateId
+						+"&pay_price="+totalPrice
+						+"&pay_how="+rsp.pay_method
+						+"&pay_card="+rsp.card_name
+						+"&point_price="+(-usePoint)
+						+"&pay_date="+payDate
+						+"&point_date="+pointDate;
 					} else {
 						confirm('결제실패');
 					}
+					
+					
+					
 				})
 			} else {
 				alert("동의 후 결제를 진행해주세요.")

@@ -20,6 +20,7 @@ import com.hk.wepoor.model.UserMapper;
 import com.hk.wepoor.service.LoginService;
 import com.hk.wepoor.service.UserService;
 import com.hk.wepoor.vo.KakaoTokenVO;
+import com.hk.wepoor.vo.TokenVO;
 import com.hk.wepoor.vo.UserVO;
 
 import io.jsonwebtoken.Claims;
@@ -169,15 +170,15 @@ public class LoginController {
 
 		return "additional_info";
 	}
-	String [] str;
+    TokenVO	tokenVO;
 	
 	// 사용자인증 & 토큰받기
 	@GetMapping("/requesttoken2")
 	public String reques(@RequestParam("code") String code) {
 
-		String [] str = userService.requesttoken(code,"requesttoken2"); 
+		TokenVO tokenVO = userService.requesttoken(code,"requesttoken2"); 
 
-		this.str=str;
+		this.tokenVO=tokenVO;
 		 
 		  return "end"; 
 	}
@@ -197,9 +198,9 @@ public class LoginController {
 		uservo.setUserNickname(userNickname);
 		uservo.setUserPhone(userPhone);
 		uservo.setUserPwd("-");
-		uservo.setUserSeqNo(str[0]);
-		uservo.setAccessToken(str[1]);
-		uservo.setRefreshToken(str[2]);
+		uservo.setUserSeqNo(tokenVO.getUserSeqNo());
+		uservo.setAccessToken(tokenVO.getAccessToken());
+		uservo.setRefreshToken(tokenVO.getRefreshToken());
  
 		mapper.insertUser(uservo);
 

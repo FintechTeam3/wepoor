@@ -1,0 +1,23 @@
+.image_2 img{
+	width:200px; 
+	height:200px; 
+	display:block; 
+	margin:0 auto;
+}
+.gift_input, .please {
+	text-align: center;
+	font-size: 20px;
+}
+.giftname_input, .giftprice_input {
+	width:200px; 
+	border: none;
+	text-align: center;
+}
+.apply_btn {
+	font-size: 20px;
+	width:200px; 
+	height: 40px;
+	background-color: #1abc9c;
+	color: #FFFFFF;
+	border-radius: 30px;
+}

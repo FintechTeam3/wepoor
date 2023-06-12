@@ -16,7 +16,7 @@ class InsertPoint {
 	@Test
 	void contextLoads() {
 		
-		PointVO pointVO = new PointVO(0, 37, "2023-05-31", 10000000);
+		PointVO pointVO = new PointVO(0, 37, "2023-05-31", 10000000, null);
 		
 		int affectRowCount = point_service.create(pointVO);
 		

@@ -6,11 +6,25 @@
   
   <mapper namespace="com.hk.wepoor.model.FailMapper">
   
+  <resultMap id="memberResultMap" type="FailVO">
+        <id column="fail_id" property="failId"/>
+        <result column="user_no" property="userNo"/>
+        <result column="fail_num" property="failNum"/>
+    </resultMap>
+  
   <select id="selectAll" resultType="FailVO"> <!--resultType : 조회결과값을 저장하기 위한 타입  -->
     <![CDATA[
     select * from fail
     ]]>
 	</select>  
+	    
+    <select id="getUserNo" resultType="int">
+        <![CDATA[
+          select u.user_no as userSeqNo
+   		 from user u JOIN fail f  ON u.user_no =f.user_no
+         where u.user_seq_no = #{userSeqNo}
+        ]]>
+    </select>
   
    <select id="select" resultType="FailVO"> <!-- fail_id를 기준으로 조회 : fail_id 7번 조회 -->
   <![CDATA[
@@ -21,18 +35,26 @@
   
   <insert id="insert" parameterType="FailVO"> <!-- 전달받은 파라미터 데이터 타입 지정(선택적) -->
    <![CDATA[
-    insert into fail (fail_id, user_no, fail_num)
-    values (#{fail_id}, #{user_no}, #{fail_num})
+    insert into fail (user_no, fail_num)
+    values ( #{userNo}, #{failNum} )
+    ]]>
+  </insert>
+  
+  <insert id="insertFail" parameterType="FailVO"> <!-- 전달받은 파라미터 데이터 타입 지정(선택적) -->
+   <![CDATA[
+    insert into fail (user_no, fail_num)
+    values (#{userNo}, #{failNum})
     ]]>
   </insert>
   
   
   <update id="update" parameterType="FailVO"> <!-- fail_id가 3인 사람의 user_no는 8로 fail_num은 7로 바꿔주세요 -->
    <![CDATA[
-   update fail set user_no = #{user_no}, fail_num = #{fail_num} where fail_id = #{fail_id}  
+   update fail 
+   set fail_num = #{failNum} 
+   where user_no = #{userNo}  
   ]]>  
   </update>
-  
   
   <delete id="delete" parameterType="int">    <!--fail_id를 기준값으로 해당데이터 삭제 : fail_id 8번 삭제-->
   <![CDATA[
