@@ -69,8 +69,6 @@
             	
               	<a class="nav-item nav-link" href="/">Home</a>
               	<a class="nav-item nav-link" href="/mypage">Mypage</a>
-               	<a class="nav-item nav-link" href="about.html">About</a>
-               	<a class="nav-item nav-link" href="teashop.html">Teashop</a>
                	<a id="logout" class="nav-item nav-link" onclick="logout()">Logout</a>
                	
                	<hr style="height:2px;border-width:0;background-color:#e0e0e0; margin-bottom:1px;" class="mapage_hr">
@@ -119,12 +117,10 @@
 				<tr>
             		<td class="firstcell">보유</td>
             		<td class="secondcell"><input type="text" id="userPoint" th:value="${userPoint}" class="point_input"></td>
-            		<td class="thirdcell"></td>
             	</tr>
             	<tr>
             		<td>사용</td>
             		<td><input type="text" id="inPoint" th:onkeypress="pointchange()" placeholder="포인트를 입력" class="usepoint_input"></td>
-            		<td><button class="allPoint_btn">전액사용</button></td>
             	</tr>
 			</table>
 			
@@ -195,7 +191,7 @@
 </body>
 
 	<script th:inline="javascript">
-	
+		
 		/* 포인트 사용 */
 		function pointchange() {
 			var inputPoint = $("#inPoint").val();
