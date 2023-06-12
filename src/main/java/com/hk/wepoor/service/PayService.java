@@ -44,5 +44,16 @@ public class PayService {
 		return success;
 	}
 	
+	// 구매 완료 화면 조회 - 혜정
+	public PayVO selectPayComplete(int pay_id) {
+		PayVO payVO = pay_mapper.selectPayComplete(pay_id);
+		return payVO;
+	}
+	
+	// 결제 내역 화면 조회 - 혜정
+	public List<PayVO> selectPayHistory(int user_no) {
+		List<PayVO> list = pay_mapper.selectPayHistory(user_no);
+		return list;
+	}
 	
 }

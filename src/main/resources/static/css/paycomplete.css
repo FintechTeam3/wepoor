@@ -1,0 +1,46 @@
+.payCompleteNotice {
+	background-color: #cbcbcb; 
+	color: black; 
+	border-radius: 5px;
+	margin-top: 25px;
+    margin-bottom: 25px;
+}
+.noticeContent {
+	 margin-top: 20px;
+	 margin-bottom: 20px;
+}
+.noticeContent span {
+	margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 20px;
+	color: black;
+}
+table {
+	width: 360px;
+	font-weight: 700;
+    font-size: 15px;
+}
+table td {
+	width: 180px;
+}
+.paydetailtable {
+	width: 340px;
+	margin-left: 20px;
+}
+.paydetail {
+	font-weight: 700;
+    font-size: 20px;
+}
+.cardHistory_btn {
+	width: 150px;
+	height: 40px;
+	background-color: #1abc9c;
+	border-radius: 30px;
+	margin: auto;
+	float: right;
+	text-align: center;
+}
+.cardHistory_btn a {
+	color: #FFFFFF;
+	font-size: 20px;
+}

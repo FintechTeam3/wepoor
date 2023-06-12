@@ -17,7 +17,7 @@ class UpdatePay {
 	void contextLoads() {
 		
 		PayVO payVO = null;
-		payVO = new PayVO(8, 2,1, "20230602", 500000, "신한카드");
+		payVO = new PayVO(8, 2,1, "20230602", 500000, "신한카드", "카드", 0, null, null, null);
 		
 		int affectRowCount = pay_service.update(payVO);
 		
