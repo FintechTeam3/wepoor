@@ -79,14 +79,19 @@
 		<input th:text="${session.userNo}" type="hidden" style="display: none;"></input>
 		<div th:each="pay : ${payhistorylist}">
          <ul class="list-group-item p-2">
-            <div>
-               결제완료
+            <div class="d-flex justify-content-between">
+               <div>
+                  결제완료
+               </div>
+               <div style="color:black;">
+                  <span th:text="${pay.pay_card}"></span>
+               </div>
             </div>
                <li class=" d-flex justify-content-between align-items-center">
                   <!-- 이미지 -->
-                  <img th:if="${pay.cate_name} == '교통비'" src="images/cup-img-5.png" alt="" style="width: 20vw; height: 10vh;">
+                  <img th:if="${pay.cate_name} == '교통비'" src="images/cup-img-5.png" alt="" style="width: 15vw; height: 7vh;">
                   <div>
-                     <div style="font-size: 10px; color: #1abc9c;">
+                     <div style="font-size: 10px; color: #1abc9c; height: 18px;">
                         <!-- <span th:text="${#temporals.format(pay.pay_date, 'yyyy-MM-dd HH:mm')}"></span> -->
                         <!-- <span th:text="${pay.pay_date}"></span> -->
                         <span>결제</span>
@@ -95,24 +100,37 @@
                         <span th:text="${pay.cate_name}" class="mr-1"></span>
                         <span>거지방</span>
                      </div>
-                     
+                     <div style="font-weight: bolder;">
+                        <span th:text="${pay.cate_cost}"></span>
+                        <span>원</span>
+                     </div>
                   </div>
-                  <div style="color:red; font-weight: bolder;">
-                     <span th:text="${pay.cate_cost}"></span>
-                     <span>원</span>
+                  <div>
+                     <div style="font-size: 10px; color: #1abc9c;">
+                        <div style="height: 18px;"></div>
+                     </div>
+                     <div>
+                        <span>포인트 사용내역</span>
+                     </div>
+                     <div style="color:rgb(132, 227, 132); font-weight: bolder;">
+                        <span th:text="${pay.usePoint}"></span>
+                        <span>원</span>
+                     </div>
                   </div>
-                  <div style="color:red; font-weight: bolder;">
-                     <span th:text="${pay.usePoint}"></span>
-                     <span>원</span>
-                  </div>
-                  <div style="color:red; font-weight: bolder;">
-                     <span th:text="${pay.pay_price}"></span>
-                     <span>원</span>
+                  <div>
+                     <div style="font-size: 10px; color: #1abc9c;">
+                        <div style="height: 18px;"></div>
+                     </div>
+                     <div>
+                        결제금액
+                     </div>
+                     <div style="color:red; font-weight: bolder;">
+                        <span th:text="${pay.pay_price}"></span>
+                        <span>원</span>
+                     </div>
                   </div>
 
-                  <div style="color:red; font-weight: bolder;">
-                     <span th:text="${pay.pay_card}"></span>
-                  </div>
+                  
 
                   <!-- <div th:if="${list.status} == '종료'" class="badge bg-secondary rounded-pill p-1" >
                      <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
