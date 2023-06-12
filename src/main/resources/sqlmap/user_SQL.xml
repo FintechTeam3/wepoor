@@ -139,7 +139,7 @@
 	  <insert id="insertDataIntoPointTable" >
 	   <![CDATA[
 	    INSERT INTO point (user_no, point_date, point_price)
-	    SELECT p.user_no, DATE_FORMAT(CONVERT_TZ(NOW(), @@session.time_zone, 'Asia/Seoul'), '%Y-%m-%d'), SUM(p.count * c.cate_cost) AS total_cost
+	    SELECT p.user_no, DATE_FORMAT(CONVERT_TZ(NOW(), @@session.time_zone, 'Asia/Seoul'), '%Y-%m-%d'), SUM(p.count * c.cate_cost*1.3) AS total_cost
 	    FROM (
 	      SELECT p.user_no, p.cate_id, COUNT(p.cate_id) AS count
 	      FROM pay p

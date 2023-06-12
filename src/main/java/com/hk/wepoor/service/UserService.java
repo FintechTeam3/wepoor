@@ -173,6 +173,8 @@ public class UserService {
 		userMapper.createTempUserTable();
 		userMapper.insertDataIntoPointTable();
 		userMapper.dropTempUserTable();
+		
+		
 	}
 
 	public void registerUser(UserVO userVO) {
