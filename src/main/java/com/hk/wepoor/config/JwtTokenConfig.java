@@ -13,7 +13,7 @@ public class JwtTokenConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new JwtTokenInterceptor())
 				.addPathPatterns("/category/**", "/community/**", "/mypage/**", "/pointdetail/**","/weekend/**",
-								 "/roomdetail/**", "/paydetail/**", "/paycomplete/**", "/payhistory/**");
+								 "/roomdetail/**", "/paydetail/**", "/paycomplete/**", "/payhistory/**", "/gift/**");
 //				.excludePathPatterns();
 		
 	}

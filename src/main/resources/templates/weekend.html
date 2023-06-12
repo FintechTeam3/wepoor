@@ -62,8 +62,6 @@
             	
               	<a class="nav-item nav-link" href="/">Home</a>
               	<a class="nav-item nav-link" href="/mypage">Mypage</a>
-               	<a class="nav-item nav-link" href="about.html">About</a>
-               	<a class="nav-item nav-link" href="teashop.html">Teashop</a>
                	<a id="logout" class="nav-item nav-link" onclick="logout()">Logout</a>
                	
                	<hr style="height:2px;border-width:0;background-color:#e0e0e0; margin-bottom:1px;" class="mapage_hr">
@@ -94,11 +92,11 @@
       
 	</div> -->
 
-   <div class="container" style="height: 85vh;">
+   <div class="container" style="min-height: 85vh;">
 		<input th:text="${session.userId}" type="hidden" style="display: none;"></input>
 		<input th:text="${session.userNo}" type="hidden" style="display: none;"></input>
 		<div th:each="list : ${weeklist}">
-         <a th:href="@{/category(cate_weekend = ${list.cate_weekend})}" >
+         <a th:href="@{/category(cate_weekend = ${list.cate_weekend})}" style="color:black">
             <ul class="list-group">
                   <li class="list-group-item d-flex justify-content-center align-items-center">
                      <div style="font-size: 20px;">

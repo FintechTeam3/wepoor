@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.hk.wepoor.model.UserMapper;
 import com.hk.wepoor.service.RoomDetailService;
 import com.hk.wepoor.vo.RoomDetailVO;
 import com.hk.wepoor.vo.UserVO;
@@ -19,6 +20,9 @@ public class RoomDetailController {
 
 	@Autowired
 	RoomDetailService svc;
+	
+	@Autowired
+	UserMapper userMapper;
 
 	@GetMapping("/roomdetail")
 	public String roomdetail(HttpServletRequest req) {
@@ -30,7 +34,7 @@ public class RoomDetailController {
 		String userSuccess = svc.userSuccess(userNo);
 		
 		List<RoomDetailVO> myList = svc.selectAll(userNo);
-
+		
 		Date dateNow = new Date();
 
 //		req.setAttribute("list", list);
@@ -51,6 +55,10 @@ public class RoomDetailController {
 		System.out.println("myList 입니다." + myList);
 		req.setAttribute("myList", myList);
 		req.setAttribute("userSuccess", userSuccess);
+
+		// 햄버거바 닉네임
+		UserVO userVO = userMapper.getUserByUserNo(userNo);
+		req.setAttribute("userNickname", userVO.getUserNickname());
 
 		return "roomDetail";
 	}
