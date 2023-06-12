@@ -80,7 +80,7 @@ public class MainController {
 		
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		PointVO pointVO = new PointVO(0, userNo, formatter.format(date), -giftPrice);
+		PointVO pointVO = new PointVO(0, userNo, formatter.format(date), -giftPrice, null);
 		pointService.create(pointVO);
 		
 		return "redirect:/giftbuypage";
