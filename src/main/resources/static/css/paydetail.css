@@ -39,25 +39,22 @@
 	font-size: 18px;
 }
 .firstcell {
-	width: 80px;
+	width: 170px;
 }
 .secondcell {
-	width: 140px;
-}
-.thirdcell {
-	width: 120px;
+	width: 170px;
 }
 .point_input {
 	border-radius: 3px;
 	border: none;
 	background-color: #e0e0e0;
-	width: 140px;
+	width: 170px;
 	text-align: center;
 }
 .usepoint_input {
 	border-radius: 3px;
 	border-style: none none solid none;
-	width: 140px;
+	width: 170px;
 	text-align: center;
 }
 .allPoint_btn {
