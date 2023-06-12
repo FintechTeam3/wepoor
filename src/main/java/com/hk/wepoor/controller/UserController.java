@@ -56,9 +56,6 @@ public class UserController {
 	public String reques(@RequestParam("code") String code) {
 		  TokenVO tokenVO = userService.requesttoken(code,"requesttoken"); 
 		  this.tokenVO = tokenVO;
-		 // String [] str = userService.requesttoken(code,"requesttoken"); 
-		 // this.str=str;
-
 		  return "end";
 		  
 	}

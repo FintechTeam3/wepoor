@@ -46,9 +46,7 @@ public class UserService {
 		tokenVO.setUserSeqNo(JsonuserToken.get("user_seq_no").getAsString());
 		tokenVO.setAccessToken(JsonuserToken.get("access_token").getAsString());
 		tokenVO.setRefreshToken(JsonuserToken.get("refresh_token").getAsString());
-		
-		System.out.println("@@@@@@@@@@@@@@@@@@@@1"+tokenVO.toString());
-		
+				
 //		String[] tokens = new String[3];
 //		tokens[0] = tokenVO.getUserSeqNo();
 //		tokens[1] = tokenVO.getAccessToken();
@@ -62,20 +60,23 @@ public class UserService {
 	public void requestuser() {
 		// user_no, user_name, user_seq_no, access_token 을 UserVO에 담는다.
 		List<UserVO> userVO = userMapper.getCoffee();
-
 		// 가입된 회원수 만큼 반복문이 돌아간다.
 		for (UserVO user : userVO) {
+
 			// Access_token
 			String toKen = "Bearer " + user.getAccessToken();
 
 			// 사용자 일련번호
 			String userSeqNo = user.getUserSeqNo();
 
+
 			// bank_code_std,member_bank_code 를 cardCodeVO에 담는다.
 			CardCodeVO cardCodeVO = bankingFeign.requestUserMe(toKen, userSeqNo);
 
 			// 가입된 회원수 만큼 반복문이 돌아간다.
-			for (int num = 0; num < userVO.size();) {
+			for (int num = 0; num < userVO.size();num++) {
+				
+
 				// 카드사 대표코드
 				String bankCodeStd = cardCodeVO.getInquiry_card_list().get(num).getBank_code_std();
 
@@ -90,27 +91,35 @@ public class UserService {
 
 				// 오늘기준 날짜추출 "yyyyMM" 형식으로
 				LocalDate currentDate = LocalDate.now();
+
 				DateTimeFormatter d = DateTimeFormatter.ofPattern("yyyyMM");
+
 				String formattedDate = currentDate.format(d);
+
 
 				// 카드거래내역을 cardListVO 담는다.
 				CardListVO cardListVO = bankingFeign.requestCardBills(toKen, bankTranId, userSeqNo, bankCodeStd,
 						memberBankCode, formattedDate, "0");
+				
+				System.out.println("@@@@@@@@@@@@@@@@@@33333333333"+cardListVO.toString());
 				// 카드거래내역 횟수
 				int list_num = cardListVO.getBill_detail_list().size();
+
+				
 				// 커피마신 횟수
 				int coffeeNum = 0;
-
+				
 				for (int i = 0; i < list_num; i++) {
-
+					
 					// 가맹점명
 					String MerchaName = cardListVO.getBill_detail_list().get(i).getMerchant_name_masked();
 					String paidDate = cardListVO.getBill_detail_list().get(i).getPaid_date();
-
-					String periodString = userMapper.getCateCost(user.getUserNo());
-
+					
+					int ss = user.getUserNo();
+					
+					String periodString = userMapper.getCateCost(ss);
+					
 					String dateString = paidDate;
-
 					// Parsing period dates
 					String[] periodDates = periodString.split("~");
 
@@ -136,8 +145,7 @@ public class UserService {
 				}
 
 				int userSuccess;
-
-				if (coffeeNum < 5) {
+				if (coffeeNum <= 5) {
 					userSuccess = 1;
 
 				} else {

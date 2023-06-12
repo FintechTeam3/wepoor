@@ -47,27 +47,27 @@
 	 	from user
 	 	where user_no IN (
 						 	SELECT user_no
-							FROM pay 
-							WHERE cate_id in(
-											SELECT cate_id
-											FROM category 
-											WHERE DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%c/%e') = CONCAT(SUBSTRING_INDEX(cate_date, '~', -1), '')
+							FROM pay
+							WHERE cate_id IN (
+										     SELECT cate_id
+										     FROM category
+										     WHERE DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%c/%e') = CONCAT(SUBSTRING_INDEX(cate_date, '~', -1), '')
+											)
 							)
-		)
 	        ]]>
     </select>
     
     <select id="getCateCost" parameterType="UserVO">
         <![CDATA[
-      SELECT s.cate_date
+		SELECT s.cate_date 
 		FROM user u
 		JOIN (
-		    SELECT p.user_no, c.cate_date
-		    FROM pay p
-		    JOIN category c ON p.cate_id = c.cate_id
-		    WHERE p.cate_id = c.cate_id
-		) AS s ON u.user_no = s.user_no
-			WHERE u.user_no = #{userNo};
+		      SELECT p.user_no, c.cate_date
+		      FROM pay p
+		      JOIN category c ON p.cate_id = c.cate_id
+		     ) AS s ON u.user_no = s.user_no
+		WHERE u.user_no = #{userNo}
+		  AND DATE_FORMAT(CONVERT_TZ(NOW(), 'UTC', 'Asia/Seoul'), '%c/%e') = CONCAT(SUBSTRING_INDEX(s.cate_date, '~', -1), '')
       	        ]]>
     </select>
     
@@ -139,7 +139,7 @@
 	  <insert id="insertDataIntoPointTable" >
 	   <![CDATA[
 	    INSERT INTO point (user_no, point_date, point_price)
-	    SELECT p.user_no, DATE_FORMAT(CONVERT_TZ(NOW(), '+00:00', '+09:00'), '%Y-%m-%d'), SUM(p.count * c.cate_cost) AS total_cost
+	    SELECT p.user_no, DATE_FORMAT(CONVERT_TZ(NOW(), @@session.time_zone, 'Asia/Seoul'), '%Y-%m-%d'), SUM(p.count * c.cate_cost) AS total_cost
 	    FROM (
 	      SELECT p.user_no, p.cate_id, COUNT(p.cate_id) AS count
 	      FROM pay p
@@ -150,7 +150,7 @@
 	      GROUP BY p.user_no, p.cate_id
 	    ) p
 	    JOIN category c ON c.cate_id = p.cate_id
-	    WHERE c.cate_date LIKE CONCAT('%', DATE_FORMAT(CONVERT_TZ(NOW(), '+00:00', '+09:00')), '%c/%e'), '%')
+	    WHERE c.cate_date LIKE CONCAT('%', DATE_FORMAT(CONVERT_TZ(NOW(), @@session.time_zone, 'Asia/Seoul'), '%c/%e'), '%')
 	    GROUP BY p.user_no;
 	    ]]>
 	  </insert>
