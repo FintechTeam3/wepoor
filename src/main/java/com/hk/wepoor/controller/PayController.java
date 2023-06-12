@@ -86,6 +86,10 @@ public class PayController {
 		HttpSession session = req.getSession(false);
 		int userNo = (int) session.getAttribute("userNo");
 		List<PayVO> list = payService.selectPayHistory(userNo);
+		
+		UserVO user = userMapper.getUserByUserNo(userNo);
+		req.setAttribute("userNickname", user.getUserNickname());
+
 		model.addAttribute("payhistorylist", list);
 		return "payhistory";
 	}
