@@ -46,8 +46,22 @@
 	<!-- 사용자의 포인트 내역 조회 -->
 	<select id="selectAllUser">
 	<![CDATA[
-    SELECT * FROM point WHERE user_no=#{user_no} ORDER BY point_date DESC;
+    SELECT p.point_id, p.user_no, p.point_date, p.point_price, c.cate_name
+        FROM point p
+        INNER JOIN pay pa ON p.user_no = pa.user_no
+        INNER JOIN category c ON c.cate_id = pa.cate_id
+        WHERE p.user_no=#{user_no} ORDER BY point_date DESC;
     ]]>
 	</select>
+
+    <!-- 포인트내역 조회 -->
+	<select id="selectPointHistory">
+    <![CDATA[
+    SELECT p.user_no, c.cate_name
+    FROM point p
+    INNER JOIN pay pa ON p.user_no = #{user_no}
+    INNER JOIN category c ON c.cate_id = pa.cate_id;
+    ]]>
+    </select>
   
   </mapper>
