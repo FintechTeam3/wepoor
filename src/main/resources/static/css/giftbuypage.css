@@ -1,0 +1,18 @@
+.buycontentbox {
+	text-align: center;
+}
+.buycontent {
+	font-size: 30px;
+}
+.cardHistory_btn {
+	width: 150px;
+	height: 40px;
+	background-color: #1abc9c;
+	border-radius: 5px;
+	margin: auto auto 100px auto;
+	text-align: center;
+}
+.cardHistory_btn a {
+	color: #FFFFFF;
+	font-size: 20px;
+}

@@ -83,7 +83,17 @@ public class MainController {
 		PointVO pointVO = new PointVO(0, userNo, formatter.format(date), -giftPrice);
 		pointService.create(pointVO);
 		
-		return "redirect:/gift";
+		return "redirect:/giftbuypage";
+	}
+	
+	// 기프트 구매 완료 페이지
+	@GetMapping("/giftbuypage")
+	public String giftbuypage(HttpServletRequest req, Model model) {
+		HttpSession session = req.getSession(false);
+		int userNo = (int) session.getAttribute("userNo");
+		UserVO userVO = userMapper.getUserByUserNo(userNo);
+		model.addAttribute("userNickname", userVO.getUserNickname());
+		return "giftbuypage";
 	}
 	
 }
