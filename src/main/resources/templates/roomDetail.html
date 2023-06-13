@@ -78,9 +78,9 @@
 		<div th:each="list : ${myList}">
          <a th:href="@{/community(userNo = ${session.userNo}, cate_id = ${list.cate_id})}">
             <ul class="list-group">
-                  <li class="row list-group-item d-flex justify-content-between align-items-center" style="padding:10px;">
+                  <li class="row list-group-item d-flex justify-content-between align-items-center" style="padding:5px;">
                      <div class="col-4" style="padding:5px;">
-                        <div class="d-flex" style="font-weight: bolder; font-size:18px; color: black;">
+                        <div class="d-flex" style="font-weight: bolder; font-size:17px; color: black;">
                            <span th:text="${list.cate_name}" class="mr-1"></span>
                            <span>거지방</span>
                         </div>
@@ -88,7 +88,6 @@
                            <span th:text="${#dates.format(list.start_date, 'MM/dd')}"></span>
                            <span th:text="${#dates.format(list.end_date, '~ MM/dd')}"> </span>
                         </div>
-                        
                      </div>
                      <div class="col-4" style="color:red; font-weight: bolder;">
                         <span th:text="${list.cate_cost}"></span>
