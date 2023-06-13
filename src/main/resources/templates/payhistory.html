@@ -96,8 +96,8 @@
                   <img th:if="${pay.cate_name} == '옷'" src="images/clothes.png" alt="" style="width: 15vw; height: 7vh;"> 
                   <div>
                      <div style="font-size: 10px; color: #1abc9c; height: 18px; font-weight: bolder;">
-                        <span th:text="${#dates.format(pay.pay_date, 'MM-dd')}"></span>
-                        <!-- <span th:text="${pay.pay_date}"></span> -->
+                        <!-- <span th:text="${#dates.format(pay.pay_date, 'MM-dd')}"></span> -->
+                        <span th:text="${#strings.substring(pay.pay_date, 0, 10)}"></span>
                         <span>결제</span>
                      </div>
                      <div class="d-flex" style="font-weight: bolder; color: black;">
