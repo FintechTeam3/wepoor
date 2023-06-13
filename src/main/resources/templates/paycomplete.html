@@ -110,12 +110,24 @@
             		<td th:text="${user.userName}">구매자</td>
             	</tr>
             	<tr>
-            		<td>결제방식</td>
-            		<td th:text="${pay.pay_how}">결제방식</td>
+                  <div th:if="${pay.pay_how} == 'undefined'">
+                     <td>결제방식</td>
+                     <td th:text="${pay.pay_how}">포인트 사용</td>
+                  </div>
+                  <div th:if="${pay.pay_how} != 'undefined'">
+                     <td>결제방식</td>
+                     <td th:text="${pay.pay_how}">결제방식</td>
+                  </div>
             	</tr>
             	<tr>
-            		<td>결제카드</td>
-            		<td th:text="${pay.pay_card}">결제카드</td>
+                  <div th:if="${pay.pay_card} == 'undefined'">
+                     <td>결제카드</td>
+                     <td th:text="${pay.pay_card}">포인트 사용</td>
+                  </div>
+                  <div th:if="${pay.pay_card} != 'undefined'">
+                     <td>결제카드</td>
+                     <td th:text="${pay.pay_card}">결제카드</td>
+                  </div>
             	</tr>
             </table>
             

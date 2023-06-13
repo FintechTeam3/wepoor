@@ -82,7 +82,10 @@
                <div>
                   결제완료
                </div>
-               <div style="color:black;">
+               <div style="color:black;" th:if="${pay.pay_card} == 'undefined'">
+                  <span>포인트 사용</span>
+               </div>
+               <div th:if="${pay.pay_card} != 'undefined'" style="color:black;" >
                   <span th:text="${pay.pay_card}"></span>
                </div>
             </div>
