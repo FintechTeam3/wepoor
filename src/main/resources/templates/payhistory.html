@@ -77,7 +77,7 @@
     <div class="container" style="min-height: 85vh;">
       <div style="height: 100px;"></div>
 		<div th:each="pay : ${payhistorylist}">
-         <ul class="list-group-item p-2">
+         <ul class="list-group card p-2">
             <div class="d-flex justify-content-between">
                <div>
                   결제완료
@@ -149,7 +149,7 @@
    
    
    
-   
+   <input id="ID" type="hidden" th:value="${session.userId}"/>
    <!-- 페이지 작성하기 끝-->
                   
    <!-- copyright section start -->
@@ -166,6 +166,22 @@
    <!-- Javascript files-->
    <script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.bundle.min.js"></script>
+   <script>
+      function logout(){
+	    	var id = $("#ID").val();
+	    	console.log(id);
+	    	
+	    	if(id.indexOf("@kakao") != -1){
+	    		$("#logout").prop('href', 'https://kauth.kakao.com/oauth/logout?client_id=e4e9f889e1bb27e6af7af657094f2743&logout_redirect_uri=http://localhost/logout');	
+	    	
+	    	}else{
+	    		
+	    		$("#logout").prop('href', "logout");
+	    	}
+	    	
+	    	
+	    }
+   </script>
 </body>
 
 </html>

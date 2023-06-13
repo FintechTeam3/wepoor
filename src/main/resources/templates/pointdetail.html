@@ -51,9 +51,20 @@
          
          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
+            	
+            	<!-- user info section -->     
+            	<div class="hamburger_userinfo" style="color:black">
+	           		<img src="images/whitemywoogeoji.jpg" style="width:60px; height:60px;"/>
+	           		<span class="hamburger_nickname_input ml-2" th:text="${userNickname}"></span>
+           		</div>     
+            	
+            	<hr style="height:2px;border-width:0;background-color:#e0e0e0;" class="mapage_hr">
+            	
               	<a class="nav-item nav-link" href="/">Home</a>
-               	<a class="nav-item nav-link" href="about.html">About</a>
-               	<a class="nav-item nav-link" href="teashop.html">Teashop</a>
+              	<a class="nav-item nav-link" href="/mypage">Mypage</a>
+               	<a id="logout" class="nav-item nav-link" onclick="logout()">Logout</a>
+               	
+               	<hr style="height:2px;border-width:0;background-color:#e0e0e0; margin-bottom:1px;" class="mapage_hr">
             </div>
          </div>
          
@@ -135,10 +146,26 @@
    </div>
    <!-- copyright section end -->
    
-   
+   <input id="ID" type="hidden" th:value="${session.userId}"/>
    <!-- Javascript files-->
    <script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.bundle.min.js"></script>
+   <script>
+      function logout(){
+	    	var id = $("#ID").val();
+	    	console.log(id);
+	    	
+	    	if(id.indexOf("@kakao") != -1){
+	    		$("#logout").prop('href', 'https://kauth.kakao.com/oauth/logout?client_id=e4e9f889e1bb27e6af7af657094f2743&logout_redirect_uri=http://localhost/logout');	
+	    	
+	    	}else{
+	    		
+	    		$("#logout").prop('href', "logout");
+	    	}
+	    	
+	    	
+	    }
+   </script>
 </body>
 
 </html>
