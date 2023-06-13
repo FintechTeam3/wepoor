@@ -75,8 +75,7 @@
    
    <!-- 페이지 작성하기 시작-->
     <div class="container" style="min-height: 85vh;">
-		<input th:text="${session.userId}" type="hidden" style="display: none;"></input>
-		<input th:text="${session.userNo}" type="hidden" style="display: none;"></input>
+      <div style="height: 100px;"></div>
 		<div th:each="pay : ${payhistorylist}">
          <ul class="list-group-item p-2">
             <div class="d-flex justify-content-between">

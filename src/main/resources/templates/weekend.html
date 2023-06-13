@@ -91,8 +91,7 @@
 
 
    <div class="container" style="min-height: 85vh;">
-		<input th:text="${session.userId}" type="hidden" style="display: none;"></input>
-		<input th:text="${session.userNo}" type="hidden" style="display: none;"></input>
+		<div style="height: 100px;"></div>
 		<div th:each="list : ${weeklist}">
          <a th:href="@{/category(cate_weekend = ${list.cate_weekend})}" style="color:black">
             <ul class="list-group">

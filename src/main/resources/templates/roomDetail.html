@@ -73,8 +73,7 @@
    
    <!-- 페이지 작성하기 시작-->
    <div class="container" style="min-height: 85vh;">
-		<input th:text="${session.userId}" type="hidden" style="display: none;"></input>
-		<input th:text="${session.userNo}" type="hidden" style="display: none;"></input>
+      <div style="height: 100px;"></div>
 		<div th:each="list : ${myList}">
          <a th:href="@{/community(userNo = ${session.userNo}, cate_id = ${list.cate_id})}">
             <ul class="list-group">
