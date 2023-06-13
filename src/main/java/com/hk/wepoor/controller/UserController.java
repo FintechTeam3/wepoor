@@ -76,7 +76,7 @@ public class UserController {
 	// @Scheduled(fixedRate = 5000) // 5초마다 실행
 	
 	// 
-	@GetMapping("/user_me")
+	// @GetMapping("/user_me")
 	@Scheduled(cron = "0 1 0 ? * MON", zone = "Asia/Seoul")
 	public String requestUserMe() {
 		userService.requestuser();

@@ -2,7 +2,9 @@ package com.hk.wepoor.model;
 
 import java.util.List;
 
+
 import org.apache.ibatis.annotations.Mapper;
+
 
 import com.hk.wepoor.vo.PointVO;
 
@@ -14,6 +16,12 @@ public interface PointMapper {
 	int insert(PointVO pointVO);
 	int delete(int point_id);
 	int update(PointVO pointVO);
+	
+
+	void createTemporaryTable();
+	void insertPointsFromTemporaryTable();
+	void dropTemporaryTable();
+	
 	
 	// 사용자의 포인트 내역 조회
 	List<PointVO> selectAllUser(int user_no);

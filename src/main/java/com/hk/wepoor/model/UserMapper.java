@@ -9,12 +9,7 @@ import com.hk.wepoor.vo.UserVO;
 @Repository
 @Mapper
 public interface UserMapper {
-	void createTempUserTable();
-	  
-	void insertDataIntoPointTable();
-	  
-	void dropTempUserTable();
-	
+
 	void insertUser(UserVO uservo);
 
 	void updateUser(UserVO uservo);

@@ -6,7 +6,7 @@
   
   <mapper namespace="com.hk.wepoor.model.PointMapper">
   
-  <select id="selectAll" >
+  	<select id="selectAll" >
     <![CDATA[
     SELECT * FROM point
     ]]>
@@ -63,5 +63,52 @@
     INNER JOIN category c ON c.cate_id = pa.cate_id;
     ]]>
     </select>
+    
+  <!-- PointMapper.xml -->
   
+  <insert id="createTemporaryTable">
+    <![CDATA[
+    CREATE TEMPORARY TABLE temp_point AS (
+        SELECT
+            u.user_no AS user_no,
+            DATE_FORMAT(CONVERT_TZ(NOW(), @@session.time_zone, 'Asia/Seoul'), '%Y-%m-%d') AS point_date,
+            subquery.b AS point_price
+        FROM (
+            SELECT
+                p.cate_id,
+                c.cate_id AS a,
+                COUNT(c.cate_id) * c.cate_cost / COUNT(IF(u.user_success = 1, u.user_success, NULL)) AS b
+            FROM
+                user u
+                JOIN pay p ON u.user_no = p.user_no
+                JOIN category c ON p.cate_id = c.cate_id
+            WHERE
+                SUBSTRING_INDEX(c.cate_date, '~', -1) = DATE_FORMAT(CONVERT_TZ(NOW(), @@session.time_zone, 'Asia/Seoul'), '%c/%e')
+            GROUP BY
+                p.cate_id, c.cate_id
+        ) AS subquery
+        JOIN pay p ON p.cate_id = subquery.cate_id
+        JOIN category c ON c.cate_id = subquery.cate_id
+        JOIN user u ON u.user_no = p.user_no
+        WHERE
+            SUBSTRING_INDEX(c.cate_date, '~', -1) = DATE_FORMAT(CONVERT_TZ(NOW(), @@session.time_zone, 'Asia/Seoul'), '%c/%e')
+            AND u.user_success = 1
+    )
+    ]]>
+  </insert>
+
+  <insert id="insertPointsFromTemporaryTable">
+    <![CDATA[
+    INSERT INTO point (user_no, point_date, point_price)
+    SELECT user_no, point_date, point_price
+    FROM temp_point
+    ]]>
+  </insert>
+
+  <update id="dropTemporaryTable">
+    <![CDATA[
+    DROP TABLE temp_point
+    ]]>
+  </update>
+
   </mapper>

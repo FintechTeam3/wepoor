@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.hk.wepoor.model.BankingFeign;
 import com.hk.wepoor.model.FailMapper;
+import com.hk.wepoor.model.PointMapper;
 import com.hk.wepoor.model.UserMapper;
 import com.hk.wepoor.vo.CardListVO;
 import com.hk.wepoor.vo.FailVO;
@@ -25,6 +26,9 @@ public class UserService {
 
 	@Autowired
 	private FailMapper failMapper;
+	
+	@Autowired
+	private PointMapper pointMapper;
 
 	@Autowired
 	private BankingFeign bankingFeign;
@@ -145,7 +149,7 @@ public class UserService {
 				}
 
 				int userSuccess;
-				if (coffeeNum <= 5) {
+				if (coffeeNum <= 2) {
 					userSuccess = 1;
 
 				} else {
@@ -170,10 +174,9 @@ public class UserService {
 			}
 
 		}
-		userMapper.createTempUserTable();
-		userMapper.insertDataIntoPointTable();
-		userMapper.dropTempUserTable();
-		
+		pointMapper.createTemporaryTable();
+        pointMapper.insertPointsFromTemporaryTable();
+        pointMapper.dropTemporaryTable();
 		
 	}
 
