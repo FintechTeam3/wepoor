@@ -90,8 +90,7 @@
 	</div> -->
 
 
-   <div class="container" style="min-height: 85vh;">
-		<div style="height: 100px;"></div>
+	<div class="container" style="min-height: 85vh; display: inline;">
 		<div th:each="list : ${weeklist}">
          <a th:href="@{/category(cate_weekend = ${list.cate_weekend})}" style="color:black">
             <ul class="list-group">

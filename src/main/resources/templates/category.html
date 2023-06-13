@@ -124,7 +124,6 @@
                   </div>
                </li>
             </ul>
-         
 		</div>
 	</div>	
                   
@@ -162,42 +161,39 @@
     	
     	
     }
-    
-    
-    
-    
   </script>
+  <script>
+   function check(number){
+      
+      var cate_date = $("#cate_date").text();
+      
+      $.ajax({
+            url: "/roomcheck", // POST 요청을 보낼 엔드포인트 URL
+            type: 'POST',
+            data: { "cate_date": cate_date }, // 전송할 데이터
+            success: function(response) {
+                
+             if(response == true){
+                alert("기간내 하나의 방만 입장가능 합니다.")
+             }else{
+                window.location.href = "/paydetail?cate_id="+number;
+             }
+            },
+            error: function(xhr, status, error) {
+              // 요청이 실패하였을 때의 동작
+              console.log('요청이 실패하였습니다.');
+              console.log('에러:', error);
+            }
+            
+          });
+      
+   };
+
+   
+</script>
 </body>
 
 	
 	
-	<script>
-		function check(number){
-			
-			var cate_date = $("#cate_date").text();
-			
-			$.ajax({
-			      url: "/roomcheck", // POST 요청을 보낼 엔드포인트 URL
-			      type: 'POST',
-			      data: { "cate_date": cate_date }, // 전송할 데이터
-			      success: function(response) {
-			       	
-			    	if(response == true){
-			    		alert("기간내 하나의 방만 입장가능 합니다.")
-			    	}else{
-			    		window.location.href = "/paydetail?cate_id="+number;
-			    	}
-			      },
-			      error: function(xhr, status, error) {
-			        // 요청이 실패하였을 때의 동작
-			        console.log('요청이 실패하였습니다.');
-			        console.log('에러:', error);
-			      }
-			      
-			    });
-			
-		};
 	
-		
-	</script>
 </html>
