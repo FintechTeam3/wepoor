@@ -28,7 +28,7 @@ public class PointController {
 	@GetMapping("/pointdetail")
 	public String pointdetail(HttpServletRequest req, Model model) {
 		HttpSession session = req.getSession(false);
-		
+
 		String userId = (String) session.getAttribute("userId");
 		UserVO userVO = user_mapper.getUserByUserId(userId);
 	    req.setAttribute("userPoint", userVO.getUserPoint());
@@ -36,7 +36,8 @@ public class PointController {
 	    // 포인트 내역 불러오기
 		int userNo = (int) session.getAttribute("userNo");
 	    List<PointVO> pointdetail = point_service.selectAllUser(userNo);
-	
+		UserVO user = user_mapper.getUserByUserNo(userNo);
+		req.setAttribute("userNickname", user.getUserNickname());
 
 		model.addAttribute("pointlist", pointdetail);
 
