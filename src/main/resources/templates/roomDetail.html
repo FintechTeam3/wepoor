@@ -73,43 +73,45 @@
    
    <!-- 페이지 작성하기 시작-->
    <div class="container" style="min-height: 85vh;">
-      <div style="height: 100px;"></div>
-		<div th:each="list : ${myList}">
-         <a th:href="@{/community(userNo = ${session.userNo}, cate_id = ${list.cate_id})}">
-            <ul class="list-group">
-                  <li class="row list-group-item d-flex justify-content-between align-items-center" style="padding:5px;">
-                     <div class="col-4" style="padding:5px;">
-                        <div class="d-flex" style="font-weight: bolder; font-size:17px; color: black;">
-                           <span th:text="${list.cate_name}" class="mr-1"></span>
-                           <span>거지방</span>
+      <div class="container" style="display: inline;">
+         <div th:each="list : ${myList}" >
+            <a th:href="@{/community(userNo = ${session.userNo}, cate_id = ${list.cate_id})}">
+               <ul class="list-group">
+                     <li class="list-group-item d-flex align-items-center" style="padding:5px;">
+                        <div style="padding:5px; width: 150px">
+                           <div class="d-flex" style="font-weight: bolder; font-size:17px; color: black;">
+                              <span th:text="${list.cate_name}" class="mr-1"></span>
+                              <span>거지방</span>
+                           </div>
+                           <div style="font-size: 10px; color: #1abc9c;">
+                              <span th:text="${#dates.format(list.start_date, 'MM/dd')}"></span>
+                              <span th:text="${#dates.format(list.end_date, '~ MM/dd')}"> </span>
+                           </div>
                         </div>
-                        <div style="font-size: 10px; color: #1abc9c;">
-                           <span th:text="${#dates.format(list.start_date, 'MM/dd')}"></span>
-                           <span th:text="${#dates.format(list.end_date, '~ MM/dd')}"> </span>
+                        <div style="color:red; font-weight: bolder; padding:0px; width: 90px;">
+                           <span th:text="${list.cate_cost}"></span>
+                           <span>원</span>
                         </div>
-                     </div>
-                     <div class="col-4" style="color:red; font-weight: bolder;">
-                        <span th:text="${list.cate_cost}"></span>
-                        <span>원</span>
-                     </div>
-                	 <div th:if="${list.status} == '종료'" class="badge bg-secondary rounded-pill p-1" >
-                        <div th:text="${userSuccess}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
-                     </div>
-                     <div th:if="${list.status} == '종료'" class="badge bg-secondary rounded-pill p-1" >
-                        <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
-                     </div>
-                     <div th:if="${list.status} == '진행중'" class="badge bg-success rounded-pill p-1" >
-                        <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
-                     </div>
-                     <div th:if="${list.status} == '시작전'" class="badge bg-danger rounded-pill p-1" >
-                        <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
-                     </div>
-                  </li>
-            </ul>
-         </a>
-		</div>
-	</div>	
-
+                        <div style="width:150px;">
+                           <div th:if="${list.status} == '종료'" class="badge bg-secondary rounded-pill p-1" >
+                              <div th:text="${userSuccess}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
+                           </div>
+                           <div th:if="${list.status} == '종료'" class="badge bg-secondary rounded-pill p-1" >
+                              <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
+                           </div>
+                           <div th:if="${list.status} == '진행중'" class="badge bg-success rounded-pill p-1" >
+                              <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
+                           </div>
+                           <div th:if="${list.status} == '시작전'" class="badge bg-danger rounded-pill p-1" >
+                              <div th:text="${list.status}" style="color:white; font-size:16px; font-weight: bolder; width: 50px;"></div>
+                           </div>
+                        </div>
+                     </li>
+               </ul>
+            </a>
+         </div>
+      </div>	
+   </div>
 <!-- 페이지 작성하기 끝-->
                   
    <!-- copyright section start -->

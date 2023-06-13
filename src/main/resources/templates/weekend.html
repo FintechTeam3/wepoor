@@ -90,28 +90,29 @@
 	</div> -->
 
 
-   <div class="container" style="min-height: 85vh;">
-		<div style="height: 100px;"></div>
-		<div th:each="list : ${weeklist}">
-         <a th:href="@{/category(cate_weekend = ${list.cate_weekend})}" style="color:black">
-            <ul class="list-group">
-                  <li class="list-group-item d-flex justify-content-center align-items-center">
-                     <div style="font-size: 20px;">
-                        <div class="d-flex" style="font-weight: bolder; color: black;">
-                           <div th:text="${#dates.format(list.end_date, 'MM ')}"></div>
-                           <div class="mr-2">월</div>
-                           <div th:text="${list.cate_weekend}"></div>
-                           <div>주차</div>
-                        </div>
-                        <div class="d-flex">
-                           <span>(</span>
-                           <div th:text="${list.cate_date}"></div>
-                           <span>)</span>
-                        </div>
-                     </div>
-                  </li>
-            </ul>
-         </a>
+	<div class="container" style="min-height: 85vh;">
+		<div class="container" style="display: inline;">
+			<div th:each="list : ${weeklist}">
+			<a th:href="@{/category(cate_weekend = ${list.cate_weekend})}" style="color:black">
+				<ul class="list-group">
+					<li class="list-group-item d-flex justify-content-center align-items-center">
+						<div style="font-size: 20px;">
+							<div class="d-flex" style="font-weight: bolder; color: black;">
+							<div th:text="${#dates.format(list.end_date, 'MM ')}"></div>
+							<div class="mr-2">월</div>
+							<div th:text="${list.cate_weekend}"></div>
+							<div>주차</div>
+							</div>
+							<div class="d-flex">
+							<span>(</span>
+							<div th:text="${list.cate_date}"></div>
+							<span>)</span>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</a>
+			</div>
 		</div>
 	</div>
 
