@@ -1,5 +1,7 @@
 package com.hk.wepoor.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -8,10 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -48,11 +52,12 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String login(@RequestParam("userId") String userId, @RequestParam("userPwd") String userPwd,
-			HttpServletResponse res) {
+			HttpServletResponse res,RedirectAttributes redirectAttributes){
 		String jwtToken = logsvc.loginCheck(userId, userPwd);
 		logger.info("JWTTOKEN: " + jwtToken);
 
 		if (jwtToken == null || jwtToken.equals("0")) {
+			redirectAttributes.addFlashAttribute("loginError",1);
 			return "redirect:/login_page";
 		} else {
 
