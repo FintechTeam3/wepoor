@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+
 <title>Login</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,6 +57,7 @@
 <link rel="stylesheet" type="text/css" href="css/homepage.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/category.css">
+
 
 </head>
 <body>
@@ -119,7 +121,6 @@
 			</div>
 		</div>
 	</div>
-	
 	<!-- copyright section start -->
 	<div class="copyright_section">
 		<div class="container">
@@ -214,8 +215,6 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
-	<script>
-		
-	</script>
+	<script th:if="${loginError}">alert("계정 정보가 일치하지 않습니다.");</script>
 </body>
 </html>

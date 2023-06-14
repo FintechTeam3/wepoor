@@ -62,25 +62,32 @@
 
 	$("#alert-success").hide();
 	$("#alert-danger").hide();
-
+	$("#alert_reg").hide();
+	
 	$("#userPwd, #pwdCheck").keyup(function() {
 		var pwd1 = $("#userPwd").val();
 		var pwd2 = $("#pwdCheck").val();
+		var reg_pwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;	
 		if (pwd1 != "" || pwd2 != "") {
-			if (pwd1 == pwd2) {
-				$("#alert-success").show();
-				$("#alert-danger").hide();
-				$("#divid").text("=");
-			} else {
-				$("#alert-success").hide();
-				$("#alert-danger").show();
-				$("#divid").text("≠");
-
-			}
-		} else {
+			if(!reg_pwd.test(pwd1)){
+				$("#alert_reg").show();
+			}else{
+				$("#alert_reg").hide();
+				if (pwd1 == pwd2) {
+					$("#alert-success").show();
+					$("#alert-danger").hide();
+					$("#divid").text("=");
+				}else{
+					$("#alert-success").hide();
+					$("#alert-danger").show();
+					$("#divid").text("≠");
+					}
+				}
+		}else{
 			$("#alert-success").hide();
 			$("#alert-danger").hide();
 			$("#divid").text("/");
+			$("#alert_reg").hide();
 		}
 	});
 
@@ -89,11 +96,13 @@
 	$("#submit").on("click", function(){
 		var reg_name =  /^[가-힣]{2,6}$/;
 		var reg_nick =  /^(?=.*[가-힣a-zA-Z0-9])[가-힣a-zA-Z0-9]{2,20}$/;
-		
+		var reg_phone = /^010\d{8}$/;
+			
 		var input_name = $("#userName").val();
 		var input_nickname = $("#userNickname").val();
 		var input_id = $('#userId').val();
 		var pwd_check = $("#divid").text();
+		var phone = $("#phone").val();
 		
 		// 이름
 		if(!reg_name.test(input_name)){
@@ -108,6 +117,11 @@
 			return false;
 		}
 		
+		if(!reg_phone.test(phone)){
+			alert("01012341234형식으로 입력해주세요");
+			$("#phone").focus();
+			return false;
+		}
 		//아이디
 		if(current_id == "" || input_id !== current_id){
 			alert("아이디  중복여부를 확인해주세요.");
