@@ -52,7 +52,7 @@ public class LoginService {
 		MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("grant_type", "authorization_code");
         formData.add("client_id", "e4e9f889e1bb27e6af7af657094f2743");
-        formData.add("redirect_uri", "http://itrepository.co.kr/kakaoLogin");
+        formData.add("redirect_uri", "http://localhost/kakaoLogin");
         formData.add("code", code);
         formData.add("client_secret", "s8i5uCnOFtBMvYZYmhffq10NRP2n9LF8");
         
