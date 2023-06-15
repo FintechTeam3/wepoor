@@ -238,27 +238,34 @@ public class LoginController {
 	 */
 
 	@GetMapping("/kakaoSignout")
-	public String signoutKakao(HttpServletRequest req) {
-		HttpSession session = req.getSession(false);
-
+	public String signoutKakao(HttpServletRequest req, @RequestParam("user_id") String user_id, @RequestParam("user_no") int user_no) {
+	
 		String access_token = "";
 		Cookie[] cookies = req.getCookies();
 		if (cookies != null) {
 			for (Cookie c : cookies) {
 				String cookieName = c.getName();
 				logger.info(cookieName);
-				if (cookieName.equals("access_token")) {
+				if (cookieName.equals("kakao_access_token")) {
 					access_token = c.getValue();
 				}
 			}
 		}
-
-		Long user_id = (Long) session.getAttribute("user_id");
 		System.out.println(user_id);
+		
+		String[] str_arr = user_id.split("@");
+		Long user_id_long = Long.parseLong(str_arr[0]);
+		
+		
+		
+		
+		System.out.print(user_id_long);
 		System.out.println(access_token);
-		String id = logsvc.kakaoSignout(user_id, access_token);
+		String id = logsvc.kakaoSignout(user_id_long, access_token);
 		System.out.println(id);
-		return "redirect:/login_page";
+		userService.deleteUser(user_no);
+		
+		return "redirect:/logout";
 	}
 
 	
