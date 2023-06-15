@@ -114,7 +114,6 @@ public class LoginService {
 				.retrieve()
 				.bodyToMono(String.class).block();
 
-		
 		return result;
 	}
 	

@@ -52,8 +52,7 @@
          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               	<a class="nav-item nav-link" href="/">Home</a>
-               	<a class="nav-item nav-link" href="about.html">About</a>
-               	<a class="nav-item nav-link" href="teashop.html">Teashop</a>
+              	<a id="logout" class="nav-item nav-link" onclick="logout()">Logout</a>
             </div>
          </div>
          
@@ -185,13 +184,28 @@
       </div>
    </div>
    <!-- copyright section end -->
-   
+   <input id="ID" type="hidden" th:value="${session.userId}" />
    <!-- Javascript files-->
    <script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.bundle.min.js"></script>
    
    <script>
+   function logout(){
+   	var id = $("#ID").val();
+   	console.log(id);
+   	
+   	if(id.indexOf("@kakao") != -1){
+   		$("#logout").prop('href', 'https://kauth.kakao.com/oauth/logout?client_id=e4e9f889e1bb27e6af7af657094f2743&logout_redirect_uri=http://localhost/logout');	
+   	
+   	}else{
+   		
+   		$("#logout").prop('href', "logout");
+   	}
+   	
+   	
+   }
    $(document).ready(function() {
+	   
 	   
 	   $("#nick_check").on("click", function() {
 		   
@@ -248,9 +262,23 @@
 			   
 			   var user_point = $("#userPoint").val();
 			   var userNo = $("#userNo").val();
+			   var id = $("#ID").val();
+			   console.log(id);
 			   console.log(userNo);
 			   
-			   if(user_point == 0) {
+			   if(user_point <= 0) {
+				   if(id.indexOf("@kakao") != -1){
+					   console.log("kakao");
+					   $.ajax({
+							url: '/kakaoSignout',
+							data: {"user_id": id, "user_no": userNo},
+							type: "GET",
+							success: function() {
+								$("#deleteconfirmmodal").modal();
+						   }
+					   });	
+					   
+				   }else{
 				   $.ajax({
 						url: '/deleteUser',
 						data: {"userNo": userNo},
@@ -260,7 +288,7 @@
 					   }
 				   });
 				 
-					
+				   }	
 			   } else {
 				   $("#pointwarnmodal").modal();
 			   }
