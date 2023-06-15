@@ -16,4 +16,5 @@ public interface CategoryMapper {
 	List<CategoryVO> selectAllWeekend();
 	List<CategoryVO> selectAllRoomList(int cate_weekend);
 	List<String> roomCheck(int user_no);
+	String selectCategory(int cate_id);
 }
