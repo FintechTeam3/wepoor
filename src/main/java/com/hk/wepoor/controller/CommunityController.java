@@ -77,58 +77,15 @@ public class CommunityController {
         List<CommunityVO> communityList = communityService.getUserNickName(userNo);
         List<CommunityVO> replyList = communityService.getUserNickName(userNo);
         List<CategoryVO> categoryList = categoryService.selectAll();
-        // int real_cate_id = userMapper.getUserCateId(userNo);
-        System.out.println(communityList);
-        // HttpSession session = request.getSession(false);
-        // int userNo = (int) session.getAttribute("userNo");
+        
 
         UserVO userVO = userMapper.getUserByUserNo(userNo);
         request.setAttribute("userNickName", userVO.getUserNickname());
 
-        // System.out.println("여기서 시작");
-        // // 카테고리에 대한 입장 가능 여부 확인
-        // if (real_cate_id == cate_id){
-        //     System.out.println("이유가 있어요");
-        // } else {
-        //     System.out.println("이유가 없어요");
-        // }
-        // System.out.println(real_cate_id + "real_cate_idㅋㅋ");
+    
+        String categoryName = categoryService.select_category(cate_id);
         
-        
-        // // for문을 통해 유저리스트의 넘버값을 조회
-        // communityService.getUserNickName(userNo);
-        // for (CommunityVO community : communityList) {
-        
-        //     community.setUser_nickname(communityService.getUserNickName(userNo));
-                
-        // }
-        
-        // // UserVO user = userMapper.getUserByUserNo(userNo);
-
-        // // String real_user = user.getUserNickname();
-
-        
-        // // for문을 통해 대댓글 리스트의 넘버값을 조회
-        // for (CommunityVO reply : replyList) {
-        //     reply.setUser_nickname(communityService.getUserNickName(userNo)); 
-        //     // UserVO user = userMapper.getUserByUserNo(userNo);
-        //     // System.out.println(user + "user ㅎㅎ");
-        //     // if (user != null) {
-        //     //     reply.setUser_nickname(user.getUserNickname());
-
-        //     // } else {
-        //     //     reply.setUser_nickname("Unknown User");
-
-        //     // }
-        // }
-
-        // for (CategoryVO category : categoryList) {
-        //     category.setCate_id(cate_id);
-        // }
-        
-        // 모든 유저를 검색
-
-
+        model.addAttribute("categoryName", categoryName);
         model.addAttribute("categoryList", categoryList);
         model.addAttribute("replyList", replyList);
         model.addAttribute("communityList", communityList); // communityList값이 community html로 넘어감

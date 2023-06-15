@@ -61,6 +61,11 @@ public class CategoryService {
 	public List<String> roomCheck(int user_no){
 		return categorymapper.roomCheck(user_no);
 	}
+
+	public String select_category(int cate_id) {
+		String category = categorymapper.selectCategory(cate_id);
+		return category;
+	}
 	
 	
 }
