@@ -49,14 +49,14 @@
 			<!-- 	<label>핸드폰번호</label> -->
 				<div class="input-group mb-3">
 					<input id="phone" name="userPhone" type="text" class="form-control" placeholder="핸드폰번호 입력" aria-label="Recipient's username" aria-describedby="button-addon2" required>
-					<button id="memberPhoneCheck"  style="color:black;font-weight:normal" class="btn btn-light" type="button">인증번호 전송</button>
+					<!-- <button id="memberPhoneCheck"  style="color:black;font-weight:normal" class="btn btn-light" type="button">인증번호 전송</button> -->
 				</div>
 				
 			<!-- 	<label>인증번호 입력</label> -->
-				<div class="input-group mb-3">
+				<!-- <div class="input-group mb-3">
 					<input name="memberPhoneCertify" type="text" class="form-control" placeholder="인증번호 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
 					<button id="certifyCheck"  style="color:black;font-weight:normal" class="btn btn-light" type="button">인증하기</button>
-				</div>
+				</div> -->
 
 				<div class="p-t-15">
 					<button class="btn btn-light" style="color:black;font-weight:bold;float: left;" id="cancel" type="button" onclick="location.href='login_page'">Cancel</button>
@@ -71,12 +71,12 @@
           var url="https://testapi.openbanking.or.kr/oauth/2.0/authorize?"
             +"response_type=code&"
             +"client_id=86dd1ec4-2394-4815-963f-0e5d2c28428a&"
-            +"redirect_uri=http://itrepository.co.kr/requesttoken2&"
+            +"redirect_uri=http://localhost/requesttoken2&"
             +"scope=login cardinfo&"
             +"state=12345678123456781234567812345678&"
             +"auth_type=0";
 
-          var authWindow = window.open(url, "인증하기", "width=400px,height=850px");
+          var authWindow = window.open(url, "인증하기", "width=390px,height=844px");
           
           // 주기적으로 확인하여 창이 닫혔는지 체크
           var timer = setInterval(()=> {

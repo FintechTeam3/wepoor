@@ -41,6 +41,7 @@
     <![CDATA[
         SELECT c.commu_id, c.top_commu_id, c.user_no, u.user_nickname, c.commu_content, c.create_time, c.cate_id FROM community c
         INNER JOIN user u ON c.user_no = u.user_no
+        ORDER BY c.create_time DESC
     ]]>
     </select>
 
