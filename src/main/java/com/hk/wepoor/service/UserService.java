@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
@@ -34,13 +35,19 @@ public class UserService {
 	private BankingFeign bankingFeign;
 
 	JsonObject JsonuserToken;
+	
+	@Value("${Client-ID}")
+	private String clientId;
+	
+	@Value("${Client-Secret}")
+	private String clientSecret;
 
 	public TokenVO requesttoken(String code, String requesttoken) {
 
 		// 오픈뱅킹api 호출해서 사용자인증 하고 token을 json형식의 문자열로 가지고온다.
 		String userToken = bankingFeign.requestToken(code, 
-													"86dd1ec4-2394-4815-963f-0e5d2c28428a",
-													"c3cb34d6-8b7d-4e3e-b2e7-aabf2f3d9f2d", 
+													clientId,
+													clientSecret, 
 													"http://localhost/" + requesttoken, "authorization_code");
 		// 문자열을 json 형식으로 파싱한다.
 		JsonuserToken = JsonParser.parseString(userToken).getAsJsonObject();
